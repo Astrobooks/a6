@@ -169,12 +169,57 @@ table.t tr:nth-child(even) td { background:var(--lighter); }
 #nav button:hover { background:#2E63C4; }
 #pageinfo { color:#9FB8DC; font-size:14px; letter-spacing:1px; min-width:70px; text-align:center; }
 #navtip { position:absolute; right:22px; color:#7E93B4; font-size:12px; }
+
+/* ===== 大字版 · 主体内容 +25%（仅 .pagebody） ===== */
+.pagebody { font-size:20px; }
+.pagebody .card { padding:13px 18px; }
+.pagebody .small { font-size:19px !important; }
+.pagebody .hint { font-size:17px !important; }
+.pagebody .mid { font-size:28px !important; }
+.pagebody .eq { font-size:30px !important; }
+.pagebody .fbox { font-size:29px !important; padding:10px 18px; }
+.pagebody .subtitle { font-size:20px !important; }
+.pagebody .toc-item { padding:8px 18px; margin-bottom:5px; }
+.pagebody .toc-num { font-size:34px !important; }
+.pagebody .toc-t { font-size:25px !important; }
+.pagebody .toc-d { font-size:17px !important; }
+.pagebody .toc-item > div:last-child { line-height:1.55; }
+.pagebody .step-item { font-size:20px !important; padding:9px 14px; margin-bottom:6px; }
+.pagebody .cell .nm { font-size:20px !important; }
+.pagebody .cell .un { font-size:16px !important; }
+.pagebody .chip { font-size:20px !important; padding:12px 8px; }
+.pagebody .chip .rs { font-size:15px !important; }
+.pagebody .flip-f .q { font-size:26px !important; }
+.pagebody .flip-b .nm { font-size:20px !important; }
+.pagebody .flip-b .bigv { font-size:36px !important; }
+.pagebody .flip-b .d { font-size:17px !important; }
+.pagebody .task { padding:10px 13px; }
+.pagebody .task .q { font-size:19px !important; }
+.pagebody .task input { font-size:19px !important; }
+.pagebody .fb { font-size:16px !important; }
+.pagebody .quiz { padding:9px 13px; }
+.pagebody .quiz .q { font-size:18px !important; }
+.pagebody .opt { font-size:16px !important; padding:5px 11px; }
+.pagebody .expl { font-size:16px !important; }
+.pagebody table.t { font-size:19px !important; }
+.pagebody .btn { font-size:19px !important; }
+.pagebody ul.tight { font-size:21px !important; line-height:1.75; }
+/* 页面内容里的内联字号：<=22px 的按 +25% 映射，>=30px 保持原样 */
+.pagebody [style*="font-size:14px"] { font-size:18px !important; }
+.pagebody [style*="font-size:15px"] { font-size:19px !important; }
+.pagebody [style*="font-size:16px"] { font-size:20px !important; }
+.pagebody [style*="font-size:17px"] { font-size:21px !important; }
+.pagebody [style*="font-size:18px"] { font-size:22px !important; }
+.pagebody [style*="font-size:19px"] { font-size:24px !important; }
+.pagebody [style*="font-size:20px"] { font-size:25px !important; }
+.pagebody [style*="font-size:21px"] { font-size:26px !important; }
+.pagebody [style*="font-size:22px"] { font-size:28px !important; }
 </style>
 </head>
 <body>
 <div id="stage">
 <section class="slide active"><div class="cover-left"><div class="tag">人教版（2019）· 必修第一册<br>第二章 第三节 · 第4课时</div><div><div style="width:64px;height:6px;background:#D9534F;margin-bottom:22px;"></div><h1>物质的量浓度</h1><div style="width:76px;height:4px;background:#3D7BD9;margin:22px 0;"></div><div class="sub">把 n 接到溶液里<br>c_B = n_B / V（溶液）</div></div><div class="tag" style="font-size:15px;letter-spacing:2px;">高中化学 · 45 分钟 · 交互课件</div></div><div class="cover-right"><div><div class="kicker">本节课要弄清</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 为什么有了质量分数还要新浓度？</div><div style='font-size:18px;line-height:2;color:#43506A;'>· V 到底是溶液体积还是水的体积？</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 稀释时什么不变？离子浓度怎么算？</div></div><div style="text-align:right;"><div class="section-num">04</div><div class="sec-badge" style="margin-left:auto;"></div><div style="font-size:21px;color:var(--navy);font-weight:bold;">物质的量浓度</div><div style="font-size:16px;color:#5B6B84;margin-top:6px;">c_B = n_B / V</div></div></div></section>
-<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">单元地图</div><h2 class="title">物质的量 · 五个课时</h2><div class="pagebody"><div style="margin-top:6px;"><div class="toc-item "><div class="toc-num">1</div><div><div class="toc-t">第1课时　物质的量的概念及阿伏加德罗常数</div><div class="toc-d">n = N / N_A</div></div></div><div class="toc-item "><div class="toc-num">2</div><div><div class="toc-t">第2课时　摩尔质量与气体摩尔体积</div><div class="toc-d">n = m/M = V/V_m</div></div></div><div class="toc-item "><div class="toc-num">3</div><div><div class="toc-t">第3课时　阿伏加德罗常数 N_A 的应用</div><div class="toc-d">以 n 为枢纽的换算</div></div></div><div class="toc-item on"><div class="toc-num">4</div><div><div class="toc-t">第4课时　物质的量浓度</div><div class="toc-d">c_B = n_B / V</div></div></div><div class="toc-item "><div class="toc-num">5</div><div><div class="toc-t">第5课时　一定物质的量浓度溶液的配制</div><div class="toc-d">容量瓶 · 误差分析</div></div></div></div><div class="card warm" style="margin-top:12px;font-size:15px;">一条主线：<b>把数不清的微粒，换算成能称、能量、能配的量</b>；物质的量 n 始终是枢纽。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">单元地图</div><h2 class="title">物质的量 · 五个课时</h2><div class="pagebody"><div style="margin-top:2px;"><div class="toc-item "><div class="toc-num">1</div><div><div class="toc-t">第1课时　物质的量的概念及阿伏加德罗常数</div><div class="toc-d">n = N / N_A</div></div></div><div class="toc-item "><div class="toc-num">2</div><div><div class="toc-t">第2课时　摩尔质量与气体摩尔体积</div><div class="toc-d">n = m/M = V/V_m</div></div></div><div class="toc-item "><div class="toc-num">3</div><div><div class="toc-t">第3课时　阿伏加德罗常数 N_A 的应用</div><div class="toc-d">以 n 为枢纽的换算</div></div></div><div class="toc-item on"><div class="toc-num">4</div><div><div class="toc-t">第4课时　物质的量浓度</div><div class="toc-d">c_B = n_B / V</div></div></div><div class="toc-item "><div class="toc-num">5</div><div><div class="toc-t">第5课时　一定物质的量浓度溶液的配制</div><div class="toc-d">容量瓶 · 误差分析</div></div></div></div><div class="card warm" style="margin-top:8px;font-size:15px;">一条主线：<b>把数不清的微粒，换算成能称、能量、能配的量</b>；物质的量 n 始终是枢纽。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节</span><span>物质的量</span></div></section>
 <section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">导入</div><h2 class="title">为什么需要一种新的浓度</h2><div class="pagebody"><div class="grid2" style="height:100%;"><div class="card"><div class="mid">质量分数 w</div><ul class="tight" style="margin-top:12px;"><li>w = m(溶质) / m(溶液)</li><li>要称质量，操作较繁</li><li>实验室量取体积更方便</li><li>化学反应按粒子数（n）配比</li></ul></div><div class="card blue"><div class="mid">物质的量浓度 c_B</div><ul class="tight" style="margin-top:12px;"><li>c_B = n_B / V(溶液)</li><li>直接给出「每升含多少 mol」</li><li>量取体积即得 n</li><li>与化学方程式的系数直接对接</li></ul><div class="eq" style="margin-top:16px;text-align:center;">n = c · V</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节</span><span>物质的量</span></div></section>
 <section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">定义</div><h2 class="title">c_B = n_B / V 逐块拼起来</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击三块，拼出完整定义</div><div class="grid3" style="margin-bottom:20px;"><div class="fbox" onclick="light(this)">c_B<br><span style="font-size:15px;">物质的量浓度</span></div><div class="fbox" onclick="light(this)">n_B<br><span style="font-size:15px;">溶质 B 的物质的量</span></div><div class="fbox" onclick="light(this)">V<br><span style="font-size:15px;">溶液体积（L）</span></div></div><div class="card blue" style="font-size:18px;line-height:2;">单位体积溶液里所含溶质 B 的物质的量，叫 B 的物质的量浓度。<br><span class="eq">c_B = n_B / V</span>　常用单位 <b>mol/L</b>（或 mol·L⁻¹）<br>1 mol/L NaCl 溶液：每 <b>1 L 溶液</b>中含 1 mol NaCl。</div><div class="card warm" style="margin-top:16px;font-size:16px;">特别提醒：<b>V 是溶液的总体积，不是溶剂水的体积，也不是两者简单相加</b>。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节</span><span>物质的量</span></div></section>
 <section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">辨析</div><h2 class="title">分母 V 到底是谁的体积</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击判断：下列做法对吗</div><div class="grid4"><div class="chip" onclick="chip(this,false,'✗ 溶剂体积 ≠ 溶液体积')">4 g NaOH 加 500 mL 水</div><div class="chip" onclick="chip(this,true,'✓ 配成 500 mL 溶液')">4 g NaOH 配成 500 mL</div><div class="chip" onclick="chip(this,false,'✗ 溶解后体积会变')">体积 = 水体积 + 固体体积</div><div class="chip" onclick="chip(this,true,'✓ 定容到刻度即溶液体积')">容量瓶定容至刻度线</div><div class="chip" onclick="chip(this,false,'✗ 取出的是溶液不是溶剂')">从溶液中倒出 100 mL 水</div><div class="chip" onclick="chip(this,true,'✓ 量的是溶液')">用量筒量取 100 mL 溶液</div><div class="chip" onclick="chip(this,false,'✗ 1 L 是溶剂不是溶液')">1 L 水溶解 1 mol 溶质得 1 mol/L</div><div class="chip" onclick="chip(this,true,'✓ 分母单位是升')">计算时把 mL 换成 L</div></div><div class="card warm" style="margin-top:20px;font-size:17px;">一句话：<b>分母永远是「配好之后溶液的总体积」</b>，单位换算成 L 再代入。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节</span><span>物质的量</span></div></section>
