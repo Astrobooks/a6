@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>物质的量_综合复习_第2课时_应用与配制_交互课件</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:100%; height:100%; background:#0B1F3D; overflow:hidden;
+  font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif; }
+#stage { position:absolute; left:50%; top:50%; width:1280px; height:720px;
+  transform-origin:center center; background:#fff; }
+.slide { position:absolute; inset:0; width:1280px; height:720px; display:none;
+  background:#fff; color:#1A2230; overflow:hidden; }
+.slide.active { display:block; animation:fadeIn .45s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:none;} }
+:root { --blue:#1E4FA8; --navy:#0E3F8C; --light:#E8EFF8; --lighter:#F0F5FC;
+  --red:#D9534F; --yellow:#F5B301; --ink:#1A2230; --gray:#8B97A8; --green:#2E8B57; }
+.topbar { position:absolute; top:0; left:0; right:0; height:10px;
+  background:linear-gradient(90deg,#0E3F8C,#1E4FA8); }
+.footer { position:absolute; bottom:64px; left:56px; right:56px; display:flex;
+  justify-content:space-between; font-size:13px; color:#8B97A8; }
+.kicker { display:inline-flex; align-items:center; gap:10px; color:var(--blue);
+  font-size:17px; letter-spacing:2px; font-weight:bold; }
+.kicker::before { content:""; width:5px; height:22px; background:var(--blue); display:inline-block; }
+h2.title { font-size:34px; color:var(--navy); margin:8px 0 4px; }
+.subtitle { color:#5B6B84; font-size:16px; }
+.body-pad { position:absolute; inset:0; padding:40px 56px 92px; }
+.pagebody { margin-top:20px; height:518px; }
+.btn { display:inline-block; cursor:pointer; user-select:none; border:none;
+  background:var(--blue); color:#fff; font-size:16px; font-weight:bold;
+  padding:9px 22px; border-radius:22px; letter-spacing:1px;
+  box-shadow:0 3px 10px rgba(30,79,168,.35); transition:.2s; }
+.btn:hover { background:var(--navy); transform:translateY(-2px); }
+.btn.red { background:var(--red); box-shadow:0 3px 10px rgba(217,83,79,.35); }
+.btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); box-shadow:none; }
+.btn.ghost:hover { background:var(--light); }
+.btn.done { background:#B9C6DA; box-shadow:none; cursor:default; }
+.reveal { opacity:0; transform:translateY(14px); transition:.55s ease; }
+.reveal.shown { opacity:1; transform:none; }
+.hint { color:#8B97A8; font-size:14px; font-style:italic; }
+.card { background:var(--lighter); border:1px solid #D5E1F2; border-radius:14px; padding:16px 20px; }
+.card.blue { background:var(--light); border-color:#B9CCEC; }
+.card.warm { background:#FFF9E8; border-color:#F0DFA8; }
+.card.good { background:#E9F6EC; border-color:#A9D9B6; }
+.eq { font-size:25px; font-weight:bold; color:var(--navy); letter-spacing:.5px; }
+.big { font-size:40px; font-weight:800; color:var(--blue); line-height:1.2; }
+.mid { font-size:23px; font-weight:bold; color:var(--navy); }
+.small { font-size:15px; color:#5B6B84; line-height:1.7; }
+.row { display:flex; gap:16px; }
+.col { flex:1; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+ul.tight { padding-left:22px; line-height:1.95; font-size:17px; }
+.tagRed { color:var(--red); } .tagBlue { color:var(--blue); }
+.tagY { color:#B87B00; } .tagG { color:var(--green); }
+
+/* 封面 */
+.cover-left { position:absolute; left:0; top:0; width:440px; height:720px; background:var(--navy);
+  padding:56px 46px; display:flex; flex-direction:column; justify-content:space-between; }
+.cover-left .tag { color:#9FB8DC; font-size:17px; letter-spacing:3px; line-height:1.8; }
+.cover-left h1 { color:#fff; font-size:54px; line-height:1.25; font-weight:800; }
+.cover-left .sub { color:#C9DAF2; font-size:19px; line-height:1.75; }
+.cover-right { position:absolute; left:440px; top:0; width:840px; height:720px; padding:62px 58px;
+  display:flex; flex-direction:column; justify-content:space-between; }
+.section-num { font-size:140px; font-weight:800; color:var(--light); line-height:1; }
+.sec-badge { width:76px; height:8px; background:var(--red); border-radius:4px; margin:18px 0; }
+
+/* 目录 */
+.toc-item { display:flex; align-items:center; gap:18px; background:var(--lighter);
+  border-radius:12px; padding:14px 22px; margin-bottom:11px; border-left:8px solid #D5E1F2; }
+.toc-item.on { background:var(--light); border-left-color:var(--red); }
+.toc-num { font-size:29px; font-weight:800; color:var(--blue); width:48px; }
+.toc-t { font-size:21px; font-weight:bold; color:var(--ink); }
+.toc-d { color:#5B6B84; font-size:14px; margin-top:2px; }
+
+/* 翻牌 */
+.flip { height:190px; perspective:900px; cursor:pointer; }
+.flip-in { position:relative; width:100%; height:100%; transform-style:preserve-3d;
+  transition:transform .65s; }
+.flip.open .flip-in { transform:rotateY(180deg); }
+.flip-f,.flip-b { position:absolute; inset:0; backface-visibility:hidden; border-radius:16px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:14px; }
+.flip-f { background:var(--light); border:2px solid #B9CCEC; }
+.flip-b { background:var(--navy); color:#fff; transform:rotateY(180deg); border:2px solid var(--navy); }
+.flip-f .q { font-size:21px; font-weight:bold; color:var(--navy); }
+.flip-f .ic { font-size:38px; margin-bottom:10px; }
+.flip-b .nm { font-size:17px; color:#C9DAF2; }
+.flip-b .bigv { font-size:31px; font-weight:800; color:#FFD86B; margin:8px 0; }
+.flip-b .d { font-size:14px; color:#C9DAF2; line-height:1.6; }
+
+/* 判错卡片 */
+.chip { background:#fff; border:2px solid #C4D2E8; border-radius:12px; padding:14px 10px;
+  text-align:center; cursor:pointer; font-size:16px; font-weight:bold; color:var(--ink); transition:.2s; }
+.chip:hover { border-color:var(--blue); }
+.chip.ok { background:#E4F4E6; border-color:#3E9B4F; color:#22662E; }
+.chip.no { background:#FBE4E3; border-color:var(--red); color:#9C2B27; }
+.chip .rs { display:block; font-size:12.5px; font-weight:normal; margin-top:8px;
+  line-height:1.5; color:#43506A; }
+
+/* 逐步点亮 */
+.step-item { background:var(--lighter); border-left:6px solid var(--blue); border-radius:10px;
+  padding:11px 16px; margin-bottom:9px; font-size:16px; cursor:pointer;
+  opacity:.3; transition:.4s; }
+.step-item.on { opacity:1; background:var(--light); }
+
+/* 点击高亮格 */
+.cell { background:var(--lighter); border:2px solid #D5E1F2; border-radius:12px;
+  padding:14px 10px; text-align:center; cursor:pointer; transition:.3s; opacity:.6; }
+.cell:hover { opacity:.9; }
+.cell.on { opacity:1; background:var(--light); border-color:var(--blue); transform:translateY(-4px); }
+.cell.hi.on { background:#FFF4D6; border-color:var(--yellow); }
+.cell .nm { font-size:16px; font-weight:bold; color:var(--navy); }
+.cell .un { font-size:13px; color:#5B6B84; margin-top:5px; }
+
+/* 滑块 / 数值 */
+input[type=range] { width:100%; height:8px; accent-color:var(--blue); cursor:pointer; }
+.n-big { font-size:46px; font-weight:800; color:var(--navy); line-height:1.1; }
+.dots { display:flex; flex-wrap:wrap; gap:5px; align-content:flex-start; height:110px; }
+.dot { width:11px; height:11px; border-radius:50%; background:var(--blue); animation:pop .4s; }
+@keyframes pop { 0%{transform:scale(.5);opacity:.2} 70%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
+.pulse { animation:pop .5s ease; }
+
+/* 公式框 */
+.fbox { background:var(--light); border:2px solid #B9CCEC; border-radius:12px;
+  padding:12px 22px; font-size:24px; font-weight:bold; color:var(--navy);
+  cursor:pointer; transition:.25s; text-align:center; }
+.fbox.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+.hub { width:120px; height:120px; border-radius:50%; background:var(--navy); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:46px; font-weight:800;
+  cursor:pointer; box-shadow:0 8px 22px rgba(14,63,140,.3); }
+
+/* 输入判分 */
+.task { background:var(--lighter); border:1px solid #D5E1F2; border-radius:12px; padding:11px 14px; }
+.task .q { font-size:15px; font-weight:bold; margin-bottom:7px; line-height:1.5; }
+.task input { width:92px; font-size:15px; padding:5px 8px; border:2px solid #C4D2E8;
+  border-radius:8px; outline:none; }
+.task input:focus { border-color:var(--blue); }
+.fb { font-size:13px; margin-top:6px; font-weight:bold; min-height:17px; }
+.fb.good { color:#22662E; } .fb.bad { color:#9C2B27; }
+
+/* 选择题 */
+.quiz { background:var(--lighter); border:1px solid #D5E1F2; border-radius:12px; padding:10px 14px; }
+.quiz .q { font-size:14.5px; font-weight:bold; margin-bottom:8px; line-height:1.5; }
+.opts { display:flex; gap:7px; flex-wrap:wrap; }
+.opt { cursor:pointer; background:#fff; border:2px solid #C4D2E8; border-radius:9px;
+  padding:5px 10px; font-size:13px; transition:.15s; }
+.opt:hover { border-color:var(--blue); }
+.opt.right { background:#E4F4E6; border-color:#3E9B4F; color:#22662E; font-weight:bold; }
+.opt.wrong { background:#FBE4E3; border-color:var(--red); color:#9C2B27; }
+.expl { display:none; margin-top:7px; font-size:12.5px; color:#22662E; background:#E4F4E6;
+  border-radius:8px; padding:6px 10px; line-height:1.5; }
+.expl.show { display:block; }
+
+/* 表格 */
+table.t { width:100%; border-collapse:collapse; font-size:15px; }
+table.t th { background:var(--navy); color:#fff; padding:9px 10px; text-align:left; }
+table.t td { border-bottom:1px solid #D5E1F2; padding:8px 10px; }
+table.t tr:nth-child(even) td { background:var(--lighter); }
+
+/* 导航 */
+#nav { position:absolute; bottom:0; left:0; right:0; height:52px; background:rgba(11,31,61,.94);
+  display:flex; align-items:center; justify-content:center; gap:16px; z-index:50; }
+#nav button { background:#1E4FA8; border:none; color:#fff; width:40px; height:32px;
+  border-radius:8px; font-size:16px; cursor:pointer; }
+#nav button:hover { background:#2E63C4; }
+#pageinfo { color:#9FB8DC; font-size:14px; letter-spacing:1px; min-width:70px; text-align:center; }
+#navtip { position:absolute; right:22px; color:#7E93B4; font-size:12px; }
+</style>
+</head>
+<body>
+<div id="stage">
+<section class="slide active"><div class="cover-left"><div class="tag">人教版（2019）· 必修第一册<br>第二章 第三节 · 综合复习 · 第2课时</div><div><div style="width:64px;height:6px;background:#D9534F;margin-bottom:22px;"></div><h1>应用与实验</h1><div style="width:76px;height:4px;background:#3D7BD9;margin:22px 0;"></div><div class="sub">N<sub>A</sub> 判断 · 配制流程 · 误差分析</div></div><div class="tag" style="font-size:15px;letter-spacing:2px;">高中化学 · 45 分钟 · 交互课件</div></div><div class="cover-right"><div><div class="kicker">本节课要弄清</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 含 N<sub>A</sub> 的说法怎么判？</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 配制溶液有哪七步？</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 俯视仰视为什么一高一低？</div><div style='font-size:18px;line-height:2;color:#43506A;'>· 容量瓶有哪些使用禁区？</div></div><div style="text-align:right;"><div class="section-num">02</div><div class="sec-badge" style="margin-left:auto;"></div><div style="font-size:21px;color:var(--navy);font-weight:bold;">N_A 应用与溶液配制</div><div style="font-size:16px;color:#5B6B84;margin-top:6px;">陷阱辨析 · 七步流程 · 误差分析</div></div></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">复习地图</div><h2 class="title">物质的量 · 两个课时</h2><div class="pagebody"><div style="margin-top:20px;"><div class="toc-item "><div class="toc-num">1</div><div><div class="toc-t">第1课时　以 n 为枢纽的换算网络</div><div class="toc-d">n = N/N_A = m/M = V/V_m = c·V</div></div></div><div class="toc-item on"><div class="toc-num">2</div><div><div class="toc-t">第2课时　N_A 应用与溶液配制</div><div class="toc-d">陷阱辨析 · 七步流程 · 误差分析</div></div></div></div><div class="card warm" style="margin-top:20px;font-size:16px;line-height:1.8;">一条主线：<b>物质的量 n 是所有换算的枢纽</b>；先由已知量求 n，再由 n 求未知量。<br>第 1 课时练换算与易错辨析，第 2 课时练 N<sub>A</sub> 判断、配制流程与误差分析。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">N_A 专题</div><h2 class="title">六个常见陷阱，逐条判断</h2><div class="pagebody"><div class="hint" style="margin-bottom:14px;">点击卡片判正误；绿色正确、红色错误，理由会展开</div><div class="grid3"><div class="chip" onclick="chip(this,false,'✗ 标况下水是液体，不能用气体摩尔体积')">标况 22.4 L 水含 N<sub>A</sub> 个分子</div><div class="chip" onclick="chip(this,false,'✗ 非标准状况，V_m 不等于 22.4 L/mol')">常温 22.4 L O₂ 含 N<sub>A</sub> 个分子</div><div class="chip" onclick="chip(this,false,'✗ 阴离子是 O₂²⁻，1 mol 中只有 1 mol 阴离子')">1 mol Na₂O₂ 含 2N<sub>A</sub> 个阴离子</div><div class="chip" onclick="chip(this,true,'✓ Na 由 0 升到 +1，失 1 mol 电子')">1 mol Na 与水反应转移 N<sub>A</sub> 个电子</div><div class="chip" onclick="chip(this,true,'✓ NH₃ 是 10 电子分子')">1 mol NH₃ 含 10N<sub>A</sub> 个电子</div><div class="chip" onclick="chip(this,true,'✓ 歧化反应，1 mol Cl₂ 转移 1 mol e⁻')">1 mol Cl₂ 与足量 NaOH 转移 N<sub>A</sub> 个电子</div></div><div class="card blue" style="margin-top:18px;font-size:16px;">判断顺序：<b>物质状态 → 温度压强 → 粒子种类 → 组成与价态</b>，四关逐条过。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">N_A 训练</div><h2 class="title">三道即时判分选择题</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:12px;"><div class="quiz"><div class="q">① 下列含 N<sub>A</sub> 个分子的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'r2q1')">A．标况 22.4 L 水</span><span class="opt" onclick="pick(this,false,'r2q1')">B．常温 22.4 L O₂</span><span class="opt" data-key="1" onclick="pick(this,true,'r2q1')">C．标况 22.4 L CO₂</span><span class="opt" onclick="pick(this,false,'r2q1')">D．1 mol NaCl</span></div><div class="expl" id="e_r2q1">A 水为液体；B 非标况；D 离子晶体中不存在分子。</div></div><div class="quiz"><div class="q">② 1 mol CH₄ 中电子与 C—H 键的物质的量（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'r2q2')">A．10、2</span><span class="opt" data-key="1" onclick="pick(this,true,'r2q2')">B．10、4</span><span class="opt" onclick="pick(this,false,'r2q2')">C．8、4</span><span class="opt" onclick="pick(this,false,'r2q2')">D．6、4</span></div><div class="expl" id="e_r2q2">CH₄ 为 10 电子分子；含 4 个 C—H 键，即 4 mol 共用电子对。</div></div><div class="quiz"><div class="q">③ 1 mol Cl₂ 与足量 NaOH 反应转移电子（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'r2q3')">A．0.5 mol</span><span class="opt" data-key="1" onclick="pick(this,true,'r2q3')">B．1 mol</span><span class="opt" onclick="pick(this,false,'r2q3')">C．2 mol</span><span class="opt" onclick="pick(this,false,'r2q3')">D．4 mol</span></div><div class="expl" id="e_r2q3">Cl₂+2NaOH=NaCl+NaClO+H₂O，氯既升又降，按一半计为 1 mol。</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">配制流程</div><h2 class="title">七步排序，按顺序点亮</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">按正确操作顺序依次点击；点错会提示该找第几步</div><div class="grid4" id="seqBox"><div class="cell" onclick="seq(this,4)"><div class="nm">洗涤</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,1)"><div class="nm">计算</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,6)"><div class="nm">定容</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,3)"><div class="nm">溶解冷却</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,7)"><div class="nm">摇匀装瓶</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,2)"><div class="nm">称量</div><div class="un">点击</div></div><div class="cell" onclick="seq(this,5)"><div class="nm">转移</div><div class="un">点击</div></div><div class="card warm" style="font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center;">容量瓶只有一条刻度线，定容前须冷却至室温</div></div><div class="card blue" style="margin-top:16px;font-size:17px;" id="seqTip">已点亮 0 / 7　（顺序：计算→称量→溶解冷却→转移→洗涤→定容→摇匀装瓶）</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">容量瓶</div><h2 class="title">使用规范翻牌看</h2><div class="pagebody"><div class="hint" style="margin-bottom:14px;">点击卡片翻面，查看每条规范的原因</div><div class="grid2" style="gap:16px;"><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">使用前第一步？</div></div><div class="flip-b"><div class="nm">检漏</div><div class="bigv">倒立 2 分钟</div><div class="d">加水塞紧、倒立观察，再转 180° 重复</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">能在瓶内溶解固体吗？</div></div><div class="flip-b"><div class="nm">不能</div><div class="bigv">烧杯溶解</div><div class="d">溶解放热，须冷却至室温再转移</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">瓶身标了什么？</div></div><div class="flip-b"><div class="nm">三项标记</div><div class="bigv">温度·容积·刻度线</div><div class="d">常用 100、250、500、1000 mL</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">能长期存放溶液吗？</div></div><div class="flip-b"><div class="nm">不能</div><div class="bigv">装瓶贴签</div><div class="d">配好后转移到试剂瓶并贴标签</div></div></div></div></div><div class="card warm" style="margin-top:18px;font-size:16px;">定容操作：加水至距刻度线 1～2 cm，改用胶头滴管；视线与刻度线相平，凹液面最低处与线相切。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">误差分析</div><h2 class="title">操作 → n 或 V → c 的变化</h2><div class="pagebody"><div class="hint" style="margin-bottom:14px;">点击任一操作，看看 c = n/V 中谁变了</div><div class="grid3" style="gap:12px;"><div class="cell erow" onclick="err(0)"><div class="nm">定容时俯视</div><div class="un">点击</div></div><div class="cell erow" onclick="err(1)"><div class="nm">定容时仰视</div><div class="un">点击</div></div><div class="cell erow" onclick="err(2)"><div class="nm">未洗涤烧杯玻璃棒</div><div class="un">点击</div></div><div class="cell erow" onclick="err(3)"><div class="nm">摇匀后再加水</div><div class="un">点击</div></div><div class="cell erow" onclick="err(4)"><div class="nm">容量瓶未干燥</div><div class="un">点击</div></div><div class="cell erow" onclick="err(5)"><div class="nm">转移时溶液洒出</div><div class="un">点击</div></div></div><div class="card blue" id="errDetail" style="margin-top:18px;font-size:17px;line-height:1.8;min-height:78px;">一切误差都回到 <b>c = n / V</b>：先判断溶质的 n 是否损失，再判断溶液体积 V 偏大还是偏小。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">误差训练</div><h2 class="title">三道即时判分选择题</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:12px;"><div class="quiz"><div class="q">① 定容时俯视刻度线，所配溶液浓度（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'r2q4')">A．偏高</span><span class="opt" onclick="pick(this,false,'r2q4')">B．偏低</span><span class="opt" onclick="pick(this,false,'r2q4')">C．不变</span><span class="opt" onclick="pick(this,false,'r2q4')">D．无法判断</span></div><div class="expl" id="e_r2q4">俯视时液面低于刻度线，实际 V 偏小，c = n/V 偏高。</div></div><div class="quiz"><div class="q">② 容量瓶内壁附有少量蒸馏水，结果（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'r2q5')">A．偏高</span><span class="opt" onclick="pick(this,false,'r2q5')">B．偏低</span><span class="opt" data-key="1" onclick="pick(this,true,'r2q5')">C．无影响</span><span class="opt" onclick="pick(this,false,'r2q5')">D．无法判断</span></div><div class="expl" id="e_r2q5">定容本来就要加水，n 与最终 V 都不变，浓度不受影响。</div></div><div class="quiz"><div class="q">③ 下列操作使浓度偏低的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'r2q6')">A．定容俯视</span><span class="opt" data-key="1" onclick="pick(this,true,'r2q6')">B．未洗涤烧杯和玻璃棒</span><span class="opt" onclick="pick(this,false,'r2q6')">C．砝码生锈</span><span class="opt" onclick="pick(this,false,'r2q6')">D．容量瓶未干燥</span></div><div class="expl" id="e_r2q6">A 使 V 偏小、C 使称得溶质偏多，均偏高；D 无影响。</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">配制计算</div><h2 class="title">输入数值，立即判分</h2><div class="pagebody"><div class="grid2"><div class="task"><div class="q">① 配 100 mL 1.00 mol/L NaCl，需 NaCl 多少 g？（M=58.5）</div><input id="b1" placeholder="g"> <button class="btn" style="padding:5px 14px;font-size:14px;" onclick="checkVal('b1','g1f',5.85,'m = 0.100×1.00×58.5 = 5.85 g','先算 n = c·V，再乘 M')">判分</button><div class="fb" id="g1f"></div></div><div class="task"><div class="q">② 18 mol/L 硫酸 10 mL 稀释到 100 mL，c 是多少 mol/L？</div><input id="b2" placeholder="mol/L"> <button class="btn" style="padding:5px 14px;font-size:14px;" onclick="checkVal('b2','g2f',1.8,'c₂ = 18×10/100 = 1.8 mol/L','用 c₁V₁ = c₂V₂，单位一致')">判分</button><div class="fb" id="g2f"></div></div></div><div class="card warm" style="margin-top:20px;font-size:16px;line-height:1.8;">稀释定律：<b>c₁V₁ = c₂V₂</b>，本质是稀释前后溶质的物质的量不变。<br>托盘天平只能读到 0.1 g，实际称量 5.9 g；题目问计算值时写 5.85 g。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">综合应用</div><h2 class="title">稀释、取样与浓度</h2><div class="pagebody"><div class="card blue" style="font-size:17px;line-height:1.8;">题：取 18 mol/L 浓硫酸 10 mL，加水稀释到 100 mL。求稀释后浓度；再取出 10 mL，其中含 H₂SO₄ 多少 mol？</div><button class="btn" style="margin-top:16px;" onclick="reveal(['d1','d2','d3'])">展开三步 →</button><div id="d1" class="reveal card" style="margin-top:14px;font-size:17px;">第 1 步　c₂ = c₁V₁/V₂ = 18×10/100 = <b>1.8 mol/L</b></div><div id="d2" class="reveal card" style="margin-top:12px;font-size:17px;">第 2 步　取出的 10 mL 浓度<b>仍是 1.8 mol/L</b>，与所取体积无关</div><div id="d3" class="reveal card good" style="margin-top:12px;font-size:17px;">第 3 步　n = c·V = 1.8×0.010 = <b>0.018 mol</b></div><div class="card warm" style="margin-top:14px;font-size:15px;">「浓度不随取用量改变、物质的量随取用量改变」是本节最常考的一组对比。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">归纳</div><h2 class="title">两个课时串起来</h2><div class="pagebody"><div class="card" style="margin-bottom:10px;font-size:16.5px;padding:12px 18px;"><b style="color:var(--blue);">1.</b>　n 是枢纽：N、m、V(g)、c 都通过 n 相互换算。</div><div class="card" style="margin-bottom:10px;font-size:16.5px;padding:12px 18px;"><b style="color:var(--blue);">2.</b>　N<sub>A</sub> 判断题：状态、条件、粒子种类、组成价态，四关逐条查。</div><div class="card" style="margin-bottom:10px;font-size:16.5px;padding:12px 18px;"><b style="color:var(--blue);">3.</b>　配制七步：计算→称量→溶解冷却→转移→洗涤→定容→摇匀装瓶。</div><div class="card" style="margin-bottom:10px;font-size:16.5px;padding:12px 18px;"><b style="color:var(--blue);">4.</b>　误差一律回到 c = n/V；稀释用 c₁V₁ = c₂V₂。</div><div class="card warm" style="margin-top:12px;font-size:15.5px;">复习建议：画一张以 n 为中心的关系图，把四个公式、配制流程与常见陷阱写在同一页纸上。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第二章 第三节 · 综合复习</span><span>物质的量</span></div></section></div>
+<div id="nav">
+  <button onclick="go(-1)" title="上一页">◀</button>
+  <span id="pageinfo">1 / 11</span>
+  <button onclick="go(1)" title="下一页">▶</button>
+  <div id="navtip">← → / 空格 翻页 · 点击卡片交互</div>
+</div>
+<script>
+
+const stage = document.getElementById('stage');
+function fit(){
+  const s = Math.min(window.innerWidth/1280, (window.innerHeight-52)/720);
+  stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+}
+window.addEventListener('resize', fit); fit();
+const slides = [...document.querySelectorAll('.slide')];
+let cur = 0;
+function go(d){
+  if(d>0 && cur===slides.length-1) return;
+  if(d<0 && cur===0) return;
+  slides[cur].classList.remove('active');
+  cur += d;
+  slides[cur].classList.add('active');
+  document.getElementById('pageinfo').textContent = (cur+1)+' / '+slides.length;
+}
+document.addEventListener('keydown', e=>{
+  const t = e.target.tagName;
+  if(t==='INPUT' || t==='TEXTAREA' || t==='SELECT') return;
+  if(e.key===' ' && t==='BUTTON') return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { e.preventDefault(); go(1); }
+  if(e.key==='ArrowLeft'||e.key==='PageUp') { e.preventDefault(); go(-1); }
+});
+function show(id){ const e=document.getElementById(id); if(e) e.classList.add('shown'); }
+function reveal(ids){ ids.forEach(show); }
+function flip(el){ el.classList.toggle('open'); }
+function chip(el, ok, reason){
+  if(el.dataset.done) return;
+  el.classList.add(ok?'ok':'no');
+  const s=document.createElement('span'); s.className='rs'; s.textContent=reason;
+  el.appendChild(s); el.dataset.done='1';
+}
+function pick(el, ok, qid){
+  const box = el.closest('.quiz');
+  if(box.dataset.done) return;
+  box.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  el.classList.add(ok?'right':'wrong');
+  if(!ok) box.querySelectorAll('.opt').forEach(o=>{ if(o.dataset.key==='1') o.classList.add('right'); });
+  document.getElementById('e_'+qid).classList.add('show');
+  box.dataset.done='1';
+}
+function checkVal(inputId, fbId, expected, okMsg, badMsg){
+  const v = parseFloat(document.getElementById(inputId).value);
+  const fb = document.getElementById(fbId);
+  if(Math.abs(v-expected) < 1e-6){ fb.className='fb good'; fb.textContent='✓ '+okMsg; }
+  else { fb.className='fb bad'; fb.textContent='✗ '+badMsg; }
+}
+function light(el, cls){
+  el.classList.add('on');
+  if(cls) el.classList.add(cls);
+}
+function lightNext(groupIdx){
+  const g=document.getElementById(groupIdx);
+  const items=g.querySelectorAll('.step-item');
+  for(let i=0;i<items.length;i++){ if(!items[i].classList.contains('on')){ items[i].classList.add('on'); break; } }
+}
+
+
+let expectStep = 1;
+function seq(el, i){
+  const tip = document.getElementById('seqTip');
+  if(i === expectStep){
+    el.classList.add('on');
+    el.querySelector('.un').textContent = '第 ' + i + ' 步 ✓';
+    expectStep++;
+    tip.textContent = '已点亮 ' + (expectStep-1) + ' / 7　（顺序：计算→称量→溶解冷却→转移→洗涤→定容→摇匀装瓶）';
+    if(expectStep === 8) tip.textContent = '✓ 全部正确！七步顺序已完整点亮。';
+  } else {
+    tip.textContent = '顺序不对，先找第 ' + expectStep + ' 步';
+    el.style.borderColor = '#D9534F';
+    setTimeout(()=>{ el.style.borderColor = ''; }, 700);
+  }
+}
+const ERR = [
+ ['定容时俯视','液面低于刻度线就停止加水，实际 V 偏小','c 偏高'],
+ ['定容时仰视','液面超过刻度线，实际 V 偏大','c 偏低'],
+ ['未洗涤烧杯和玻璃棒','有溶质残留未转入容量瓶，n 偏小','c 偏低'],
+ ['摇匀后液面下降再加水','液面下降是正常现象，补水使 V 偏大','c 偏低'],
+ ['容量瓶未干燥','定容本来就要加水，n 与最终 V 都不变','无影响'],
+ ['转移时溶液洒出','部分溶质损失，n 偏小','c 偏低']
+];
+function err(i){
+  document.querySelectorAll('.erow').forEach((e,j)=>e.classList.toggle('on', j===i));
+  const box = document.getElementById('errDetail');
+  box.innerHTML = '<b>' + ERR[i][0] + '</b>：<br>' + ERR[i][1]
+    + ' → <b style="color:#D9534F;font-size:21px;">' + ERR[i][2] + '</b>'
+    + '<br><span class="small">统一方法：c = n / V，先判 n，再判 V。</span>';
+}
+
+</script>
+</body>
+</html>
