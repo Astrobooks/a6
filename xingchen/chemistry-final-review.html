@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高一化学期中考前复习 · 四节课试题讲评｜星辰班级 化学小屋</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#1c2430;--sub:#5b6779;--line:#e2e8f0;--blue:#2563eb;--blue-soft:#eef4ff;--red:#c0392b;--orange:#b45309;--green:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;font-size:19px;line-height:1.85}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+header.top{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:38px 0 30px;margin-bottom:0}
+header.top .wrap{padding-bottom:0}
+h1{margin:0 0 10px;font-size:34px;letter-spacing:1px}
+.sub{font-size:18px;opacity:.93;margin:0 0 6px}
+.meta{font-size:16px;opacity:.85;margin-top:14px;line-height:1.9}
+nav.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(20,40,80,.06)}
+nav.bar .wrap{display:flex;gap:8px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.nav-item{color:var(--blue);text-decoration:none;font-size:16px;padding:7px 14px;border:1px solid #d7e3ff;border-radius:20px;background:var(--blue-soft);white-space:nowrap}
+.nav-item:hover{background:#dce9ff}
+.notice{background:#fff8e8;border:1px solid #f2d9a0;border-left:5px solid #e0a426;border-radius:10px;padding:16px 20px;margin:26px 0;font-size:17px;color:#6b4d10}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:22px 0;box-shadow:0 2px 8px rgba(20,40,80,.04)}
+.panel h2{font-size:24px;margin:0 0 14px;color:#16336b}
+details>summary{cursor:pointer;font-size:19px;font-weight:600;color:var(--blue);padding:6px 0}
+table{width:100%;border-collapse:collapse;font-size:16px;margin-top:12px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#eff4fc;color:#25406b;white-space:nowrap}
+td a{color:var(--blue);text-decoration:none}
+.lesson{margin-top:46px}
+.lesson-head{display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--blue);padding-bottom:12px;margin-bottom:16px}
+.lesson-no{background:var(--blue);color:#fff;border-radius:8px;padding:6px 14px;font-size:18px;white-space:nowrap}
+.lesson h2{font-size:29px;margin:0;color:#16336b}
+.goal,.focus{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:10px 0;font-size:17px}
+.goal b,.focus b{color:var(--blue)}
+.focus{background:#f0f7f4;border-color:#cfe7de}
+.focus b{color:var(--green)}
+.lesson-tools{display:flex;align-items:center;gap:14px;margin:18px 0 12px}
+.expand-all{background:#fff;border:1px solid var(--blue);color:var(--blue);border-radius:8px;padding:8px 16px;font-size:16px;cursor:pointer}
+.expand-all:hover{background:var(--blue-soft)}
+.count{color:var(--sub);font-size:16px}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0;box-shadow:0 2px 8px rgba(20,40,80,.04)}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px dashed var(--line);padding-bottom:10px;margin-bottom:14px}
+.qno{background:#16336b;color:#fff;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.badge{font-size:15px;padding:3px 11px;border-radius:14px;white-space:nowrap}
+.badge.hard{background:#fdecea;color:var(--red);border:1px solid #f5c6c0}
+.badge.mid{background:#eaf1ff;color:#1d4ed8;border:1px solid #c9dcff}
+.badge.easy{background:#eef7f2;color:var(--green);border:1px solid #cbe8dc}
+.badge.type{background:#f1f3f7;color:#46536a;border:1px solid #dde2ea}
+.src{margin-left:auto;color:var(--sub);font-size:15px}
+.qbody{font-size:19px;line-height:2.0;overflow-x:auto}
+.qbody img{max-width:100%;height:auto;vertical-align:middle;margin:2px 3px}
+.qbody table{margin:10px 0;font-size:18px}
+.qbody table td{border:none;padding:5px 16px 5px 0;vertical-align:top}
+.qbody p{margin:8px 0}
+.ans-toggle{margin-top:16px;background:var(--blue-soft);color:var(--blue);border:1px solid #c9dcff;border-radius:9px;padding:10px 18px;font-size:17px;cursor:pointer;font-family:inherit}
+.ans-toggle:hover{background:#dce9ff}
+.ans-toggle.small{padding:7px 14px;font-size:16px;margin-top:6px}
+.ans-body{margin-top:14px;border-left:4px solid var(--green);background:#f5faf8;border-radius:0 10px 10px 0;padding:14px 18px}
+.ans-row{display:flex;gap:14px;padding:8px 0;border-bottom:1px dashed #d6e8e1;font-size:17.5px}
+.ans-row:last-child{border-bottom:none}
+.ans-row.teach{background:#fff;border-radius:8px;padding:12px;margin-top:8px;border:1px solid #d6e8e1}
+.ans-label{flex:none;width:104px;white-space:nowrap;color:var(--green);font-weight:700}
+.ans-txt{flex:1;min-width:0}
+.variant{background:#fff;border:1px solid var(--line);border-left:5px solid var(--green);border-radius:12px;padding:18px 22px;margin-top:28px}
+.variant h3{margin:0 0 12px;font-size:22px;color:var(--green)}
+.vitem{padding:12px 0;border-bottom:1px dashed var(--line)}
+.vitem:last-child{border-bottom:none}
+.vq{margin:0;font-size:18px}
+footer{color:var(--sub);font-size:15px;text-align:center;padding:30px 0 10px}
+@media(max-width:700px){body{font-size:17px}.wrap{padding:0 12px 50px}h1{font-size:26px}.qbody{font-size:17px}.ans-label{width:auto;min-width:100px}.ans-row{display:block}.src{margin-left:0;width:100%}}
+@media print{nav.bar,.ans-toggle,.lesson-tools{display:none}.ans-body{display:block!important}.qcard{break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<div style="margin:0 0 16px;font-size:15px;line-height:1.6;"><a href="chemistry.html" style="display:inline-block;color:#e8f1ff;text-decoration:none;border:1px solid rgba(255,255,255,.5);padding:5px 16px;border-radius:20px;">← 返回化学小屋</a><span style="margin-left:12px;opacity:.85;">星辰班级 · 期中复习</span></div>
+<h1>高一化学 · 期中考前复习试题讲评</h1>
+<p class="sub">四节课 · 25 道高难题 · 按考点分类 · 答案点击展开</p>
+<div class="meta">题目来源：组卷网 2026–2027 学年高一上学期期中试卷（15 套，15 个地区，2026/11/12–11/14 更新）<br>
+选题口径：题目前标注的难度等级与难度系数（优先 0.39–0.65），结合高一化学易错点复筛<br>
+课时安排：按考点顺序分 4 节 · 每节含典题精讲、易错归因与原创变式巩固</div>
+</div></header>
+<nav class="bar"><div class="wrap"><a href="#L1" class="nav-item">第 1 课时 物质的分类 · 离子反应 · 胶体</a>
+<a href="#L2" class="nav-item">第 2 课时 氧化还原反应</a>
+<a href="#L3" class="nav-item">第 3 课时 钠及其化合物（含 Na₂CO₃ / NaHCO₃ 受热分解计算）</a>
+<a href="#L4" class="nav-item">第 4 课时 氯及其化合物（含氯气的实验室制法）</a></div></nav>
+<div class="wrap">
+<div class="notice"><b>使用说明与核对提示</b><br>
+① 点「点击查看参考答案与讲评」逐题展开；也可用每节开头的「展开本节全部答案」一次展开，便于投屏讲评或打印。<br>
+② 题目原文（含化学式、装置图）与题目前的难度标注来自组卷网；<b>参考答案、解析与讲评要点为讲评编写版</b>，未复制网站原文解析，建议课前与原卷答案核对一次。<br>
+③ 全部题目图片已保存到本站，无需联网即可正常显示；打印时答案会自动展开，适合投屏讲评或印发给学生。</div>
+
+<div class="panel"><h2>一、15 套试卷来源清单</h2>
+<details><summary>展开查看全部 15 套（可点击打开原卷）</summary>
+<table><thead><tr><th>#</th><th>地区</th><th>试卷名称</th><th>更新日期</th><th>链接</th></tr></thead><tbody><tr><td>1</td><td>天津</td><td>天津市蓟州区2026-2027学年高一第一学期期中练习 化学试题</td><td>2026/11/14</td><td><a href="https://zujuan.xkw.com/14p3581806.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>2</td><td>内蒙古</td><td>内蒙古鄂尔多斯市准格尔中学2026-2027学年高一上学期期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3586227.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>3</td><td>广东</td><td>广东东莞市东莞中学2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3586220.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>4</td><td>江苏</td><td>江苏宿迁市2026-2027学年高一第一学期期中质量监测 化学试卷</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3583773.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>5</td><td>河南</td><td>河南省南阳市2026-2027学年高一上学期期中质量评估 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585843.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>6</td><td>江西</td><td>江西赣州市部分学校2026-2027学年高一上学期11月素养训练 化学试卷</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585839.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>7</td><td>辽宁</td><td>辽宁沈阳市四校2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585768.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>8</td><td>海南</td><td>海南省部分学校2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3583789.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>9</td><td>北京</td><td>北京市房山区2026-2027学年高一上学期期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585662.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>10</td><td>黑龙江</td><td>黑龙江牡丹江市第二高级中学2026-2027学年高一上学期期中考试 化学试卷</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585649.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>11</td><td>陕西</td><td>陕西咸阳市武功县部分学校2026-2027学年高一上学期11月期中评价 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3585333.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>12</td><td>贵州</td><td>贵州黔西南布依族苗族自治州册亨县三校2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3584779.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>13</td><td>重庆</td><td>重庆市第十一中学校2026-2027学年高一上学期期中考试 化学试卷</td><td>2026/11/13</td><td><a href="https://zujuan.xkw.com/14p3583950.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>14</td><td>云南</td><td>云南德宏傣族景颇族自治州芒市第一中学2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/12</td><td><a href="https://zujuan.xkw.com/14p3583230.html" target="_blank" rel="noopener">打开原卷</a></td></tr>
+<tr><td>15</td><td>吉林</td><td>吉林省吉林市昌邑区吉林江城中学2026-2027学年高一上学期11月期中考试 化学试题</td><td>2026/11/12</td><td><a href="https://zujuan.xkw.com/14p3583175.html" target="_blank" rel="noopener">打开原卷</a></td></tr></tbody></table></details></div>
+
+<div class="panel"><h2>二、四节课选题覆盖表</h2>
+<table><thead><tr><th>课时 / 专题</th><th>题数</th><th>选题编号（卷号-题号）</th></tr></thead><tbody><tr><td>物质的分类 · 离子反应 · 胶体</td><td>7</td><td>08-08、05-15、02-16、07-08、08-10、07-07、02-19</td></tr>
+<tr><td>氧化还原反应</td><td>6</td><td>12-14、08-12、02-09、11-17、15-11、07-15</td></tr>
+<tr><td>钠及其化合物（含 Na₂CO₃ / NaHCO₃ 受热分解计算）</td><td>6</td><td>05-08、03-14、02-10、07-13、03-11、09-28</td></tr>
+<tr><td>氯及其化合物（含氯气的实验室制法）</td><td>6</td><td>11-09、08-17、07-18、07-14、03-15、11-18</td></tr></tbody></table>
+<p style="font-size:16px;color:#5b6779;margin:12px 0 0">指定题定位：<b>05-08</b>（NaHCO₃ 受热分解定量计算）、<b>03-14</b>（Na₂CO₃/NaHCO₃ 受热分解测质量分数误差分析）、<b>11-09</b> 与 <b>08-17 / 07-18</b>（氯气的实验室制法）。</p></div>
+
+<section class="lesson" id="L1">
+<div class="lesson-head"><div class="lesson-no">第 1 课时</div><h2>物质的分类 · 离子反应 · 胶体</h2></div>
+<div class="goal"><b>课时目标</b>　建立「分类观」与「微粒观」：会用树状/交叉分类法判断物质类别，能区分电解质与导电性，能按「拆、删、查」三步书写与判断离子方程式，掌握胶体的本质特征与制备方法。</div>
+<div class="focus"><b>本节聚焦</b>　易错集中点：电解质≠能导电；Fe(OH)₃ 胶体制备不能用 NaOH；离子方程式漏写参与反应的离子；少量/过量对产物的影响。</div>
+<div class="lesson-tools"><button type="button" class="expand-all" data-target="L1">展开本节全部答案</button><span class="count">共 7 题 · 难度系数 0.39~0.70</span></div>
+<div class="qlist">
+<article class="qcard" id="q-08-08">
+<div class="qhead"><span class="qno">01</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">海南 · 26-27高一上—海南—期中</span></div>
+<div class="qbody">
+            8. 某样品可能含有下列物质中的一种或几种：<img src="assets/papers/chem_final_review/9820227841b264c0.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/0b3d74c59ccb31b8.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/107dda9849342631.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/117b89110195b2d6.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/6c4e8e3f404c6d60.png" mathml="" latex="" style="vertical-align:middle;">。对该样品进行初步测试后，得出如图所示的结果。<p style="text-align:justify;"><img src="assets/papers/chem_final_review/e1e9a3e713b65b0a.png" style="vertical-align:middle;" alt=""></p>下列关于该样品组成的分析正确的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．一定是<img src="assets/papers/chem_final_review/107dda9849342631.png" mathml="" latex="" style="vertical-align:middle;">的纯净物</td></tr><tr><td>B．可能是<img src="assets/papers/chem_final_review/107dda9849342631.png" mathml="" latex="" style="vertical-align:middle;">，<img src="assets/papers/chem_final_review/117b89110195b2d6.png" mathml="" latex="" style="vertical-align:middle;">的混合物</td></tr><tr><td>C．可能是<img src="assets/papers/chem_final_review/9820227841b264c0.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/107dda9849342631.png" mathml="" latex="" style="vertical-align:middle;">的混合物</td></tr><tr><td>D．可能是<img src="assets/papers/chem_final_review/6c4e8e3f404c6d60.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/107dda9849342631.png" mathml="" latex="" style="vertical-align:middle;">的混合物</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">B</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">样品为白色固体且加水后全部溶解：CuSO₄·5H₂O 为蓝色且溶液呈蓝色、AgCl 与 BaCO₃ 均难溶于水，三者一定不含。滴加酚酞变红说明溶液呈碱性，NaOH 一定含有。NaCl 白色易溶、溶液中性，含与不含都不影响上述三个现象，因此只能确定「NaOH 一定含有，NaCl 可能含有」。故样品可能是 NaOH 与 NaCl 的混合物。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 把「酚酞变红」直接等同于「只有 NaOH」，忽略 NaCl 可以共存；② 忘记 CuSO₄·5H₂O 本身是蓝色晶体，第一步「观察外观」就已排除；③ 把「可能是」误当成「一定是」。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">讲评时按流程三步走：先看颜色（排除有色物质）→ 再看溶解性（排除难溶物）→ 最后看酸碱性（锁定碱性物质），每一步都问「还剩谁、谁一定在、谁可能在」。这类题的答案往往是「一定含 A，可能含 B」，而不是纯净物。</div></div>
+</div></article>
+<article class="qcard" id="q-05-15">
+<div class="qhead"><span class="qno">02</span><span class="badge hard">难度 困难</span><span class="badge type">解答题</span><span class="src">河南 · 河南省南阳市2026-2027学年高一上学期</span></div>
+<div class="qbody">
+            15. 分类是学习化学的一种重要方法，科学合理的分类对于系统掌握知识、提高学习效率、解决问题都有着重要的意义。回答下列问题：<br>(1)现有下列物质：①石墨 ②酒精 ③稀硫酸 ④<img src="assets/papers/chem_final_review/13ba5dcdfe06fe96.png" mathml="" latex="" style="vertical-align:middle;"> ⑤<img src="assets/papers/chem_final_review/9cf35117f94377d5.png" mathml="" latex="" style="vertical-align:middle;">溶液 ⑥液态HCl ⑦<img src="assets/papers/chem_final_review/f76f64f1fabaa604.png" mathml="" latex="" style="vertical-align:middle;">固体 ⑧<img src="assets/papers/chem_final_review/892d58e73fc54585.png" mathml="" latex="" style="vertical-align:middle;">溶液<br>Ⅰ．上述状态的物质能导电的是<bk size="10" index="1" type="underline">__________</bk>(填序号，下同)，属于电解质的是<bk size="10" index="2" type="underline">__________</bk>。<br>Ⅱ．常温常压下，等质量的<img src="assets/papers/chem_final_review/13ba5dcdfe06fe96.png" mathml="" latex="" style="vertical-align:middle;">、HCl体积之比<bk size="10" index="3" type="underline">__________</bk>。<br>Ⅲ．1 L <img src="assets/papers/chem_final_review/892d58e73fc54585.png" mathml="" latex="" style="vertical-align:middle;">溶液中含<img src="assets/papers/chem_final_review/1e75ac3386ece707.png" mathml="" latex="" style="vertical-align:middle;"> 54 g，从该溶液中取出20 mL，并稀释到100 mL，稀释后溶液中硫酸根离子的物质的量浓度为<bk size="10" index="4" type="underline">__________</bk>mol·L<sup>-1</sup>。<br>Ⅳ．⑤与少量⑦的水溶液混合，发生反应的离子方程式为<bk size="22" index="5" type="underline">______________________</bk>。<br>(2)如图为氯及其化合物的“价—类”二维图。缺失的类别b为<bk size="10" index="6" type="underline">__________</bk>，将物质a通入石灰乳可制得<img src="assets/papers/chem_final_review/0b0fbd736c001b11.png" mathml="" latex="" style="vertical-align:middle;">，写出相应反应的化学方程式<bk size="34" index="7" type="underline">__________________________________</bk>。<p style="text-align:justify;"><img src="assets/papers/chem_final_review/b71c9a9672ee5fcc.png" style="vertical-align:middle;" alt=""></p>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">Ⅰ 能导电看「当前状态有无自由移动的离子或电子」：石墨（自由电子）、稀硫酸/溶液（自由离子）、熔融盐可导电；固态离子化合物、液态 HCl（未电离）、酒精、蔗糖不导电。电解质必须是「化合物」，且指在水溶液或熔融状态下能导电的性质，与当前是否导电无关——石墨是单质、稀硫酸是混合物，都不是电解质。Ⅱ 等质量气体体积比等于物质的量之比，即摩尔质量的反比。Ⅲ 先由 54 g 溶质求原溶液浓度，取出 20 mL 时浓度不变，再按稀释前后溶质物质的量守恒 c₁V₁=c₂V₂ 计算。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">最典型错误是把「能导电」与「是电解质」混为一谈：金属单质、石墨能导电但不是电解质；NaCl 固体是电解质但固态不导电。另一个坑是稀释时把「取出 20 mL」当成浓度被稀释 5 倍。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">用一张两栏表把「物质 / 能否导电 / 是否电解质 / 理由」逐行填完，让学生自己发现两列并不一致。强调电解质的判断对象是化合物、判断依据是「水溶液或熔融态能否导电」。</div></div>
+</div></article>
+<article class="qcard" id="q-02-16">
+<div class="qhead"><span class="qno">03</span><span class="badge mid">难度 适中 0.68</span><span class="badge type">填空题</span><span class="src">内蒙古 · 26-27高一上—内蒙古鄂尔多斯—期中</span></div>
+<div class="qbody">
+            16. 回答下列问题：<br>Ⅰ．已知有以下几种物质：①酒精、②<img src="assets/papers/chem_final_review/598d21eef474f954.png" mathml="" latex="" style="vertical-align:middle;">固体、③<img src="assets/papers/chem_final_review/6b8d64fcd6c8d13f.png" mathml="" latex="" style="vertical-align:middle;">、④氨水、⑤<img src="assets/papers/chem_final_review/b5d532510b500d15.png" mathml="" latex="" style="vertical-align:middle;">气体、⑥<img src="assets/papers/chem_final_review/7b85dd025cdfc40d.png" mathml="" latex="" style="vertical-align:middle;">溶液、⑦<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">、⑧熔融<img src="assets/papers/chem_final_review/6609b342ced1a9a1.png" mathml="" latex="" style="vertical-align:middle;">、⑨空气、⑩<img src="assets/papers/chem_final_review/94b99bb49bc344d7.png" mathml="" latex="" style="vertical-align:middle;">固体。<br>(1)以上物质中属于盐类的是<bk size="7" index="1" type="underline">_______</bk>(填序号，下同)，属于电解质的是<bk size="7" index="2" type="underline">_______</bk>，上述状态下能导电的是<bk size="7" index="3" type="underline">_______</bk>。<br>(2)写出<img src="assets/papers/chem_final_review/598d21eef474f954.png" mathml="" latex="" style="vertical-align:middle;">固体溶于水的电离方程式：<bk size="7" index="4" type="underline">_______</bk>。<br>Ⅱ．某化学小组进行<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">胶体的制备实验并检验其性质。<br>(3)将分散系分为溶液、胶体和浊液的分类依据是<bk size="7" index="5" type="underline">_______</bk>。<br>(4)实验室制备<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">胶体的离子方程式为<bk size="7" index="6" type="underline">_______</bk>。<br>(5)依据图中所示信息，为了提纯混有少量<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">沉淀的<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">胶体，可以选择<bk size="7" index="7" type="underline">_______</bk>(填“滤纸”或“半透膜”)来实现。<p style="text-align:justify;"><img src="assets/papers/chem_final_review/fba01ca3fa84682a.png" style="vertical-align:middle;" alt=""></p>(6)实验证明，胶体的凝聚能力主要取决于与胶粒带相反电荷的离子所带的电荷数，电荷数越大，凝聚能力越强。已知：<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">胶体粒子带正电荷，向<img src="assets/papers/chem_final_review/db745192f07e655a.png" mathml="" latex="" style="vertical-align:middle;">胶体中加入下列电解质时，其凝聚能力最强的为<bk size="7" index="8" type="underline">_______</bk>(填字母)。<br>A．<img src="assets/papers/chem_final_review/b031723773b05c69.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-family:'Times New Roman'" qml-space-size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>B．<img src="assets/papers/chem_final_review/884c566656514b6a.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-family:'Times New Roman'" qml-space-size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>C．<img src="assets/papers/chem_final_review/7b85dd025cdfc40d.png" mathml="" latex="" style="vertical-align:middle;">
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">Ⅰ 盐 = 金属阳离子（或 NH₄⁺）与酸根阴离子构成的化合物；电解质须为化合物，排除单质与混合物；能导电看当前状态。电离方程式注意原子团不能拆（如 KClO₃ = K⁺ + ClO₃⁻）。Ⅱ 分散系分类的唯一依据是分散质粒子直径（&lt;1 nm 溶液、1~100 nm 胶体、&gt;100 nm 浊液）；胶粒能透过滤纸但不能透过半透膜。实验室制 Fe(OH)₃ 胶体是把饱和 FeCl₃ 溶液滴入沸水并加热至红褐色，方程式为 FeCl₃ + 3H₂O = Fe(OH)₃(胶体) + 3HCl，不能写沉淀符号，也不能用 NaOH。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 把「丁达尔效应」当成分散系分类依据（那只是鉴别方法）；② 制胶体时写「↓」或滴加 NaOH；③ 电离方程式把 ClO₃⁻、SO₄²⁻ 拆成原子。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把「分类依据」与「鉴别方法」分开板书，并让学生用半透膜/滤纸的通透性画一张粒子大小示意图，胶体这块就通了。</div></div>
+</div></article>
+<article class="qcard" id="q-07-08">
+<div class="qhead"><span class="qno">04</span><span class="badge hard">难度 较难 0.4</span><span class="badge type">单选题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            8. 下列实验操作正确且能达到实验目的的是<table style="width:409px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:191;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:justify;"><img src="assets/papers/chem_final_review/316e6e97ae970d51.png" style="vertical-align:middle;" alt=""></p></td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:justify;"><img src="assets/papers/chem_final_review/6be872a7492b9025.png" style="vertical-align:middle;" alt=""></p></td></tr><tr><td style="width:191;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">A．用NaOH溶液除去Cl<sub word-font="Times New Roman">2</sub>尾气，防止污染环境</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">B．证明过氧化钠和水的反应是放热反应</td></tr><tr><td style="width:191;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:justify;"><img src="assets/papers/chem_final_review/a5822fde91eb11fd.png" style="vertical-align:middle;" alt=""></p></td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:justify;"><img src="assets/papers/chem_final_review/b158a099a539a623.png" style="vertical-align:middle;" alt=""></p></td></tr><tr><td style="width:191;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">C．制备氢氧化铁胶体</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">D．用焰色试验检验溶液中的Na<sup word-font="Times New Roman">+</sup></td></tr></tbody></table><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="4"><tbody><tr><td>A．A</td><td>B．B</td><td>C．C</td><td>D．D</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">B</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：Cl₂ 通入 NaOH 溶液的导管没有伸入液面以下，气体无法与吸收液接触，不能除尾气。B：向包有 Na₂O₂ 的脱脂棉滴 2 滴水，棉花燃烧，说明反应放热使温度达到着火点，同时生成 O₂ 助燃，能达到目的。C：把饱和 FeCl₃ 滴入 NaOH 溶液并加热，得到的是 Fe(OH)₃ 沉淀而不是胶体；制备胶体必须滴入沸水。D：焰色试验要用铂丝或光洁无锈的铁丝，玻璃棒本身含钠且不能耐高温灼烧，操作错误。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">学生常只记「NaOH 能吸收 Cl₂」「FeCl₃ 能制胶体」而忽略装置细节，忘了看导管长短、滴加对象和仪器材质。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">提醒一句口诀：「先看装置能不能通气，再看试剂能不能反应」。实验操作题的正误往往藏在导管、仪器和滴加顺序里，而不在化学原理上。</div></div>
+</div></article>
+<article class="qcard" id="q-08-10">
+<div class="qhead"><span class="qno">05</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">海南 · 26-27高一上—海南—期中</span></div>
+<div class="qbody">
+            10. 氢氧化钡可用于制特种肥皂、杀虫剂，也可用于硬水软化等。下列有关反应的离子方程式正确的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．向氢氧化钡溶液中通入少量二氧化碳：<img src="assets/papers/chem_final_review/50a030bb6c4dd68b.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．向氢氧化钡溶液中加入硫酸镁溶液：<img src="assets/papers/chem_final_review/560165bda434041a.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>C．向氢氧化钡溶液中加入稀硫酸：<img src="assets/papers/chem_final_review/02bc5f58a0a7ffde.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．向氢氧化钡溶液中加入少量碳酸氢钾：<img src="assets/papers/chem_final_review/9f41b2e018d38cb1.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：向 Ba(OH)₂ 中通入少量 CO₂，应生成 BaCO₃ 沉淀，正确式子为 Ba²⁺ + 2OH⁻ + CO₂ = BaCO₃↓ + H₂O，选项写成了 CO₂ 与 OH⁻ 生成 HCO₃⁻（那是 CO₂ 过量的情形）。B：Ba(OH)₂ 与 MgSO₄ 反应时 Mg²⁺ 与 OH⁻ 也会生成 Mg(OH)₂ 沉淀，选项只写 BaSO₄，漏了另一半。C：Ba(OH)₂ 与稀硫酸反应，H⁺ 与 OH⁻、Ba²⁺ 与 SO₄²⁻ 两组离子同时反应，配比 2:2:1:1，式子正确。D：加入少量 KHCO₃ 时 HCO₃⁻ 只与 1 个 OH⁻ 反应生成 CO₃²⁻ 并立即与 Ba²⁺ 沉淀，正确式子为 Ba²⁺ + OH⁻ + HCO₃⁻ = BaCO₃↓ + H₂O，选项系数与产物均错。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">「少量 / 过量」是离子方程式的第一大坑；另一个是「漏写同时发生的另一组离子反应」（Ba²⁺ + SO₄²⁻ 与 Mg²⁺ + OH⁻ 常常只写一半）。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">教一个固定动作：先列出溶液中所有离子，再两两配对找「能生成沉淀/气体/弱电解质」的组合，一组都不能漏；最后用「少量者系数为 1」定系数、查电荷与原子守恒。</div></div>
+</div></article>
+<article class="qcard" id="q-07-07">
+<div class="qhead"><span class="qno">06</span><span class="badge hard">难度 较难 0.39</span><span class="badge type">单选题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            7. 某未知溶液X可能含有<img src="assets/papers/chem_final_review/b638a443e8ed5103.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/d531269fe1615b27.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/725cc3463e7bf248.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/f74846fb1c558394.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/b30a44f3feb0bca2.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/689ef74406dce3a3.png" mathml="" latex="" style="vertical-align:middle;">中的若干种，取该溶液进行如图所示实验。实验过程中所加试剂均过量，产生的气体全部逸出。下列说法正确的是<p style="text-align:left;"><img src="assets/papers/chem_final_review/71eca3b6bdb62fc7.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．原溶液至少含有Ca<sup word-font="Times New Roman">2+</sup>、K<sup word-font="Times New Roman">+</sup>、Na<sup word-font="Times New Roman">+</sup>中的一种离子</td></tr><tr><td>B．原溶液中一定存在<img src="assets/papers/chem_final_review/f74846fb1c558394.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/b30a44f3feb0bca2.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/689ef74406dce3a3.png" mathml="" latex="" style="vertical-align:middle;">和至少0.01 molCl<sup word-font="Times New Roman">-</sup></td></tr><tr><td>C．原溶液中一定存在Na<sup word-font="Times New Roman">+</sup>，且<i style="font-family: Times New Roman;">n</i>(Na<sup word-font="Times New Roman">+</sup>)≥0.03 mol</td></tr><tr><td>D．原溶液最多可能含有上述离子中的6种</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点（建议与原卷答案核对）</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">本题是离子推断与定量结合：先由「加 BaCl₂ 得沉淀 8.60 g、加盐酸后剩余 4.66 g」判断 —— 不溶于盐酸的 4.66 g 为 BaSO₄（0.02 mol），溶于盐酸并放气的 3.94 g 为 BaCO₃（0.02 mol），故原溶液含 SO₄²⁻、CO₃²⁻，且不含与它们生成沉淀的 Ca²⁺、Ba²⁺。再由「加 NaOH 产生气体 1.12 L（标况）」得 NH₄⁺ 为 0.05 mol。焰色试验呈黄色（未透过蓝色钴玻璃）说明一定含 Na⁺、K⁺ 不能确定。最后用电荷守恒：正电荷总数 = 2×0 + 0.05(NH₄⁺) + n(Na⁺)，负电荷 = 2×0.02×2 = 0.08 mol，故 n(Na⁺) ≥ 0.03 mol。据此逐项判断 A~D。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 忘记「未透过蓝色钴玻璃」意味着钾离子无法确定；② 加 BaCl₂ 引入了 Cl⁻，后续不能据此判断原溶液含 Cl⁻；③ 漏用电荷守恒，导致 Na⁺ 的下界算不出。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把推断题拆成「定性排除 → 定量算物质的量 → 电荷守恒补缺口」三板斧，特别提醒：加入的试剂本身带进来的离子不能算作原溶液的离子。</div></div>
+</div></article>
+<article class="qcard" id="q-02-19">
+<div class="qhead"><span class="qno">07</span><span class="badge hard">难度 较难 0.4</span><span class="badge type">解答题</span><span class="src">内蒙古 · 26-27高一上—内蒙古鄂尔多斯—期中</span></div>
+<div class="qbody">
+            19. 某化学兴趣小组利用《离子反应》一节的知识，进行如下探究实验。<p style="text-align:left;"><img src="assets/papers/chem_final_review/e3df17cdf7ed98be.png" style="vertical-align:middle;" alt=""></p>回答下列问题：<br>(1)A试管内有气泡产生，写出反应的离子方程式：<bk size="11" index="1" type="underline">___________</bk>。<br>(2)图1实验结束后，某同学将A、B两试管内的所有物质倒入D烧杯中(如图2)，得到澄清溶液， A、B试管内物质加入D烧杯的过程中，离子数目增加的是<bk size="11" index="2" type="underline">___________</bk>。可推知A、B两试管混合前，A试管中<bk size="11" index="3" type="underline">___________</bk>(填“<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">溶液”或“稀盐酸”)过量。<br>(3)将C试管中固体过滤后，将溶液加入D烧杯中(如图3)，发现混合后先出现气泡，然后有白色沉淀X产生，充分反应后过滤，同学们对此时D烧杯滤液的离子成分提出如下几种猜想：<br>甲同学：<img src="assets/papers/chem_final_review/725cc3463e7bf248.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/0fa81cf9be45b97f.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-family:'Times New Roman'" qml-space-size="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>乙同学：<img src="assets/papers/chem_final_review/725cc3463e7bf248.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/0fa81cf9be45b97f.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/b30a44f3feb0bca2.png" mathml="" latex="" style="vertical-align:middle;"><br>丙同学：<img src="assets/papers/chem_final_review/725cc3463e7bf248.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/0fa81cf9be45b97f.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/c4247ce5629b423b.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-family:'Times New Roman'" qml-space-size="8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>丁同学：<img src="assets/papers/chem_final_review/725cc3463e7bf248.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/0fa81cf9be45b97f.png" mathml="" latex="" style="vertical-align:middle;">、___________<br>①白色沉淀X的化学式为<bk size="11" index="4" type="underline">___________</bk>；丁同学的猜想空白处应填<bk size="11" index="5" type="underline">___________</bk>。四位同学经过讨论，得出丙同学的猜想不合理，理由是<bk size="11" index="6" type="underline">___________</bk>。<br>②为验证上述猜想，同学们向D中滤液加入<img src="assets/papers/chem_final_review/5d1d99deb2ae8742.png" mathml="" latex="" style="vertical-align:middle;">溶液，当出现<bk size="11" index="7" type="underline">___________</bk>时，证明丁同学的猜想是正确的。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">(1) A 试管中 Na₂CO₃ 与稀盐酸反应放出 CO₂：CO₃²⁻ + 2H⁺ = CO₂↑ + H₂O（盐酸不足时先发生 CO₃²⁻ + H⁺ = HCO₃⁻）。(2) 混合后得到澄清溶液，说明过量的是稀盐酸，它把 CO₃²⁻/HCO₃⁻ 全部转化；此过程中 H⁺ 被消耗、Cl⁻ 未参与反应而数目不变，Na⁺ 也不变，故「离子数目增加」的是 Na⁺、Cl⁻（随溶液合并带入），A 试管中过量的是稀盐酸。(3) 混合后先冒泡后出白色沉淀，是 CO₃²⁻ 先与 H⁺ 反应、待酸耗尽后 Ba²⁺（或 Ca²⁺）与 CO₃²⁻ 生成 BaCO₃（CaCO₃）沉淀；滤液成分要用「反应先后 + 过量判断」逐一讨论。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把「先气泡后沉淀」当成两个互不相关的反应，忽略 H⁺ 会优先消耗 CO₃²⁻；另外滤液成分讨论时漏掉「过量」的情形。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">画一条时间轴：加酸 → 酸过量 → 碳酸根耗尽 → 再加含 Ba²⁺ 的溶液 → 沉淀出现。让学生自己说出每一阶段溶液里「谁还在、谁没了」。</div></div>
+</div></article>
+</div>
+<div class="variant"><h3>✎ 变式巩固（原创，答案点击展开）</h3>
+<div class="vitem"><p class="vq">原创变式 1｜现有①铜丝 ②液态 HCl ③NaCl 晶体 ④蔗糖 ⑤稀硫酸 ⑥熔融 KNO₃。请回答：当前状态能导电的是哪些？属于电解质的是哪些？属于非电解质的是哪些？</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">能导电：①铜丝（自由电子）、⑤稀硫酸、⑥熔融 KNO₃。电解质：②液态 HCl（溶于水能导电的化合物）、③NaCl 晶体、⑥熔融 KNO₃ 对应的 KNO₃。非电解质：④蔗糖。注意①是单质、⑤是混合物，二者既不是电解质也不是非电解质；③当前不导电但仍是电解质。</div></div></div>
+<div class="vitem"><p class="vq">原创变式 2｜向 Ba(OH)₂ 溶液中逐滴加入少量 NaHCO₃ 溶液，写出离子方程式；若改为加入足量 NaHCO₃，式子又该怎么写？</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">少量 NaHCO₃（以 HCO₃⁻ 系数为 1）：Ba²⁺ + OH⁻ + HCO₃⁻ = BaCO₃↓ + H₂O。足量 NaHCO₃ 时 Ba(OH)₂ 完全反应，OH⁻ 全部被消耗：Ba²⁺ + 2OH⁻ + 2HCO₃⁻ = BaCO₃↓ + CO₃²⁻ + 2H₂O。关键：「少量者系数定为 1」，再按 Ba(OH)₂ 中 Ba²⁺:OH⁻ = 1:2 配平。</div></div></div>
+</div></section>
+<section class="lesson" id="L2">
+<div class="lesson-head"><div class="lesson-no">第 2 课时</div><h2>氧化还原反应</h2></div>
+<div class="goal"><b>课时目标</b>　抓住「化合价升降—电子转移」这条主线：会判断氧化剂/还原剂、会比较氧化性还原性强弱、会正确标注双线桥与单线桥、会用电子守恒做计算。</div>
+<div class="focus"><b>本节聚焦</b>　易错集中点：得失电子数算错、桥的方向标反、氧化性顺序由方程式推错、氧化剂与还原剂物质的量之比只看部分反应物。</div>
+<div class="lesson-tools"><button type="button" class="expand-all" data-target="L2">展开本节全部答案</button><span class="count">共 6 题 · 难度系数 0.39~0.70</span></div>
+<div class="qlist">
+<article class="qcard" id="q-12-14">
+<div class="qhead"><span class="qno">01</span><span class="badge hard">难度 较难 0.4</span><span class="badge type">单选题</span><span class="src">贵州 · 26-27高一上—贵州黔西南—期中</span></div>
+<div class="qbody">
+            14. 已知下列三个氧化还原反应：①<img src="assets/papers/chem_final_review/ef046e46861593e8.png" mathml="" latex="" style="vertical-align:middle;">；②<img src="assets/papers/chem_final_review/d3f6b09c960ba6c3.png" mathml="" latex="" style="vertical-align:middle;">；③<img src="assets/papers/chem_final_review/1c6c566e42ade5da.png" mathml="" latex="" style="vertical-align:middle;">。根据上述反应，判断下列结论中错误的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．氧化性强弱的顺序为：<img src="assets/papers/chem_final_review/fbe49e8a3b1e9be3.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．反应②中<img src="assets/papers/chem_final_review/7b85dd025cdfc40d.png" mathml="" latex="" style="vertical-align:middle;">既是氧化产物又是还原产物</td></tr><tr><td>C．反应③中氧化剂和还原剂个数比为<img src="assets/papers/chem_final_review/57a1a29774e4752c.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．溶液中可发生：<img src="assets/papers/chem_final_review/f104f0e7b1f76fbf.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">由①得氧化性 Fe³⁺ &gt; I₂；由②得 Cl₂ &gt; Fe³⁺；由③得 MnO₄⁻ &gt; Cl₂，故 A 的顺序 MnO₄⁻ &gt; Cl₂ &gt; Fe³⁺ &gt; I₂ 正确。B：反应② 2FeCl₂ + Cl₂ = 2FeCl₃ 中，Fe³⁺ 是氧化产物、Cl⁻ 是还原产物，二者都在 FeCl₃ 中，说法正确。C：反应③ 2KMnO₄ + 16HCl(浓) = 2KCl + 2MnCl₂ + 5Cl₂↑ + 8H₂O 中，2 个 MnO₄⁻ 是氧化剂，16 个 HCl 里只有 10 个 Cl⁻ 被氧化成 Cl₂（另 6 个起酸的作用），故氧化剂 : 还原剂 = 2 : 10 = 1 : 5，不是 1 : 8，C 错误。D：Cl₂ 氧化性强于 I₂，Cl₂ + 2KI = 2KCl + I₂ 可以发生，正确。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把「参加反应的 HCl 总数 16」当成「还原剂个数 16」，这是含盐酸性反应的经典陷阱。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">板书一句：浓盐酸在氧化还原反应中常「一身二任」—— 一部分作还原剂（Cl⁻ 变 Cl₂），一部分只提供酸性。判断比例时只数化合价变化的那部分。</div></div>
+</div></article>
+<article class="qcard" id="q-08-12">
+<div class="qhead"><span class="qno">02</span><span class="badge mid">难度 适中 0.63</span><span class="badge type">多选题</span><span class="src">海南 · 26-27高一上—海南—期中</span></div>
+<div class="qbody">
+            12. 在酸性条件下，三个反应的转化关系如图所示，下列说法正确的是<p style="text-align:justify;"><img src="assets/papers/chem_final_review/9635036f8f102a8f.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．还原性：<img src="assets/papers/chem_final_review/8848a0956edfcf11.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．反应③中<img src="assets/papers/chem_final_review/1e4601892a7ff27f.png" mathml="" latex="" style="vertical-align:middle;">被还原</td></tr><tr><td>C．反应②中氧化剂与还原剂的化学计量数之比为<img src="assets/papers/chem_final_review/060e50582566a04e.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．酸性条件下，<img src="assets/papers/chem_final_review/0ccd2365498634d7.png" mathml="" latex="" style="vertical-align:middle;">能将<img src="assets/papers/chem_final_review/1e4601892a7ff27f.png" mathml="" latex="" style="vertical-align:middle;">氧化为<img src="assets/papers/chem_final_review/689ef74406dce3a3.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">A</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">由转化关系：① PbO₂ 把 Mn²⁺ 氧化为 MnO₄⁻，② MnO₄⁻ 把 Cl⁻ 氧化为 Cl₂，③ Cl₂ 把 SO₃²⁻ 氧化为 SO₄²⁻。氧化性 PbO₂ &gt; MnO₄⁻ &gt; Cl₂ &gt; SO₄²⁻，对应还原性 SO₃²⁻ &gt; Cl⁻ &gt; Mn²⁺ &gt; Pb²⁺，故 A 正确。B：反应③中 SO₃²⁻ 被氧化为 SO₄²⁻，不是被还原。C：反应②为 2MnO₄⁻ + 10Cl⁻ + 16H⁺ = 2Mn²⁺ + 5Cl₂↑ + 8H₂O，氧化剂 : 还原剂 = 2 : 10 = 1 : 5，不是 5 : 1。D：MnO₄⁻ 能把 SO₃²⁻ 氧化为 SO₄²⁻，反过来不行。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把氧化性顺序与还原性顺序弄反；以及把「氧化剂:还原剂」的比值倒过来写。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">用「强制弱」一句话串起来：氧化剂的氧化性 &gt; 氧化产物的氧化性，还原剂的还原性 &gt; 还原产物的还原性。每写一个方程式就在旁边标一对不等号，最后连成一条链。</div></div>
+</div></article>
+<article class="qcard" id="q-02-09">
+<div class="qhead"><span class="qno">03</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">内蒙古 · 26-27高一上—内蒙古鄂尔多斯—期中</span></div>
+<div class="qbody">
+            9. 下列化学方程式中电子转移的方向和数目表示正确的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．<img src="assets/papers/chem_final_review/32cddfce989bbef7.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>B．<img src="assets/papers/chem_final_review/03234e658c5e6583.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>C．<img src="assets/papers/chem_final_review/a033b95e31a9d56d.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>D．<img src="assets/papers/chem_final_review/801526216d906627.png" style="vertical-align:middle;" alt=""></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">D</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：2KMnO₄ = K₂MnO₄ + MnO₂ + O₂↑ 中 Mn 共得 4e⁻、O 共失 4e⁻，数目是对的，但单线桥必须标在反应物之间、从失电子元素指向得电子元素，图示跨等号且方向不规范。B：3S + 6NaOH = 2Na₂S + Na₂SO₃ + 3H₂O 中，2 个 S 降价得 2×2e⁻、1 个 S 升价失 4e⁻，选项把「得」「失」标反了。C：KClO₃ + 6HCl(浓) = KCl + 3Cl₂↑ + 3H₂O 中，ClO₃⁻ 的 Cl(+5→0) 得 5e⁻，5 个 HCl 的 Cl(−1→0) 共失 5e⁻，转移 5e⁻ 而非 6e⁻。D：2Na + 2H₂O = 2NaOH + H₂↑ 中 2 个 Na 失 2×e⁻、2 个 H 得 2×e⁻，方向与数目都正确。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">两个高频错：歧化反应把得失标反；KClO₃ 与浓盐酸反应误按 6 个 HCl 全被氧化算成 6e⁻。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">定一个检查顺序：先标化合价 → 数「变价的原子个数 × 每个原子变化值」→ 核对得失总数相等 → 最后看箭头方向（失→得）。</div></div>
+</div></article>
+<article class="qcard" id="q-11-17">
+<div class="qhead"><span class="qno">04</span><span class="badge mid">难度 适中 0.64</span><span class="badge type">解答题</span><span class="src">陕西 · 26-27高一上—陕西咸阳—期中</span></div>
+<div class="qbody">
+            17. 钛及钛合金强度高、耐腐蚀，广泛用于航空航天、深海装备等领域。工业上以金红石(主要成分为<img src="assets/papers/chem_final_review/9a71dd65c125d4f2.png" mathml="" latex="" style="vertical-align:middle;">)为原料，用“氯化—镁还原”法生产钛，主要流程如下(杂质已略去)：<p style="text-align:left;"><img src="assets/papers/chem_final_review/86fc8368a7cb535b.png" style="vertical-align:middle;" alt=""></p>已知：反应①中碳元素全部转化为<img src="assets/papers/chem_final_review/e5080b5bcd72b3ef.png" mathml="" latex="" style="vertical-align:middle;">。回答下列问题：<br>(1)<img src="assets/papers/chem_final_review/9a71dd65c125d4f2.png" mathml="" latex="" style="vertical-align:middle;">中Ti元素的化合价为<bk size="8" index="1" type="underline">________</bk>；过程④属于<bk size="4" index="2" type="underline">____</bk>(填“物理”或“化学”)变化。<br>(2)配平反应①：<bk size="8" index="3" type="underline">________</bk>。<br>____<img src="assets/papers/chem_final_review/40cb1036c46c37c3.png" mathml="" latex="" style="vertical-align:middle;">____C＋____<img src="assets/papers/chem_final_review/3b03dbb18ae5ea49.png" mathml="" latex="" style="vertical-align:middle;">____<img src="assets/papers/chem_final_review/6d551d723bdbea41.png" mathml="" latex="" style="vertical-align:middle;">____CO<br>该反应中氧化剂是<bk size="8" index="4" type="underline">________</bk>(填化学式，下同)，氧化产物是<bk size="8" index="5" type="underline">________</bk>。<br>(3)反应②为<img src="assets/papers/chem_final_review/3ff91721e3e99756.png" mathml="" latex="" style="vertical-align:middle;">。用单线桥法表示该反应中电子转移的方向和数目：<bk size="8" index="6" type="underline">________</bk>。由该反应可知，还原性：Mg<bk size="8" index="7" type="underline">________</bk>(填“&gt;”或“＜”)Ti。<br>(4)反应③中被还原的元素为<bk size="8" index="8" type="underline">________</bk>，生成1个<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">时转移<bk size="8" index="9" type="underline">________</bk>个电子。<br>(5)该流程中可以循环利用的物质是<bk size="8" index="10" type="underline">________</bk>(填化学式)。<br>(6)理论上每生产96t钛，还原炉中至少需要消耗<img src="assets/papers/chem_final_review/02e55a983bf6a4e6.png" mathml="" latex="" style="vertical-align:middle;"><bk size="8" index="11" type="underline">________</bk>t。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">(1) TiO₂ 中 Ti 为 +4 价；过程④（熔融、电解等）有新物质生成，属化学变化。(2) 反应①配平：TiO₂ + 2C + 2Cl₂ = TiCl₄ + 2CO（题给碳全部转化为 CO），氧化剂是 Cl₂，氧化产物是 CO。(3) 反应② TiCl₄ + 2Mg = Ti + 2MgCl₂（Ar 气氛、高温），用单线桥从 Mg 指向 TiCl₄ 中的 Ti，标「4e⁻」；Mg 作还原剂，Ar 气用于隔绝空气防止 Mg、Ti 被氧化。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">配平①时把碳写成 CO₂；单线桥箭头方向画成从 Ti 指向 Mg；忽略 Ar 保护气的作用。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把流程图当「题干」读：每一步进出什么、条件是什么（Ar、熔融、高温），条件往往就是下一问的答案。配平先用原子守恒，再用电子守恒复核。</div></div>
+</div></article>
+<article class="qcard" id="q-15-11">
+<div class="qhead"><span class="qno">05</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">吉林 · 26-27高一上—吉林—期中</span></div>
+<div class="qbody">
+            11. 下列化学反应中电子转移的表示方法错误的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．<img src="assets/papers/chem_final_review/abafd220e6f7df1f.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>B．<img src="assets/papers/chem_final_review/dd1bef32ae90b430.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>C．<img src="assets/papers/chem_final_review/4bd636dd2ebfd0af.png" style="vertical-align:middle;" alt=""></td></tr><tr><td>D．<img src="assets/papers/chem_final_review/9aed23807775921a.png" style="vertical-align:middle;" alt=""></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">B</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：2Cl₂ + 2Ca(OH)₂ = CaCl₂ + Ca(ClO)₂ + 2H₂O 是 Cl₂ 的歧化，2 个 Cl 降价得 2e⁻、2 个 Cl 升价失 2e⁻，标注正确。B：H₂S + H₂SO₄(浓) = S↓ + SO₂↑ + 2H₂O 中，S(−2→0) 失 2e⁻、S(+6→+4) 得 2e⁻，转移电子只有 2e⁻，选项标成「失去 6e⁻ / 得到 6e⁻」且方向也不对，错误。C：10KI + 2KMnO₄ + 8H₂SO₄ = 5I₂ + 6K₂SO₄ + 2MnSO₄ + 8H₂O 中，10 个 I⁻ 失 10e⁻、2 个 Mn(+7→+2) 得 2×5e⁻ = 10e⁻，标注正确。D：2H₂S + SO₂ = 3S↓ + 2H₂O 是归中反应，标 4e⁻ 正确。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">归中/歧化反应里，把「化合价变化的数值」误当成「转移电子总数」；H₂S 与浓硫酸反应误算成 6e⁻。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">强调「转移电子数 = 化合价升高总数 = 化合价降低总数」，不是二者相加，也不是某个元素的族序数。</div></div>
+</div></article>
+<article class="qcard" id="q-07-15">
+<div class="qhead"><span class="qno">06</span><span class="badge hard">难度 较难 0.4</span><span class="badge type">单选题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            15. 锑酸钠<img src="assets/papers/chem_final_review/4cca1c5cdbcc60f3.png" mathml="" latex="" style="vertical-align:middle;">是一种合成聚酯的催化剂，可用“硝酸钠法”制备，反应方程式为<img src="assets/papers/chem_final_review/5b12e94bdeb44c01.png" mathml="" latex="" style="vertical-align:middle;">。下列说法正确的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．氧化性：<img src="assets/papers/chem_final_review/f358b0be198a3938.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．每转移<img src="assets/papers/chem_final_review/15b2c7617fa48984.png" mathml="" latex="" style="vertical-align:middle;">电子，有<img src="assets/papers/chem_final_review/20a0c5de3cd348e2.png" mathml="" latex="" style="vertical-align:middle;">发生还原反应</td></tr><tr><td>C．每生成<img src="assets/papers/chem_final_review/dd82e89f2bfa2a24.png" mathml="" latex="" style="vertical-align:middle;">，被<img src="assets/papers/chem_final_review/204f148ffb407d8f.png" mathml="" latex="" style="vertical-align:middle;">氧化的<img src="assets/papers/chem_final_review/9e836d3073652b52.png" mathml="" latex="" style="vertical-align:middle;">为<img src="assets/papers/chem_final_review/0e1278a155b15b88.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．反应中氧化剂和还原剂的物质的量之比为<img src="assets/papers/chem_final_review/5c92af5d82149b73.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C（B 项注意未注明标准状况）</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">反应 4NaNO₃ + 4Sb + 3O₂ = 4NaSbO₃ + 2NO + 2NO₂：Sb(0→+5) 每个失 5e⁻，4 个共失 20e⁻；NaNO₃ 中 N(+5→+2 得 3e⁻×2、+5→+4 得 1e⁻×2) 共得 8e⁻；3 个 O₂ 共得 12e⁻。A：NaNO₃ 是氧化剂、NaSbO₃ 是氧化产物，氧化性 NaNO₃ &gt; NaSbO₃，A 错。B：每转移 20 mol e⁻ 消耗 3 mol O₂，即每 1 mol e⁻ 对应 0.15 mol O₂；但「3.36 L」未注明标准状况，不能确定，B 不严谨。C：生成 2 mol NO 时被 NaNO₃（得 8e⁻）氧化的 Sb 为 8/5 = 1.6 mol，生成 10 mol NO 时为 8 mol，正确。D：氧化剂为 NaNO₃(4) + O₂(3) 共 7 mol，还原剂 Sb 为 4 mol，比例 7:4 而非 4:7。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 气体体积不看状况直接用 22.4 L/mol；② 把 NaNO₃ 单独当氧化剂，漏掉 O₂；③ 氧化剂与还原剂的比值写反。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">这类「陌生方程式计算」先做一张电子收支表：谁升、升几个、共失多少；谁降、降几个、共得多少。表填完，四个选项基本都能一眼判掉。</div></div>
+</div></article>
+</div>
+<div class="variant"><h3>✎ 变式巩固（原创，答案点击展开）</h3>
+<div class="vitem"><p class="vq">原创变式 1｜已知：① 2Fe³⁺ + 2I⁻ = 2Fe²⁺ + I₂；② Cl₂ + 2Fe²⁺ = 2Cl⁻ + 2Fe³⁺；③ 2MnO₄⁻ + 10Cl⁻ + 16H⁺ = 2Mn²⁺ + 5Cl₂↑ + 8H₂O。排出氧化性由强到弱的顺序，并判断 MnO₄⁻ 能否氧化 I⁻。</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">氧化性：MnO₄⁻ &gt; Cl₂ &gt; Fe³⁺ &gt; I₂（每一步都是「氧化剂的氧化性强于氧化产物」）。还原性顺序相反：I⁻ &gt; Fe²⁺ &gt; Cl⁻ &gt; Mn²⁺。因此 MnO₄⁻ 可以氧化 I⁻，反应能自发进行。</div></div></div>
+<div class="vitem"><p class="vq">原创变式 2｜KClO₃ + 6HCl(浓) = KCl + 3Cl₂↑ + 3H₂O，用双线桥标出电子转移，并求氧化剂与还原剂的物质的量之比。</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">KClO₃ 中 Cl(+5→0) 得 5e⁻；6 个 HCl 中有 5 个 Cl(−1→0) 共失 5e⁻，另 1 个 Cl⁻ 进入 KCl 未变价。转移电子总数为 5e⁻。氧化剂 KClO₃ : 还原剂 HCl(被氧化的部分) = 1 : 5；若按加入的 HCl 总量算则「表现还原性 : 表现酸性」= 5 : 1。</div></div></div>
+</div></section>
+<section class="lesson" id="L3">
+<div class="lesson-head"><div class="lesson-no">第 3 课时</div><h2>钠及其化合物（含 Na₂CO₃ / NaHCO₃ 受热分解计算）</h2></div>
+<div class="goal"><b>课时目标</b>　以「价—类」二维图串起 Na、Na₂O₂、NaOH、Na₂CO₃、NaHCO₃；重点突破热稳定性差异、鉴别与除杂、以及受热分解的质量差量计算。</div>
+<div class="focus"><b>本节聚焦</b>　本节含指定题：膨松剂受热分解的定量计算；配套混合样品质量分数测定的误差分析。</div>
+<div class="lesson-tools"><button type="button" class="expand-all" data-target="L3">展开本节全部答案</button><span class="count">共 6 题 · 难度系数 0.39~0.70</span></div>
+<div class="qlist">
+<article class="qcard" id="q-05-08">
+<div class="qhead"><span class="qno">01</span><span class="badge hard">难度 困难</span><span class="badge type">单选题</span><span class="src">河南 · 河南省南阳市2026-2027学年高一上学期</span></div>
+<div class="qbody">
+            8. 某兴趣小组为研究膨松剂(有效成分为<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">，其他成分受热均不分解)受热分解放出气体的量，设计以下实验，按下图所示连接装置(气密性良好，各装置中的试剂皆为足量)。下列说法正确的是<p style="text-align:justify;"><img src="assets/papers/chem_final_review/3e0a161441b7238c.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．①、③试管内的试剂分别为浓硫酸、NaOH溶液</td></tr><tr><td>B．②中熄灭酒精灯后，应立即停止通入空气</td></tr><tr><td>C．④中U形管若增重0.66 g，则膨松剂中含有2.52 g <img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．装置⑤的作用是进行尾气处理，防止污染大气</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C ★ 指定题：NaHCO₃ 受热分解的定量计算</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">实验目的是称量 NaHCO₃ 分解放出的 CO₂：2NaHCO₃ =(Δ) Na₂CO₃ + CO₂↑ + H₂O。① 用于除去通入空气中的 CO₂ 和水蒸气；③ 必须装浓硫酸（只吸收水，不吸收 CO₂），若装 NaOH 溶液会把待测 CO₂ 一起吸收，A 错。② 熄灭酒精灯后要继续通一段时间空气，把装置内残留的 CO₂ 全部赶入④，B 错。④（碱石灰 U 形管）增重 0.66 g 即 m(CO₂)=0.66 g，n(CO₂)=0.66/44=0.015 mol，由关系式 2NaHCO₃ ~ CO₂ 得 n(NaHCO₃)=0.030 mol，m=0.030×84=2.52 g，C 正确。⑤ 是防止空气中的 CO₂、水蒸气倒灌进入④影响称量。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 把 U 形管增重当成「CO₂ + H₂O」的总质量；② 忘记 2:1 的化学计量关系，直接 0.015×84；③ 熄灭灯后立刻停气，导致结果偏低。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把这题当成「差量法 + 关系式法」的模板：先写分解方程式 → 找出「固体减少量」或「吸收装置增重」对应的是 CO₂、H₂O 还是两者 → 用 2NaHCO₃ ~ CO₂ ~ H₂O 的 2:1:1 关系换算。再顺带问一句：若把③换成 NaOH 溶液，结果会怎样？（偏低甚至为 0）</div></div>
+</div></article>
+<article class="qcard" id="q-03-14">
+<div class="qhead"><span class="qno">02</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">广东 · 26-27高一上—广东东莞—期中</span></div>
+<div class="qbody">
+            14. 为确定<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">和<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">混合样品中<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">的质量分数，可通过加热分解得到的<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">质量进行计算，某同学设计的实验装置示意图如图。下列因素会使<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">的质量分数偏高的是<p style="text-align:justify;"><img src="assets/papers/chem_final_review/2d43e733d9a299e0.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．样品分解完全</td></tr><tr><td>B．装置B、C之间缺少<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">的干燥装置</td></tr><tr><td>C．产生<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">气体的速率太快，没有被碱石灰完全吸收</td></tr><tr><td>D．反应完全后停止加热，通入过量的空气</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">B ★ 指定题配套：受热分解测质量分数的误差分析</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">原理：只加热 NaHCO₃，测生成的 CO₂（或固体减少量）反推 NaHCO₃ 的质量分数。A 样品分解完全是实验前提，不影响结果偏高。B 装置 B（冷凝除水）与 C（碱石灰吸收 CO₂）之间若缺少干燥装置，水蒸气会随 CO₂ 一起被碱石灰吸收，测得「CO₂ 质量」偏大 → 算出的 NaHCO₃ 偏多 → 质量分数偏高，B 正确。C 气流过快导致 CO₂ 未被完全吸收，测得值偏小 → 结果偏低。D 反应完全后通入空气是为把残留 CO₂ 赶尽；若所通空气未经除 CO₂、除水净化，也会带来偏高，需结合进气端是否净化判断，本题标准操作下不作为主要误差源。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">误差分析方向搞反：「吸收剂多吸了东西」→ 结果偏高；「待测气体跑掉/没吸全」→ 结果偏低。学生常把两者混在一起。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">教一句判断口诀：「称的是谁，谁多了就偏高」。先明确被称量的量（CO₂ 质量），再逐项问「这个操作会让称量值变大还是变小」。</div></div>
+</div></article>
+<article class="qcard" id="q-02-10">
+<div class="qhead"><span class="qno">03</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">内蒙古 · 26-27高一上—内蒙古鄂尔多斯—期中</span></div>
+<div class="qbody">
+            10. 下列是某兴趣小组根据教材实验设计的一个能说明碳酸钠与碳酸氢钠热稳定性的套管实验．查阅资料可知白色的无水硫酸铜粉末遇水变蓝．请观察如下图所示的实验装置，分析实验原理，并判断下列说法和做法，其中不科学的是<p style="text-align:left;"><img src="assets/papers/chem_final_review/e1c79ce227606dc1.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．甲为小苏打，乙为纯碱</td></tr><tr><td>B．要证明碳酸氢钠受热能产生水，可在小试管内塞上沾有无水硫酸铜粉末的棉花球</td></tr><tr><td>C．加热不久就能看到A烧杯的澄清石灰水变浑浊</td></tr><tr><td>D．B烧杯中发生反应的化学方程式为CO<sub>2</sub>+Ca(OH)<sub>2</sub>=CaCO<sub>3</sub>↓+H<sub>2</sub>O</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">套管实验中大试管（乙）直接受热、温度高，小试管（甲）间接受热、温度低。要让结论有说服力，应把热稳定性差的 NaHCO₃ 放在低温的小试管（甲）、把 Na₂CO₃ 放在高温的大试管（乙），故 A 正确。B 在小试管内塞蘸无水 CuSO₄ 的棉花，遇水变蓝可证明 NaHCO₃ 分解生成 H₂O，正确。C 中 A 烧杯连通的是大试管（乙，Na₂CO₃），Na₂CO₃ 受热不分解，澄清石灰水不会变浑浊，说法不科学。D B 烧杯连通小试管，NaHCO₃ 分解产生的 CO₂ 使石灰水变浑浊，方程式正确。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把甲乙的位置与 A、B 烧杯的对应关系记反；误以为「加热不久两支试管都会放出 CO₂」。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">先让学生在图上用箭头标出「哪支试管温度高」「哪个烧杯接哪支试管」，再讲「低温的分解、高温的不分解」这个对比逻辑，套管实验的设计意图就清楚了。</div></div>
+</div></article>
+<article class="qcard" id="q-07-13">
+<div class="qhead"><span class="qno">04</span><span class="badge mid">难度 适中 0.54</span><span class="badge type">单选题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            13. 实验室有一包白色固体，可能含有<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">和NaCl中的一种或多种。下列根据实验操作和现象得出的结论正确的是<table style="width:553.8px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:63;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">选项</td><td style="width:290;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验操作和现象</td><td style="width:200;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">结论</td></tr><tr><td style="width:63;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">A</td><td style="width:290;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">取一定量固体，溶解，向溶液中小心滴入少量的稀盐酸，未观察到有气体生成</td><td style="width:200;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">原固体中一定不含<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td style="width:63;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">B</td><td style="width:290;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">取一定量固体，溶解，向溶液中加入适量CaO粉末，充分反应后观察到有白色沉淀生成</td><td style="width:200;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">原固体中一定含有<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td style="width:63;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">C</td><td style="width:290;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">取一定量固体，溶解，向溶液中滴加适量<img src="assets/papers/chem_final_review/dbc732d56ad4066b.png" mathml="" latex="" style="vertical-align:middle;">溶液，观察到有白色沉淀生成</td><td style="width:200;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">原固体中一定含有NaCl</td></tr><tr><td style="width:63;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">D</td><td style="width:290;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">取一定量固体，溶解，向溶液中通入足量<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">，充分反应后观察到有晶体生成</td><td style="width:200;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">原固体中一定含有<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="4"><tbody><tr><td>A．A</td><td>B．B</td><td>C．C</td><td>D．D</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">D</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：向含 Na₂CO₃ 的溶液中滴入少量稀盐酸，先发生 CO₃²⁻ + H⁺ = HCO₃⁻，本就不放气，不能据此说不含 Na₂CO₃/NaHCO₃，结论错。B：CaO 遇水生成 Ca(OH)₂，Ca²⁺ 与 CO₃²⁻、HCO₃⁻ 都能生成 CaCO₃ 白色沉淀，无法证明一定含 Na₂CO₃，结论错。C：Ag⁺ 与 CO₃²⁻ 也能生成白色 Ag₂CO₃ 沉淀，不能证明含 NaCl，结论错。D：向溶液中通入足量 CO₂，若含 Na₂CO₃ 则发生 Na₂CO₃ + CO₂ + H₂O = 2NaHCO₃，而 NaHCO₃ 溶解度明显更小，会析出晶体，可证明含 Na₂CO₃，正确。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">「少量盐酸无气泡」和「白色沉淀」都是典型的「现象不唯一」：必须先想清楚还有谁也能给出同样现象，再下结论。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把检验题的判据写成一句话：「唯一现象 + 排除干扰」。每写一个结论，就问一句「还有别的物质也能做到吗？」</div></div>
+</div></article>
+<article class="qcard" id="q-03-11">
+<div class="qhead"><span class="qno">05</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">广东 · 26-27高一上—广东东莞—期中</span></div>
+<div class="qbody">
+            11. <img src="assets/papers/chem_final_review/b8482225f7248c37.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">和</span><img src="assets/papers/chem_final_review/902cc52414177da4.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">与水的反应分别为①</span><img src="assets/papers/chem_final_review/e3e722f002fd0f8b.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">；②</span><img src="assets/papers/chem_final_review/a321f3542c608967.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">。下列说法正确的是</span><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．<img src="assets/papers/chem_final_review/b8482225f7248c37.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">中阴、阳离子个数比为</span><img src="assets/papers/chem_final_review/7c691736b21ef7a4.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．<span style="font-size:14px;">①中水发生氧化反应，②中水发生还原反应</span></td></tr><tr><td>C．<span style="font-size:14px;">当反应①和②中转移的电子数相同时，产生的</span><img src="assets/papers/chem_final_review/2452aaf209d9d041.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">和</span><img src="assets/papers/chem_final_review/13ba5dcdfe06fe96.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">的个数比为</span><img src="assets/papers/chem_final_review/9f213ef69b438cf7.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．<span style="font-size:14px;">若将</span><img src="assets/papers/chem_final_review/902cc52414177da4.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">投入盐酸，</span><img src="assets/papers/chem_final_review/902cc52414177da4.png" mathml="" latex="" style="vertical-align:middle;"><span style="font-size:14px;">先与水反应</span></td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">① 2Na₂O₂ + 2H₂O = 4NaOH + O₂↑（Na₂O₂ 自身歧化）；② CaH₂ + 2H₂O = Ca(OH)₂ + 2H₂↑（H⁻ 与 H₂O 中 H⁺ 的归中）。A：Na₂O₂ 中阴离子是 O₂²⁻，阴、阳离子个数比为 1:2，不是 1:1，错。B：①中水既未被氧化也未被还原（是 Na₂O₂ 中 −1 价氧自身歧化），②中水里的 H 被还原，B 错。C：①每生成 1 个 O₂ 转移 2e⁻，②每生成 2 个 H₂ 转移 2e⁻，转移电子数相同时 n(O₂):n(H₂)=1:2，正确。D：Na₂O₂ 投入盐酸直接与 HCl 反应，不存在「先与水反应」的先后，错。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把 Na₂O₂ 与水反应误认为「水被氧化」；把 O₂²⁻ 当成两个 O²⁻，导致阴阳离子比算成 1:1。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">重点讲清两条特殊规律：过氧化物中氧为 −1 价、阴离子是一个整体的 O₂²⁻；金属氢化物中 H 为 −1 价，与水反应是归中。这两条一通，四个选项自动分层。</div></div>
+</div></article>
+<article class="qcard" id="q-09-28">
+<div class="qhead"><span class="qno">06</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">解答题</span><span class="src">北京 · 20-21高一上—北京—期末</span></div>
+<div class="qbody">
+            28. 某小组研究Na<sub>2</sub>CO<sub>3</sub>和NaHCO<sub>3</sub>的性质，实验如下。<br>【实验一】<table style="border-width:0px 0px 0px 0px;border-style:solid;border-color:black;border-collapse: collapse;"><tbody><tr height="22px"><td rowspan="2" style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">序号</td><td rowspan="2" style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">操作</td><td colspan="2" style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">现象</td></tr><tr height="22px"><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">Na<sub>2</sub>CO<sub>3</sub></td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">NaHCO<sub>3</sub></td></tr><tr height="22px"><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">①</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">在两支试管中加入1g Na<sub>2</sub>CO<sub>3</sub>或1g NaHCO<sub>3</sub>，再加入5mL水，振荡；将温度计分别插入其中</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">温度由17.6℃变为23.2℃；放置至室温时，试管内无固体</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">温度由17.6℃变为17.2℃；放置至室温时，试管内有少量固体残留</td></tr><tr height="22px"><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">②</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">室温时，分别向①所得溶液中滴入2滴酚酞溶液</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">溶液变红</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">溶液微红</td></tr></tbody></table>(1)室温下，Na<sub>2</sub>CO<sub>3</sub>的溶解度大于NaHCO<sub>3</sub>的实验证据是<bk size="7" index="1" type="underline">_______</bk>。<br>(2)根据两试管中的温度变化情况，可得出的结论是<bk size="7" index="2" type="underline">_______</bk>。<br>(3)该实验<dot>不能</dot>说明Na<sub>2</sub>CO<sub>3</sub>溶液的碱性强于NaHCO<sub>3</sub>溶液，理由是<bk size="7" index="3" type="underline">_______</bk>。<br>【实验二】<br>测量下述实验过程的pH变化，实验操作及实验现象如下。<br>资料：pH越小，c(OH<sup>-</sup>)越小，溶液碱性越弱。<table style="width:555px;border-width:0px 0px 0px 0px;border-style:solid;border-color:black;border-collapse: collapse;"><tbody><tr height="22px"><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验操作</td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验现象</td></tr><tr height="22px"><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/bd8b76861ccebaaa.png" style="vertical-align:middle;" alt=""></p></td><td style="vertical-align:center;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">Ⅰ.②和③中均产生白色沉淀。<p style="text-align:left;">Ⅱ. <img src="assets/papers/chem_final_review/bd55ac3f514fc536.png" style="vertical-align:middle;" alt=""></p></td></tr></tbody></table> (4)澄清石灰水显碱性，用电离方程式表示其原因是<bk size="7" index="4" type="underline">_______</bk>。<br>(5)白色沉淀是<bk size="7" index="5" type="underline">_______</bk>。<br> (6)加入4mL Na<sub>2</sub>CO<sub>3</sub>溶液或4mLNaHCO<sub>3</sub>溶液时，产生的白色沉淀的质量相等。写出推理过程：<bk size="7" index="6" type="underline">_______</bk>。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">(1) 溶解度大小的证据：等质量（各 1 g）固体加等体积（5 mL）水振荡后，Na₂CO₃ 试管无固体残留而 NaHCO₃ 试管有少量固体残留，说明室温下 Na₂CO₃ 溶解度更大。(2) 温度变化：Na₂CO₃ 溶解温度升高（放热），NaHCO₃ 溶解温度略降（吸热）；滴酚酞后 Na₂CO₃ 溶液红色更深，说明其溶液碱性更强（CO₃²⁻ 水解程度大于 HCO₃⁻）。(3) 与石灰水反应：两者都生成 CaCO₃ 白色沉淀，故不能用澄清石灰水鉴别；应改用 CaCl₂/BaCl₂ 溶液（只与 Na₂CO₃ 生成沉淀）或加热（NaHCO₃ 放出使石灰水变浑浊的气体）。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">① 用「澄清石灰水」鉴别 Na₂CO₃ 与 NaHCO₃（两者都沉淀）；② 把「溶解吸热/放热」当成「热稳定性」；③ 由酚酞颜色深浅直接推「NaOH 杂质」。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把这一组实验整理成对比表：溶解度、溶解热效应、溶液碱性、与 Ca²⁺ 反应、热稳定性。表格填完，「怎么鉴别」自然只剩两条可行路径。</div></div>
+</div></article>
+</div>
+<div class="variant"><h3>✎ 变式巩固（原创，答案点击展开）</h3>
+<div class="vitem"><p class="vq">原创变式 1｜将 16.8 g Na₂CO₃ 与 NaHCO₃ 的混合物加热至恒重，固体质量减少 3.1 g。求原混合物中 NaHCO₃ 的质量分数。</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">2NaHCO₃ =(Δ) Na₂CO₃ + CO₂↑ + H₂O，每 2 mol NaHCO₃（168 g）固体减少 62 g（44 + 18）。设 NaHCO₃ 为 x g，则 62/168 = 3.1/x，得 x = 8.4 g。质量分数 = 8.4/16.8 = 50%。提醒：减少的是 CO₂ 与 H₂O 的总质量，不是只有 CO₂。</div></div></div>
+<div class="vitem"><p class="vq">原创变式 2｜设计两种不同原理的实验鉴别 Na₂CO₃ 溶液与 NaHCO₃ 溶液，并说明为什么不能用澄清石灰水。</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">方法一：分别滴加 CaCl₂（或 BaCl₂）溶液，产生白色沉淀的是 Na₂CO₃，无明显现象的是 NaHCO₃。方法二：分别加热（或加同浓度稀盐酸比较产气快慢），放出使澄清石灰水变浑浊气体的是 NaHCO₃。不能用澄清石灰水：Ca(OH)₂ 与 CO₃²⁻、HCO₃⁻ 都能生成 CaCO₃ 白色沉淀，现象不唯一。</div></div></div>
+</div></section>
+<section class="lesson" id="L4">
+<div class="lesson-head"><div class="lesson-no">第 4 课时</div><h2>氯及其化合物（含氯气的实验室制法）</h2></div>
+<div class="goal"><b>课时目标</b>　掌握 Cl₂ 的实验室制法（发生—除杂—干燥—收集—尾气）、新制氯水的多重成分与性质、HClO 的光照分解、含氯消毒剂与漂白粉。</div>
+<div class="focus"><b>本节聚焦</b>　本节含指定题：氯气实验室制法的装置正误判断，以及完整制备—性质探究实验。</div>
+<div class="lesson-tools"><button type="button" class="expand-all" data-target="L4">展开本节全部答案</button><span class="count">共 6 题 · 难度系数 0.39~0.70</span></div>
+<div class="qlist">
+<article class="qcard" id="q-11-09">
+<div class="qhead"><span class="qno">01</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">陕西 · 26-27高一上—陕西咸阳—期中</span></div>
+<div class="qbody">
+            9. 实验室制取<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">的实验原理及装置均正确的是<table style="width:361.903px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/3e718298da3289ae.png" style="vertical-align:middle;" alt=""></p></td><td style="width:211;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/805e24e493c615bb.png" style="vertical-align:middle;" alt=""></p></td></tr><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"> A．制取<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;"></td><td style="width:211;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">B．除去<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">中的<img src="assets/papers/chem_final_review/b5d532510b500d15.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/1956baf0a1e01cc2.png" style="vertical-align:middle;" alt=""></p></td><td style="width:211;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/65a9793a4f561f26.png" style="vertical-align:middle;" alt=""></p></td></tr><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">C．收集<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;"></td><td style="width:211;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">D．吸收尾气中的<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;"></td></tr></tbody></table><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="4"><tbody><tr><td>A．A</td><td>B．B</td><td>C．C</td><td>D．D</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C ★ 指定题：氯气的实验室制法</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">A：MnO₂ 与浓盐酸制 Cl₂ 必须加热（MnO₂ + 4HCl(浓) =(Δ) MnCl₂ + Cl₂↑ + 2H₂O），图中无加热装置，错。B：除去 Cl₂ 中的 HCl 应使用饱和食盐水（既溶解 HCl 又抑制 Cl₂ 溶解），图中用饱和 NaHCO₃ 溶液会与 HCl 反应生成 CO₂ 引入新杂质、且 Cl₂ 也能与 NaHCO₃ 反应，错。C：Cl₂ 密度大于空气，用向上排空气法收集，气体从长管进、短管出，图中正确。D：尾气吸收应使用 NaOH 溶液，Cl₂ 在饱和食盐水中溶解度很小，错。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把「饱和食盐水」记成「饱和 NaHCO₃」；忘记 MnO₂ 需要加热（KMnO₄ 才不需加热）；尾气用饱和食盐水。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把实验室制气固定成五段口诀：「发生（固+液加热 / 不加热）→ 除杂（饱和食盐水除 HCl）→ 干燥（浓硫酸）→ 收集（向上排空气）→ 尾气（NaOH 溶液）」，每段让学生说清「为什么是它、换成别的会怎样」。</div></div>
+</div></article>
+<article class="qcard" id="q-08-17">
+<div class="qhead"><span class="qno">02</span><span class="badge mid">难度 适中 0.53</span><span class="badge type">解答题</span><span class="src">海南 · 26-27高一上—海南—期中</span></div>
+<div class="qbody">
+            17. 某化学兴趣小组利用如图所示装置制备氯气，并进一步探究其性质。<p style="text-align:justify;"><img src="assets/papers/chem_final_review/39cd57fe6a5b4e72.jpg" style="vertical-align:middle;" alt=""></p>已知：碘单质（<img src="assets/papers/chem_final_review/94164d471488115e.png" mathml="" latex="" style="vertical-align:middle;">）遇到淀粉会变蓝。回答下列问题：<br>(1)<img src="assets/papers/chem_final_review/dc986762025b25b7.png" mathml="" latex="" style="vertical-align:middle;">固体和浓盐酸反应可以制备氯气，自身被还原为<img src="assets/papers/chem_final_review/1aeda4e13280a30e.png" mathml="" latex="" style="vertical-align:middle;">，该反应的化学方程式为<bk size="6" index="1" type="underline">______</bk>。<br>(2)饱和食盐水的作用是<bk size="9" index="2" type="underline">_________</bk>。<br>(3)实验中可以观察到湿润的蓝色石蕊试纸<bk size="11" index="3" type="underline">___________</bk>（填实验现象）。<br>(4)若观察到湿润的淀粉-KI试纸变蓝，说明氯气具有<bk size="8" index="4" type="underline">________</bk>（填“氧化性”或“还原性”），氯气与KI溶液反应的离子方程式为<bk size="13" index="5" type="underline">_____________</bk>。<br>(5)实验结束后可以用注射器注入足量空气，这样做的目的是<bk size="11" index="6" type="underline">___________</bk>。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">(1) KMnO₄ 固体与浓盐酸常温反应：2KMnO₄ + 16HCl(浓) = 2KCl + 2MnCl₂ + 5Cl₂↑ + 8H₂O（KMnO₄ 被还原为 Mn²⁺）。(2) 饱和食盐水用于除去 Cl₂ 中混有的 HCl，并减少 Cl₂ 的溶解损失。(3) 湿润的蓝色石蕊试纸先变红（H⁺）后褪色（HClO 的漂白性）。(4) 湿润淀粉-KI 试纸变蓝说明 Cl₂ 具有氧化性，离子方程式 Cl₂ + 2I⁻ = 2Cl⁻ + I₂。(5) 实验结束后注入足量空气，是把装置内残留的 Cl₂ 全部赶入 NaOH 溶液吸收，防止污染空气（也可防倒吸）。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把 KMnO₄ 与浓盐酸的方程式系数写错（16 HCl 中只有 10 个被氧化）；把石蕊褪色归因于「Cl₂ 有漂白性」（实为 HClO）。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">用「氯水三分子四离子」（Cl₂、H₂O、HClO；H⁺、Cl⁻、ClO⁻、OH⁻）逐一对应实验现象：变红找 H⁺、白色沉淀找 Cl⁻、气泡找 H⁺ 与 HCO₃⁻、漂白找 HClO、变蓝找 Cl₂ 的氧化性。</div></div>
+</div></article>
+<article class="qcard" id="q-07-18">
+<div class="qhead"><span class="qno">03</span><span class="badge mid">难度 适中 0.56</span><span class="badge type">解答题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            18. <img src="assets/papers/chem_final_review/3373d110a477b007.png" mathml="" latex="" style="vertical-align:middle;">是HClO对应的酸性氧化物，<img src="assets/papers/chem_final_review/3373d110a477b007.png" mathml="" latex="" style="vertical-align:middle;">的沸点为3.8℃，42℃以上分解为<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">和<img src="assets/papers/chem_final_review/2452aaf209d9d041.png" mathml="" latex="" style="vertical-align:middle;">，常用于杀菌、漂白。在实验室可采用潮湿的氯气与碳酸钠固体反应来制取，反应原理为<img src="assets/papers/chem_final_review/a292c2446a43e2fb.png" mathml="" latex="" style="vertical-align:middle;">。实验装置如图所示（夹持装置省略）：<p style="text-align:left;"><img src="assets/papers/chem_final_review/a640500913ce3065.png" style="vertical-align:middle;" alt=""></p>请回答下列问题：<br>(1)装置A中使用恒压分液漏斗的优点为<bk size="8" index="1" type="underline">________</bk>；装置A中产生<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">的化学方程式为<bk size="16" index="2" type="underline">________________</bk>。<br>(2)装置B中的试剂是<bk size="8" index="3" type="underline">________</bk>；装置E的作用是除去<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">和<img src="assets/papers/chem_final_review/3373d110a477b007.png" mathml="" latex="" style="vertical-align:middle;">，若装置E中完全吸收尾气后所得溶液中NaCl与NaClO的物质的量之比为1：3，则装置D中出来的尾气中<img src="assets/papers/chem_final_review/9d93f0bb45721fe1.png" mathml="" latex="" style="vertical-align:middle;">和<img src="assets/papers/chem_final_review/3373d110a477b007.png" mathml="" latex="" style="vertical-align:middle;">的物质的量之比为<bk size="8" index="4" type="underline">________</bk>。<br>(3)装置C中所用<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">可由侯氏制碱法获得，侯氏制碱法的简易流程如图所示：<p style="text-align:left;"><img src="assets/papers/chem_final_review/b9756d465194b42a.png" style="vertical-align:middle;" alt=""></p>①该流程中生成<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">的离子方程式为<bk size="16" index="5" type="underline">________________</bk>。<br>②向母液b中通氨气并加入食盐粉，通氨气的作用有<bk size="8" index="6" type="underline">________</bk>（填序号）。<br>A．使<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">结晶析出<br>B．增大<img src="assets/papers/chem_final_review/a2339ed52634437a.png" mathml="" latex="" style="vertical-align:middle;">浓度，使<img src="assets/papers/chem_final_review/af9543b18fb60fc8.png" mathml="" latex="" style="vertical-align:middle;">更多地析出<br>C．使<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">更多地析出<br>D．使<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">转化为<img src="assets/papers/chem_final_review/5cd930d2b65aa057.png" mathml="" latex="" style="vertical-align:middle;">，提高析出的<img src="assets/papers/chem_final_review/af9543b18fb60fc8.png" mathml="" latex="" style="vertical-align:middle;">纯度<br>③实验室模拟“侯氏制碱法”，下列操作未涉及的是<bk size="8" index="7" type="underline">________</bk>（填字母）。<table style="width:555px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/8b4ea3ab3c5f0306.png" style="vertical-align:middle;" alt=""></p></td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/529ee8df92517a82.png" style="vertical-align:middle;" alt=""></p></td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/b530ed4cad536da4.png" style="vertical-align:middle;" alt=""></p></td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/922ae69743c07d2c.png" style="vertical-align:middle;" alt=""></p></td></tr><tr><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">A</td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">B</td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">C</td><td style="width:150;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">D</td></tr></tbody></table>④制得的纯碱产品中还通常会混有<img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">杂质。取27.4g碳酸钠和碳酸氢钠的混合粉末样品，将其分成两等份，取其中一份加热到质量不再改变，冷却后称其质量为10.6g。求将另一份和盐酸充分反应后生成的<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">在标准状况下的体积<bk size="8" index="8" type="underline">________</bk>L（不考虑<img src="assets/papers/chem_final_review/33e87abc9231251d.png" mathml="" latex="" style="vertical-align:middle;">的溶解）。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">(1) 恒压分液漏斗可平衡气压，使浓盐酸顺利滴下（也便于控制速率）；装置 A 中用 MnO₂ 与浓盐酸加热制 Cl₂（或用 KMnO₄ 常温），方程式 MnO₂ + 4HCl(浓) =(Δ) MnCl₂ + Cl₂↑ + 2H₂O。(2) 装置 B 盛饱和食盐水除 HCl，装置 D/E 分别用于制备与收集 Cl₂O、以及用 NaOH 溶液吸收尾气；题中给出 2Cl₂ + 2Na₂CO₃ + H₂O = 2NaHCO₃ + 2NaCl + Cl₂O。若尾气被 NaOH 完全吸收后 n(NaCl):n(NaClO)=1:3，则由 Cl₂ 与冷 NaOH 反应（生成 NaCl 与 NaClO）及 Cl₂O 与 NaOH 反应（只生成 NaClO）列方程组，即可反推尾气中 Cl₂ 与 Cl₂O 的物质的量之比。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">忽略 Cl₂O 与 NaOH 反应只生成 NaClO，导致方程组列错；把恒压分液漏斗的作用答成「防止倒吸」。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">这类新情境制备题按「发生—除杂—反应—收集—尾气」五段拆图，再用元素守恒/得失守恒列式。陌生方程式不要怕，题干给的信息就是已知条件。</div></div>
+</div></article>
+<article class="qcard" id="q-07-14">
+<div class="qhead"><span class="qno">04</span><span class="badge hard">难度 较难 0.4</span><span class="badge type">单选题</span><span class="src">辽宁 · 26-27高一上—辽宁沈阳—期中</span></div>
+<div class="qbody">
+            14. 为探究新制氯水的性质，某学生做了如下实验。<table style="width:555px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:54;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验</td><td style="width:85;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">装置</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">试剂a</td><td style="width:151;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">现象</td></tr><tr><td style="width:54;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">①</td><td rowspan="4" style="width:85;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/d9f8139470af080a.png" style="vertical-align:middle;" alt=""></p></td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">紫色的石蕊试液</td><td style="width:151;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">溶液先变红后褪色</td></tr><tr><td style="width:54;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">②</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><img src="assets/papers/chem_final_review/ec973d72ba4addca.png" mathml="" latex="" style="vertical-align:middle;">酸化的<img src="assets/papers/chem_final_review/dbc732d56ad4066b.png" mathml="" latex="" style="vertical-align:middle;">溶液</td><td style="width:151;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">产生白色沉淀</td></tr><tr><td style="width:54;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">③</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><img src="assets/papers/chem_final_review/3844ee435ab4abbd.png" mathml="" latex="" style="vertical-align:middle;">溶液</td><td style="width:151;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">产生气泡</td></tr><tr><td style="width:54;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">④</td><td style="width:217;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><img src="assets/papers/chem_final_review/ee8821d2bf13e624.png" mathml="" latex="" style="vertical-align:middle;">溶液、淀粉溶液</td><td style="width:151;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">溶液变蓝</td></tr></tbody></table>由上述实验可得新制氯水的性质与对应的解释或离子方程式不相符的是<table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．实验①说明新制氯水中含有<img src="assets/papers/chem_final_review/ebc1a72a4e586da6.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/132026a8aff83c61.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>B．实验②说明新制氯水中有<img src="assets/papers/chem_final_review/08ded27e2871c040.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>C．实验③发生的反应为：<img src="assets/papers/chem_final_review/475914e189116a57.png" mathml="" latex="" style="vertical-align:middle;"></td></tr><tr><td>D．实验④说明<img src="assets/papers/chem_final_review/ee8821d2bf13e624.png" mathml="" latex="" style="vertical-align:middle;">溶液中的<img src="assets/papers/chem_final_review/d1c9644a014e6c47.png" mathml="" latex="" style="vertical-align:middle;">被氧化</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">C</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">实验①石蕊先变红后褪色，说明氯水含 H⁺（酸性）和 HClO（漂白性），A 相符。实验② HNO₃ 酸化的 AgNO₃ 产生白色沉淀，说明含 Cl⁻（Cl⁻ + Ag⁺ = AgCl↓），B 相符。实验③ NaHCO₃ 溶液产生气泡，是氯水中的 H⁺（盐酸电离）与 HCO₃⁻ 反应：H⁺ + HCO₃⁻ = CO₂↑ + H₂O；HClO 的酸性比碳酸还弱，不能写成 HCO₃⁻ + HClO = ClO⁻ + CO₂↑ + H₂O，C 不相符。实验④ KI-淀粉变蓝说明 I⁻ 被 Cl₂ 氧化为 I₂，D 相符。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把氯水的酸性笼统归给 HClO；忽略「酸性：H₂CO₃ &gt; HClO」这一条，写出不能发生的反应。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">把新制氯水的成分表贴在黑板角，每个现象都要求学生指名道姓说出「是哪种微粒干的」。凡是出现 HClO 与碳酸盐/碳酸氢盐放 CO₂ 的式子，一律判错。</div></div>
+</div></article>
+<article class="qcard" id="q-03-15">
+<div class="qhead"><span class="qno">05</span><span class="badge mid">难度 适中 0.65</span><span class="badge type">单选题</span><span class="src">广东 · 26-27高一上—广东东莞—期中</span></div>
+<div class="qbody">
+            15. 利用数字化实验验证次氯酸光照分解的产物：将三种传感器分别插入盛有氯水的广口瓶中，并用强光照射广口瓶，所得的实验数据如图所示。下列说法正确的是<p style="text-align:left;"><img src="assets/papers/chem_final_review/fffeb5fb831bfbec.png" style="vertical-align:middle;" alt=""></p><table name="optionsTable" style="width:100%;table-layout:fixed;" cols="1"><tbody><tr><td>A．图(1)中的pH数据也可用pH试纸测得</td></tr><tr><td>B．根据图(1)(2)的数据可知，HClO光照分解产生了HCl</td></tr><tr><td>C．根据图(3)的数据可知，光照使水分解，导致<img src="assets/papers/chem_final_review/2452aaf209d9d041.png" mathml="" latex="" style="vertical-align:middle;">增多</td></tr><tr><td>D．若停止光照，溶液pH、氯离子浓度和氧气的体积分数会立即恢复如初</td></tr></tbody></table>
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">B</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">光照氯水发生 2HClO =(光照) 2HCl + O₂↑。A：氯水有漂白性且需精确 pH 数据，不能用 pH 试纸（会被漂白、读数也不精确），错。B：图中 pH 下降（H⁺ 增多）且 Cl⁻ 浓度上升，说明 HClO 分解生成了 HCl，正确。C：O₂ 体积分数上升来自 HClO 分解，不是「光照使水分解」，错。D：HClO 分解是不可逆过程，停止光照后各量不会「立即恢复如初」，错。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把 O₂ 的来源误判为水的光解；把可逆/不可逆与「停止条件后是否恢复」混淆。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">用传感器曲线讲「证据链」：pH↓ + c(Cl⁻)↑ + φ(O₂)↑ 三条曲线同时出现，只能由一个反应 2HClO → 2HCl + O₂↑ 解释。这也是数字化实验题的通用读图法。</div></div>
+</div></article>
+<article class="qcard" id="q-11-18">
+<div class="qhead"><span class="qno">06</span><span class="badge mid">难度 适中 0.62</span><span class="badge type">解答题</span><span class="src">陕西 · 26-27高一上—陕西咸阳—期中</span></div>
+<div class="qbody">
+            18. 已知甲、乙、丙为单质，甲为黄绿色气体，乙为生活中使用最广泛的金属。B为相对分子质量最小的氧化物，D、E分别为“84”消毒液、漂白粉的有效成分，有关的转化关系如图所示，部分反应条件和产物未列出。<p style="text-align:left;"><img src="assets/papers/chem_final_review/dc7fa9875eff0e72.png" style="vertical-align:middle;" alt=""></p>回答下列问题：<br>(1)A溶于水所得溶液的颜色为<bk size="8" index="1" type="underline">________</bk>，D的化学式为<bk size="8" index="2" type="underline">________</bk>，C→丙的化学方程式为<bk size="16" index="3" type="underline">________________</bk>。<br>(2)将甲通入B中可制得氯水，用玻璃棒蘸取饱和氯水滴在pH试纸中部，现象如图所示。<p style="text-align:left;"><img src="assets/papers/chem_final_review/8d3abb1b9e263f8d.png" style="vertical-align:middle;" alt=""></p>使pH试纸变红的微粒是<bk size="12" index="4" type="underline">____________</bk>(填微粒符号，下同)，使pH试纸变白的微粒是<bk size="12" index="5" type="underline">____________</bk>。<br>(3)甲→E的化学方程式为<bk size="12" index="6" type="underline">____________</bk>。漂白粉、活性炭都能使红墨水褪色，其褪色原理<bk size="12" index="7" type="underline">____________</bk>(填“相同”或“不同”)。<br>(4)米醋是一种用稻谷酿制的食用醋，因含有机色素而呈棕色。米醋中含有醋酸<img src="assets/papers/chem_final_review/fdae50d00ae77ec6.png" mathml="" latex="" style="vertical-align:middle;">，能电离出<img src="assets/papers/chem_final_review/ebc1a72a4e586da6.png" mathml="" latex="" style="vertical-align:middle;">。某同学猜测“84”消毒液可漂白米醋，进行了如下实验：<table style="width:356.667px;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;border-collapse: collapse;"><tbody><tr><td style="width:56;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">编号</td><td style="width:146;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验操作</td><td style="width:154;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验现象</td></tr><tr><td style="width:56;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验一</td><td style="width:146;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/7e538a227d40cf59.png" style="vertical-align:middle;" alt=""></p></td><td style="width:154;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">滴入米醋后立即褪色，<br>闻到刺激性气味</td></tr><tr><td style="width:56;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">实验二</td><td style="width:146;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;"><p style="text-align:left;"><img src="assets/papers/chem_final_review/9b58182fff259639.png" style="vertical-align:middle;" alt=""></p></td><td style="width:154;border-width:1px 1px 1px 1px;border-style:solid solid solid solid;border-color:black;">溶液为浅棕色，无刺<br>激性气味</td></tr></tbody></table>已知：“84”消毒液中含氯微粒主要有<img src="assets/papers/chem_final_review/3cdd450bd65aaac1.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/13201abc8458601b.png" mathml="" latex="" style="vertical-align:middle;">、<img src="assets/papers/chem_final_review/6dde646184a85187.png" mathml="" latex="" style="vertical-align:middle;">。<br>①实验二的目的是第一：排除醋酸挥发产生刺激性气味气体的可能性；第二：<bk size="8" index="8" type="underline">________</bk>。<br>②结合发生的反应，解释实验一中立即褪色的原因：<bk size="8" index="9" type="underline">________</bk>。试猜测实验一中产生的刺激性气味气体是<bk size="8" index="10" type="underline">________</bk>。
+        </div>
+<button class="ans-toggle" type="button" aria-expanded="false">▸ 点击查看参考答案与讲评</button>
+<div class="ans-body" hidden>
+<div class="ans-row"><span class="ans-label">参考答案</span><div class="ans-txt">见要点</div></div>
+<div class="ans-row"><span class="ans-label">解析</span><div class="ans-txt">甲为 Cl₂，乙为 Fe，B 为 H₂O，A 为 HCl（溶于水得盐酸），C 为 FeCl₃ 或 HCl 相关产物，D 为 NaClO（84 消毒液有效成分），E 为 Ca(ClO)₂（漂白粉有效成分），丙为 HClO 光照分解产生的 O₂。(1) A 溶于水得无色盐酸；D 为 NaClO；C→丙可写 MnO₂ + 4HCl(浓) =(Δ) MnCl₂ + Cl₂↑ + 2H₂O 或对应的实验室制氯气反应。(2) 饱和氯水滴在 pH 试纸中部，中间先变红后变白、外圈呈红色：使变红的是 H⁺，使变白的是 HClO；说明氯水既有酸性又有漂白性，且不能用 pH 试纸准确测其 pH。(3) 滴加米醋（提供 H⁺）后 84 消毒液漂白/消毒效果增强，是因为 ClO⁻ + H⁺ ⇌ HClO，HClO 浓度增大；对照组为加蒸馏水的同浓度 84 消毒液。</div></div>
+<div class="ans-row"><span class="ans-label">易错点</span><div class="ans-txt">把漂白粉有效成分写成 CaCl₂ 或 HClO；把「84 加酸效果增强」说成「生成了 Cl₂」而不提 HClO 浓度增大。</div></div>
+<div class="ans-row teach"><span class="ans-label">讲评要点</span><div class="ans-txt">用「价—类二维图」把 Cl 的 −1 / 0 / +1 / +4 价物质连成一张网，再让学生把 D、E、丙逐个填进图里。转化关系题先定「突破口」（黄绿色气体、生活中最广泛的金属、相对分子质量最小的氧化物），其余自然推出。</div></div>
+</div></article>
+</div>
+<div class="variant"><h3>✎ 变式巩固（原创，答案点击展开）</h3>
+<div class="vitem"><p class="vq">原创变式 1｜写出实验室用 MnO₂ 与浓盐酸制 Cl₂ 的化学方程式，并依次说明饱和食盐水、浓硫酸、NaOH 溶液三处装置的作用；若把 MnO₂ 换成 KMnO₄，装置要怎么改？</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">MnO₂ + 4HCl(浓) =(Δ) MnCl₂ + Cl₂↑ + 2H₂O。饱和食盐水：除 HCl（并抑制 Cl₂ 溶解）；浓硫酸：干燥 Cl₂；NaOH 溶液：吸收尾气 Cl₂，防止污染。换成 KMnO₄ 后反应在常温下即可进行，可撤去酒精灯（不加热），方程式 2KMnO₄ + 16HCl(浓) = 2KCl + 2MnCl₂ + 5Cl₂↑ + 8H₂O。</div></div></div>
+<div class="vitem"><p class="vq">原创变式 2｜新制氯水滴入紫色石蕊试液，先变红后褪色；久置氯水漂白性消失。解释这两个现象，并写出相关方程式。</p><button type="button" class="ans-toggle small">▸ 查看答案与提示</button><div class="ans-body" hidden><div class="ans-txt">Cl₂ + H₂O ⇌ HCl + HClO。HCl 电离出 H⁺ 使石蕊变红；HClO 有强氧化性，把有色物质氧化而褪色。久置时 2HClO =(光照) 2HCl + O₂↑，HClO 分解殆尽，氯水最终变成稀盐酸，故漂白性消失、酸性增强。</div></div></div>
+</div></section>
+
+<footer>高一化学期中考前复习 · 四节课试题讲评　|　题目与难度标注来源：组卷网　|　讲评解析为编写版，供课堂教学使用</footer>
+</div>
+<script>
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.ans-toggle');
+  if(b){
+    var box=b.nextElementSibling;
+    var open=!box.hasAttribute('hidden');
+    if(open){box.setAttribute('hidden','');b.setAttribute('aria-expanded','false');b.textContent=b.textContent.replace('▾','▸');}
+    else{box.removeAttribute('hidden');b.setAttribute('aria-expanded','true');b.textContent=b.textContent.replace('▸','▾');}
+    return;
+  }
+  var a=e.target.closest('.expand-all');
+  if(a){
+    var sec=document.getElementById(a.getAttribute('data-target'));
+    var boxes=sec.querySelectorAll('.ans-body');
+    var btns=sec.querySelectorAll('.ans-toggle');
+    var allOpen=[].slice.call(boxes).every(function(x){return !x.hasAttribute('hidden');});
+    boxes.forEach(function(x){ if(allOpen){x.setAttribute('hidden','');} else {x.removeAttribute('hidden');} });
+    btns.forEach(function(x){ x.textContent=allOpen?x.textContent.replace('▾','▸'):x.textContent.replace('▸','▾'); });
+    a.textContent=allOpen?'展开本节全部答案':'收起本节全部答案';
+  }
+});
+</script>
+</body></html>
