@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>数学加油站 · 星辰班级</title>
 <link rel="stylesheet" href="assets/css/style.css?v=20261028" />
-<link rel="stylesheet" href="assets/css/quiz.css?v=20261028" />
+<link rel="stylesheet" href="assets/css/quiz.css?v=20261118" />
 <link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=20261028" />
 </head>
 <body data-theme="math">
@@ -70,6 +70,20 @@
         </p>
 
         <div class="quiz-entry" id="quiz-entry">
+          <div class="quiz-card" data-quiz="week1118">
+            <div class="qc-ico">📝</div>
+            <h3>练习试卷（八）· 高一数学（B 卷）</h3>
+            <p style="margin:0;font-size:13.5px;line-height:1.95;color:var(--ink-soft);">
+              瑞昌一中 2026~2027 学年度上学期练习试卷（八）· 高一数学（B）
+            </p>
+            <div class="qc-meta">
+              <span>19 题</span>
+              <span>满分 150 分</span>
+              <span>含详细解析</span>
+            </div>
+            <div class="qc-go">开始作答 →</div>
+          </div>
+
           <div class="quiz-card" data-quiz="math">
             <div class="qc-ico">📝</div>
             <h3>周考试卷四（B 卷）</h3>
@@ -131,6 +145,7 @@
           </div>
         </div>
 
+        <div class="quiz" id="quiz-week1118" style="margin-top:22px;"></div>
         <div class="quiz" id="quiz-math" style="margin-top:22px;"></div>
         <div class="quiz" id="quiz-week1026" style="margin-top:22px;"></div>
         <div class="quiz" id="quiz-week1103" style="margin-top:22px;"></div>
@@ -241,10 +256,16 @@
 
   <script src="assets/vendor/katex/katex.min.js?v=20261028"></script>
   <script src="assets/js/main.js?v=20261028"></script>
-  <script src="assets/js/quiz.js?v=20261028"></script>
+  <script src="assets/js/quiz.js?v=20261118"></script>
   <script>
     (function () {
       var specs = {
+        week1118: {
+          json: "assets/papers/math_1118B.json?v=20261118",
+          id: "week1118",
+          title: "练习试卷（八）· 高一数学（B 卷）",
+          dir: "assets/papers/math_1118B/"
+        },
         math: {
           json: "assets/papers/math.json?v=20261028",
           id: "mathq",

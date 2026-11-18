@@ -224,6 +224,16 @@ img.fx:not(.colored) {
   filter: invert(1) grayscale(1) brightness(1.08);
 }
 
+/* 长推导公式：整行铺满宽度显示，避免被压缩成一条看不清的小图 */
+img.fx.block {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 10px 0;
+}
+
 /* 彩色题图：保持原色，白底衬托，可点击放大 */
 img.fx.colored {
   background: #fff;

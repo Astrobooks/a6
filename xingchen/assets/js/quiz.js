@@ -20,7 +20,11 @@
         // 黑白公式图在深色背景上看不清 -> 反色成白字；
         // 彩色图（v-t 图、光电门、实验装置）保持原色，限宽显示。
         var cls, st = "";
-        if (f.c) {
+        if (f.b) {
+          // 长推导公式：整行铺满宽度（超过 maxw 时按上限收窄），避免压缩到看不清
+          cls = "fx block";
+          st = ' style="width:100%;max-width:' + (f.maxw || 940) + 'px"';
+        } else if (f.c) {
           cls = "fx colored";
           st = ' style="width:' + Math.min(300, f.w || 240) + 'px"';
         } else {
