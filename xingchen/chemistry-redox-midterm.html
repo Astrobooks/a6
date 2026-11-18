@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>氧化还原反应_期中复习_交互课件</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:100%; height:100%; background:#0B1F3D; overflow:hidden;
+  font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif; }
+#stage { position:absolute; left:50%; top:50%; width:1280px; height:720px;
+  transform-origin:center center; background:#fff; }
+.slide { position:absolute; inset:0; width:1280px; height:720px; display:none;
+  background:#fff; color:#1A2230; overflow:hidden; }
+.slide.active { display:block; animation:fadeIn .45s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:none;} }
+:root { --blue:#1E4FA8; --navy:#0E3F8C; --light:#E8EFF8; --lighter:#F0F5FC;
+  --red:#D9534F; --yellow:#F5B301; --ink:#1A2230; --gray:#8B97A8; --green:#2E8B57; }
+.topbar { position:absolute; top:0; left:0; right:0; height:10px;
+  background:linear-gradient(90deg,#0E3F8C,#1E4FA8); }
+.footer { position:absolute; bottom:64px; left:56px; right:56px; display:flex;
+  justify-content:space-between; font-size:13px; color:#8B97A8; }
+.kicker { display:inline-flex; align-items:center; gap:10px; color:var(--blue);
+  font-size:17px; letter-spacing:2px; font-weight:bold; }
+.kicker::before { content:""; width:5px; height:22px; background:var(--blue); display:inline-block; }
+h2.title { font-size:34px; color:var(--navy); margin:8px 0 4px; }
+.subtitle { color:#5B6B84; font-size:16px; }
+.body-pad { position:absolute; inset:0; padding:40px 56px 92px; }
+.pagebody { margin-top:20px; height:518px; }
+.btn { display:inline-block; cursor:pointer; user-select:none; border:none;
+  background:var(--blue); color:#fff; font-size:16px; font-weight:bold;
+  padding:9px 22px; border-radius:22px; letter-spacing:1px;
+  box-shadow:0 3px 10px rgba(30,79,168,.35); transition:.2s; }
+.btn:hover { background:var(--navy); transform:translateY(-2px); }
+.btn.red { background:var(--red); box-shadow:0 3px 10px rgba(217,83,79,.35); }
+.btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); box-shadow:none; }
+.btn.ghost:hover { background:var(--light); }
+.btn.done { background:#B9C6DA; box-shadow:none; cursor:default; }
+.reveal { opacity:0; transform:translateY(14px); transition:.55s ease; }
+.reveal.shown { opacity:1; transform:none; }
+.hint { color:#8B97A8; font-size:14px; font-style:italic; }
+.card { background:var(--lighter); border:1px solid #D5E1F2; border-radius:14px; padding:16px 20px; }
+.card.blue { background:var(--light); border-color:#B9CCEC; }
+.card.warm { background:#FFF9E8; border-color:#F0DFA8; }
+.card.good { background:#E9F6EC; border-color:#A9D9B6; }
+.eq { font-size:25px; font-weight:bold; color:var(--navy); letter-spacing:.5px; }
+.big { font-size:40px; font-weight:800; color:var(--blue); line-height:1.2; }
+.mid { font-size:23px; font-weight:bold; color:var(--navy); }
+.small { font-size:15px; color:#5B6B84; line-height:1.7; }
+.row { display:flex; gap:16px; }
+.col { flex:1; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+ul.tight { padding-left:22px; line-height:1.95; font-size:17px; }
+.tagRed { color:var(--red); } .tagBlue { color:var(--blue); }
+.tagY { color:#B87B00; } .tagG { color:var(--green); }
+
+/* 封面 */
+.cover-left { position:absolute; left:0; top:0; width:440px; height:720px; background:var(--navy);
+  padding:56px 46px; display:flex; flex-direction:column; justify-content:space-between; }
+.cover-left .tag { color:#9FB8DC; font-size:17px; letter-spacing:3px; line-height:1.8; }
+.cover-left h1 { color:#fff; font-size:54px; line-height:1.25; font-weight:800; }
+.cover-left .sub { color:#C9DAF2; font-size:19px; line-height:1.75; }
+.cover-right { position:absolute; left:440px; top:0; width:840px; height:720px; padding:62px 58px;
+  display:flex; flex-direction:column; justify-content:space-between; }
+.section-num { font-size:140px; font-weight:800; color:var(--light); line-height:1; }
+.sec-badge { width:76px; height:8px; background:var(--red); border-radius:4px; margin:18px 0; }
+
+/* 目录 */
+.toc-item { display:flex; align-items:center; gap:18px; background:var(--lighter);
+  border-radius:12px; padding:14px 22px; margin-bottom:11px; border-left:8px solid #D5E1F2; }
+.toc-item.on { background:var(--light); border-left-color:var(--red); }
+.toc-num { font-size:29px; font-weight:800; color:var(--blue); width:48px; }
+.toc-t { font-size:21px; font-weight:bold; color:var(--ink); }
+.toc-d { color:#5B6B84; font-size:14px; margin-top:2px; }
+
+/* 翻牌 */
+.flip { height:190px; perspective:900px; cursor:pointer; }
+.flip-in { position:relative; width:100%; height:100%; transform-style:preserve-3d;
+  transition:transform .65s; }
+.flip.open .flip-in { transform:rotateY(180deg); }
+.flip-f,.flip-b { position:absolute; inset:0; backface-visibility:hidden; border-radius:16px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:14px; }
+.flip-f { background:var(--light); border:2px solid #B9CCEC; }
+.flip-b { background:var(--navy); color:#fff; transform:rotateY(180deg); border:2px solid var(--navy); }
+.flip-f .q { font-size:21px; font-weight:bold; color:var(--navy); }
+.flip-f .ic { font-size:38px; margin-bottom:10px; }
+.flip-b .nm { font-size:17px; color:#C9DAF2; }
+.flip-b .bigv { font-size:31px; font-weight:800; color:#FFD86B; margin:8px 0; }
+.flip-b .d { font-size:14px; color:#C9DAF2; line-height:1.6; }
+
+/* 判错卡片 */
+.chip { background:#fff; border:2px solid #C4D2E8; border-radius:12px; padding:14px 10px;
+  text-align:center; cursor:pointer; font-size:16px; font-weight:bold; color:var(--ink); transition:.2s; }
+.chip:hover { border-color:var(--blue); }
+.chip.ok { background:#E4F4E6; border-color:#3E9B4F; color:#22662E; }
+.chip.no { background:#FBE4E3; border-color:var(--red); color:#9C2B27; }
+.chip .rs { display:block; font-size:12.5px; font-weight:normal; margin-top:8px;
+  line-height:1.5; color:#43506A; }
+
+/* 逐步点亮 */
+.step-item { background:var(--lighter); border-left:6px solid var(--blue); border-radius:10px;
+  padding:11px 16px; margin-bottom:9px; font-size:16px; cursor:pointer;
+  opacity:.3; transition:.4s; }
+.step-item.on { opacity:1; background:var(--light); }
+
+/* 点击高亮格 */
+.cell { background:var(--lighter); border:2px solid #D5E1F2; border-radius:12px;
+  padding:14px 10px; text-align:center; cursor:pointer; transition:.3s; opacity:.6; }
+.cell:hover { opacity:.9; }
+.cell.on { opacity:1; background:var(--light); border-color:var(--blue); transform:translateY(-4px); }
+.cell.hi.on { background:#FFF4D6; border-color:var(--yellow); }
+.cell .nm { font-size:16px; font-weight:bold; color:var(--navy); }
+.cell .un { font-size:13px; color:#5B6B84; margin-top:5px; }
+
+/* 滑块 / 数值 */
+input[type=range] { width:100%; height:8px; accent-color:var(--blue); cursor:pointer; }
+.n-big { font-size:46px; font-weight:800; color:var(--navy); line-height:1.1; }
+.dots { display:flex; flex-wrap:wrap; gap:5px; align-content:flex-start; height:110px; }
+.dot { width:11px; height:11px; border-radius:50%; background:var(--blue); animation:pop .4s; }
+@keyframes pop { 0%{transform:scale(.5);opacity:.2} 70%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
+.pulse { animation:pop .5s ease; }
+
+/* 公式框 */
+.fbox { background:var(--light); border:2px solid #B9CCEC; border-radius:12px;
+  padding:12px 22px; font-size:24px; font-weight:bold; color:var(--navy);
+  cursor:pointer; transition:.25s; text-align:center; }
+.fbox.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+.hub { width:120px; height:120px; border-radius:50%; background:var(--navy); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:46px; font-weight:800;
+  cursor:pointer; box-shadow:0 8px 22px rgba(14,63,140,.3); }
+
+/* 输入判分 */
+.task { background:var(--lighter); border:1px solid #D5E1F2; border-radius:12px; padding:11px 14px; }
+.task .q { font-size:15px; font-weight:bold; margin-bottom:7px; line-height:1.5; }
+.task input { width:92px; font-size:15px; padding:5px 8px; border:2px solid #C4D2E8;
+  border-radius:8px; outline:none; }
+.task input:focus { border-color:var(--blue); }
+.fb { font-size:13px; margin-top:6px; font-weight:bold; min-height:17px; }
+.fb.good { color:#22662E; } .fb.bad { color:#9C2B27; }
+
+/* 选择题 */
+.quiz { background:var(--lighter); border:1px solid #D5E1F2; border-radius:12px; padding:10px 14px; }
+.quiz .q { font-size:14.5px; font-weight:bold; margin-bottom:8px; line-height:1.5; }
+.opts { display:flex; gap:7px; flex-wrap:wrap; }
+.opt { cursor:pointer; background:#fff; border:2px solid #C4D2E8; border-radius:9px;
+  padding:5px 10px; font-size:13px; transition:.15s; }
+.opt:hover { border-color:var(--blue); }
+.opt.right { background:#E4F4E6; border-color:#3E9B4F; color:#22662E; font-weight:bold; }
+.opt.wrong { background:#FBE4E3; border-color:var(--red); color:#9C2B27; }
+.expl { display:none; margin-top:7px; font-size:12.5px; color:#22662E; background:#E4F4E6;
+  border-radius:8px; padding:6px 10px; line-height:1.5; }
+.expl.show { display:block; }
+
+/* 表格 */
+table.t { width:100%; border-collapse:collapse; font-size:15px; }
+table.t th { background:var(--navy); color:#fff; padding:9px 10px; text-align:left; }
+table.t td { border-bottom:1px solid #D5E1F2; padding:8px 10px; }
+table.t tr:nth-child(even) td { background:var(--lighter); }
+
+/* 导航 */
+#nav { position:absolute; bottom:0; left:0; right:0; height:52px; background:rgba(11,31,61,.94);
+  display:flex; align-items:center; justify-content:center; gap:16px; z-index:50; }
+#nav button { background:#1E4FA8; border:none; color:#fff; width:40px; height:32px;
+  border-radius:8px; font-size:16px; cursor:pointer; }
+#nav button:hover { background:#2E63C4; }
+#pageinfo { color:#9FB8DC; font-size:14px; letter-spacing:1px; min-width:70px; text-align:center; }
+#navtip { position:absolute; right:22px; color:#7E93B4; font-size:12px; }
+
+/* ===== 大字版 · 主体内容 +25%（仅 .pagebody） ===== */
+.pagebody { font-size:20px; }
+.pagebody .card { padding:13px 18px; }
+.pagebody .small { font-size:19px !important; }
+.pagebody .hint { font-size:17px !important; }
+.pagebody .mid { font-size:28px !important; }
+.pagebody .eq { font-size:30px !important; }
+.pagebody .fbox { font-size:29px !important; padding:10px 18px; }
+.pagebody .subtitle { font-size:20px !important; }
+.pagebody .toc-item { padding:8px 18px; margin-bottom:5px; }
+.pagebody .toc-num { font-size:34px !important; }
+.pagebody .toc-t { font-size:25px !important; }
+.pagebody .toc-d { font-size:17px !important; }
+.pagebody .toc-item > div:last-child { line-height:1.55; }
+.pagebody .step-item { font-size:20px !important; padding:9px 14px; margin-bottom:6px; }
+.pagebody .cell .nm { font-size:20px !important; }
+.pagebody .cell .un { font-size:16px !important; }
+.pagebody .chip { font-size:20px !important; padding:12px 8px; }
+.pagebody .chip .rs { font-size:15px !important; }
+.pagebody .flip-f .q { font-size:26px !important; }
+.pagebody .flip-b .nm { font-size:20px !important; }
+.pagebody .flip-b .bigv { font-size:36px !important; }
+.pagebody .flip-b .d { font-size:17px !important; }
+.pagebody .task { padding:10px 13px; }
+.pagebody .task .q { font-size:19px !important; }
+.pagebody .task input { font-size:19px !important; }
+.pagebody .fb { font-size:16px !important; }
+.pagebody .quiz { padding:9px 13px; }
+.pagebody .quiz .q { font-size:18px !important; }
+.pagebody .opt { font-size:16px !important; padding:5px 11px; }
+.pagebody .expl { font-size:16px !important; }
+.pagebody table.t { font-size:19px !important; }
+.pagebody .btn { font-size:19px !important; }
+.pagebody ul.tight { font-size:21px !important; line-height:1.75; }
+/* 页面内容里的内联字号：<=22px 的按 +25% 映射，>=30px 保持原样 */
+.pagebody [style*="font-size:14px"] { font-size:18px !important; }
+.pagebody [style*="font-size:15px"] { font-size:19px !important; }
+.pagebody [style*="font-size:16px"] { font-size:20px !important; }
+.pagebody [style*="font-size:17px"] { font-size:21px !important; }
+.pagebody [style*="font-size:18px"] { font-size:22px !important; }
+.pagebody [style*="font-size:19px"] { font-size:24px !important; }
+.pagebody [style*="font-size:20px"] { font-size:25px !important; }
+.pagebody [style*="font-size:21px"] { font-size:26px !important; }
+.pagebody [style*="font-size:22px"] { font-size:28px !important; }
+</style>
+</head>
+<body>
+<div id="stage">
+<section class="slide active"><div class="cover-left"><div class="tag">人教版（2019）· 必修第一册<br>第一章 第三节 · 高一期中专项复习</div><div><div style="width:64px;height:6px;background:#D9534F;margin-bottom:22px;"></div><h1>氧化还原反应<br>期中复习</h1><div style="width:76px;height:4px;background:#3D7BD9;margin:22px 0;"></div><div class="sub">五大考点 · 真题为主 · 即时判分</div></div><div class="tag" style="font-size:15px;letter-spacing:2px;">高中化学 · 45 分钟 · 交互课件</div></div><div class="cover-right"><div><div class="kicker">这节课要攻克</div><div style='font-size:19px;line-height:2;color:#43506A;'>· 概念判断还会混淆吗？</div><div style='font-size:19px;line-height:2;color:#43506A;'>· 电子转移数目怎么算才对？</div><div style='font-size:19px;line-height:2;color:#43506A;'>· 氧化性强弱如何快速排序？</div><div style='font-size:19px;line-height:2;color:#43506A;'>· 方程式配平有没有通法？</div></div><div style="text-align:right;"><div class="section-num">01</div><div class="sec-badge" style="margin-left:auto;"></div><div style="font-size:24px;color:var(--navy);font-weight:bold;">以题带点 · 练讲结合</div><div style="font-size:17px;color:#5B6B84;margin-top:6px;">汇集各地 2024–2026 期中真题改编</div></div></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">复习地图</div><h2 class="title">五个考点，串成一条复习主线</h2><div class="pagebody"><div style="margin-top:8px;"><div class="toc-item on"><div class="toc-num">1</div><div><div class="toc-t">考点一　氧化还原基本概念</div><div class="toc-d">升失氧、降得还 · 剂与产物的对应</div></div></div><div class="toc-item "><div class="toc-num">2</div><div><div class="toc-t">考点二　电子转移的表示与数目</div><div class="toc-d">单/双线桥 · 电子守恒计算</div></div></div><div class="toc-item "><div class="toc-num">3</div><div><div class="toc-t">考点三　氧化性、还原性强弱比较</div><div class="toc-d">强制弱 · 多反应排序</div></div></div><div class="toc-item "><div class="toc-num">4</div><div><div class="toc-t">考点四　氧化还原方程式配平</div><div class="toc-d">标价—守恒—配平—检查</div></div></div><div class="toc-item "><div class="toc-num">5</div><div><div class="toc-t">考点五　四大规律与综合应用</div><div class="toc-d">强制弱/归中/歧化/先后 · 情境题</div></div></div></div><div class="card warm" style="margin-top:16px;font-size:19px;line-height:1.7;">一条主线：<b>化合价升降 → 电子转移 → 强弱比较 → 守恒配平 → 情境应用</b>。每题先标价态，再看守恒。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点一 · 知识网络</div><h2 class="title">化合价升降是表，电子转移是里</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击左侧任一概念，右侧展开它的含义与对应口诀</div><div style="display:flex;gap:22px;align-items:stretch;"><div style="width:470px;"><div class="fbox" style="margin-bottom:12px;" onclick="net(0)">化合价升高 → 失电子</div><div class="fbox" style="margin-bottom:12px;" onclick="net(1)">化合价降低 → 得电子</div><div class="fbox" style="margin-bottom:12px;" onclick="net(2)">两剂 → 两产物</div><div class="fbox" onclick="net(3)">记忆口诀</div></div><div class="card blue" id="netDetail" style="flex:1;display:flex;flex-direction:column;justify-content:center;line-height:1.9;font-size:20px;"><div class="eq" style="margin-bottom:12px;">升失氧 · 降得还</div><div class="small">点击左边的概念框，这里会显示对应关系和判断口诀。<br><br>做题第一步永远是<b>标出变价元素的化合价</b>。</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点一 · 概念辨析</div><h2 class="title">六个说法，点开判一判</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">绿色为正确、红色为错误，点开可看理由</div><div class="grid3"><div class="chip" onclick="chip(this,false,'✗ O₃→O₂ 等单质间转化，化合价不变，不是氧化还原')">有单质参加一定是氧化还原反应</div><div class="chip" onclick="chip(this,true,'✓ 氧化剂得电子被还原，还原剂失电子被氧化')">氧化剂被还原，还原剂被氧化</div><div class="chip" onclick="chip(this,false,'✗ Cl⁻→Cl₂ 是化合价升高，被氧化')">化合态变游离态一定被还原</div><div class="chip" onclick="chip(this,true,'✓ 氧化剂含降的元素，反应中化合价降低')">氧化剂在反应中化合价降低</div><div class="chip" onclick="chip(this,false,'✗ Cl₂+H₂O 中 Cl₂ 既是氧化剂又是还原剂')">一种物质不能兼作两种剂</div><div class="chip" onclick="chip(this,false,'✗ 强弱取决于得失电子难易，与数目无关')">失电子越多，还原性越强</div></div><div class="card blue" style="margin-top:18px;font-size:18px;">三个高频坑：<b>单质参加≠氧化还原</b>、<b>自身歧化可一身二任</b>、<b>强弱≠数目</b>。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点一 · 真题选择</div><h2 class="title">四道期中真题，检验概念是否清楚</h2><div class="pagebody"><div class="grid2" style="gap:12px;"><div class="quiz"><div class="q">① 反应 2Fe³⁺+2I⁻=2Fe²⁺+I₂ 中，氧化剂是（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'c1')">A．Fe³⁺</span><span class="opt" onclick="pick(this,false,'c1')">B．I⁻</span><span class="opt" onclick="pick(this,false,'c1')">C．Fe²⁺</span><span class="opt" onclick="pick(this,false,'c1')">D．I₂</span></div><div class="expl" id="e_c1">Fe 由 +3 降到 +2 得电子被还原，Fe³⁺ 是氧化剂；I⁻ 被氧化为 I₂，作还原剂。（广东汕头期中改编）</div></div><div class="quiz"><div class="q">② 下列反应中，水只做氧化剂的是（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'c2')">A．2Na+2H₂O=2NaOH+H₂↑</span><span class="opt" onclick="pick(this,false,'c2')">B．Cl₂+H₂O=HCl+HClO</span><span class="opt" onclick="pick(this,false,'c2')">C．2F₂+2H₂O=4HF+O₂</span><span class="opt" onclick="pick(this,false,'c2')">D．2H₂O=2H₂↑+O₂↑</span></div><div class="expl" id="e_c2">A 中 H 由 +1→0 得电子，水只做氧化剂；C 中 O 被氧化，水只做还原剂；D 中水既被氧化又被还原。（汕头金山中学期中）</div></div><div class="quiz"><div class="q">③ 反应 NO₂+NO+2NaOH=2NaNO₂+H₂O 中，NO 是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'c3')">A．氧化剂</span><span class="opt" data-key="1" onclick="pick(this,true,'c3')">B．还原剂</span><span class="opt" onclick="pick(this,false,'c3')">C．既是氧化剂又是还原剂</span><span class="opt" onclick="pick(this,false,'c3')">D．都不是</span></div><div class="expl" id="e_c3">NO 中 N 由 +2 升到 +3，失电子被氧化，作还原剂；NO₂ 中 N 由 +4 降到 +3，作氧化剂。（广西钦州期中）</div></div><div class="quiz"><div class="q">④ 2Fe(OH)₃+3ClO⁻+4OH⁻=2FeO₄²⁻+3Cl⁻+5H₂O 中（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'c4')">A．FeO₄²⁻ 中 Fe 为 +3 价</span><span class="opt" onclick="pick(this,false,'c4')">B．Fe(OH)₃ 作氧化剂</span><span class="opt" data-key="1" onclick="pick(this,true,'c4')">C．FeO₄²⁻ 中 Fe 为 +6 价</span><span class="opt" onclick="pick(this,false,'c4')">D．ClO⁻ 被氧化</span></div><div class="expl" id="e_c4">FeO₄²⁻ 中 Fe 为 +6 价；Fe 由 +3 升到 +6，Fe(OH)₃ 作还原剂；ClO⁻ 中 Cl 由 +1 降到 −1，作氧化剂。（广州期中改编）</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点二 · 表示方法与计算</div><h2 class="title">线桥标方向，守恒算数目</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击卡片翻面，复习两类线桥与三个要点</div><div class="grid2" style="gap:14px;"><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">双线桥怎么画？</div></div><div class="flip-b"><div class="nm">双线桥</div><div class="bigv">反应物→生成物</div><div class="d">同种元素之间搭桥，标注“升失氧 / 降得还”及电子数</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">单线桥怎么画？</div></div><div class="flip-b"><div class="nm">单线桥</div><div class="bigv">失→得</div><div class="d">从失电子元素指向得电子元素，只标电子总数，不写“得失”</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">桥上 a×be⁻ 是什么？</div></div><div class="flip-b"><div class="nm">数字含义</div><div class="bigv">a×b</div><div class="d">a 为变价原子个数，b 为单个原子转移的电子数</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">得失电子什么关系？</div></div><div class="flip-b"><div class="nm">必然相等</div><div class="bigv">电子守恒</div><div class="d">得电子总数 = 失电子总数，这是所有计算与配平的依据</div></div></div></div></div><div class="card warm" style="margin-top:16px;font-size:17px;">易错：<b>歧化反应</b>画线桥时，是同种元素“一升一降”分两条线，别只画一条。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点二 · 即时计算</div><h2 class="title">四个空，输入数字立即判分</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">只填数字（个 / mol），单位已写在题目中</div><div class="grid2" style="gap:12px;"><div class="task"><div class="q">① Zn+2HCl=ZnCl₂+H₂↑，每生成 1 个 H₂ 转移几个电子？</div><input id="e1" placeholder="个"> <button class="btn" style="padding:5px 14px;font-size:15px;" onclick="checkVal('e1','ef1',2,'Zn 由 0 到 +2，转移 2 个电子','看 Zn：0 到 +2，失 2e')">判分</button><div class="fb" id="ef1"></div></div><div class="task"><div class="q">② 2Na+2H₂O=2NaOH+H₂↑，转移 2 mol 电子生成几 mol H₂？</div><input id="e2" placeholder="mol"> <button class="btn" style="padding:5px 14px;font-size:15px;" onclick="checkVal('e2','ef2',1,'2 mol 电子生成 1 mol H₂','2Na 失 2e 生成 1 个 H₂')">判分</button><div class="fb" id="ef2"></div></div><div class="task"><div class="q">③ Cl₂+2NaOH=NaCl+NaClO+H₂O，1 个 Cl₂ 转移几个电子？</div><input id="e3" placeholder="个"> <button class="btn" style="padding:5px 14px;font-size:15px;" onclick="checkVal('e3','ef3',1,'歧化：一个升一个降，转移 1 个','Cl 0 到 −1 与 0 到 +1，各 1e')">判分</button><div class="fb" id="ef3"></div></div><div class="task"><div class="q">④ 2KClO₃=2KCl+3O₂↑，每生成 3 个 O₂ 转移几个电子？</div><input id="e4" placeholder="个"> <button class="btn" style="padding:5px 14px;font-size:15px;" onclick="checkVal('e4','ef4',12,'Cl：+5 到 −1，2×6=12 个','或 O：−2 到 0，6×2=12 个')">判分</button><div class="fb" id="ef4"></div></div></div><div class="card warm" style="margin-top:14px;font-size:16px;">算电子数通法：<b>变价原子个数 × 单个原子化合价变化</b>，升、降两边算出的总数必相等。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点二 · 真题选择</div><h2 class="title">四道情境题，练电子转移计算</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:10px;"><div class="quiz"><div class="q">① 4FeS₂+15O₂+2H₂O=2Fe₂(SO₄)₃+2H₂SO₄，每消耗 1 个 H₂O 转移电子（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'e5')">A．15 个</span><span class="opt" data-key="1" onclick="pick(this,true,'e5')">B．30 个</span><span class="opt" onclick="pick(this,false,'e5')">C．60 个</span><span class="opt" onclick="pick(this,false,'e5')">D．20 个</span></div><div class="expl" id="e_e5">Fe 由 +2→+3、S 由 −1→+6，4 个 FeS₂ 共失 4×(1+2×7)=60 e⁻，对应 2 个 H₂O，故 1 个 H₂O 对应 30 e⁻。（广东揭阳期中）</div></div><div class="quiz"><div class="q">② NO₂+NO+2NaOH=2NaNO₂+H₂O，每消耗 1 个 NO₂ 转移电子（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'e6')">A．1 个</span><span class="opt" onclick="pick(this,false,'e6')">B．2 个</span><span class="opt" onclick="pick(this,false,'e6')">C．3 个</span><span class="opt" onclick="pick(this,false,'e6')">D．4 个</span></div><div class="expl" id="e_e6">NO₂ 中 N 由 +4→+3，得 1 个电子；归中反应，别把 NO 的也重复计入。（广西钦州期中改编）</div></div><div class="quiz"><div class="q">③ 2Fe³⁺+3ClO⁻+10OH⁻=2FeO₄²⁻+3Cl⁻+5H₂O，每生成 1 个 FeO₄²⁻ 转移电子（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'e7')">A．2 个</span><span class="opt" data-key="1" onclick="pick(this,true,'e7')">B．3 个</span><span class="opt" onclick="pick(this,false,'e7')">C．6 个</span><span class="opt" onclick="pick(this,false,'e7')">D．4 个</span></div><div class="expl" id="e_e7">Fe 由 +3→+6，每个 Fe 失 3 e⁻，故每生成 1 个 FeO₄²⁻ 转移 3 个电子。（广州期中改编）</div></div><div class="quiz"><div class="q">④ xFe²⁺+2S₂O₃²⁻+O₂+4OH⁻=M+S₄O₆²⁻+2H₂O，一个 S₂O₃²⁻ 转移电子（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'e8')">A．1 个</span><span class="opt" onclick="pick(this,false,'e8')">B．2 个</span><span class="opt" onclick="pick(this,false,'e8')">C．3 个</span><span class="opt" onclick="pick(this,false,'e8')">D．4 个</span></div><div class="expl" id="e_e8">2 个 S₂O₃²⁻ 变为 1 个 S₄O₆²⁻ 共失 2 e⁻，故每个 S₂O₃²⁻ 转移 1 个电子。（浙江宁波北仑中学期中）</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点三 · 规律归纳</div><h2 class="title">氧化性、还原性：剂强于产物</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击左侧规律，右侧展开判断方法</div><div style="display:flex;gap:22px;"><div style="width:440px;"><div class="fbox" style="margin-bottom:12px;" onclick="str(0)">强制弱规律</div><div class="fbox" style="margin-bottom:12px;" onclick="str(1)">两剂两产物</div><div class="fbox" style="margin-bottom:12px;" onclick="str(2)">多反应排序法</div><div class="fbox" onclick="str(3)">判断口诀</div></div><div class="card blue" id="strDetail" style="flex:1;display:flex;flex-direction:column;justify-content:center;line-height:1.9;font-size:20px;"><div class="eq" style="margin-bottom:12px;">氧化性：氧化剂 &gt; 氧化产物</div><div class="small">还原性同理：<b>还原剂 &gt; 还原产物</b>。<br><br>点击左侧规律查看多反应排序的具体做法。</div></div></div><div class="card warm" style="margin-top:14px;font-size:17px;">注意：强弱取决于<b>得失电子的难易</b>，与得失电子数目、化合价高低无必然关系。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点三 · 真题选择</div><h2 class="title">三道排序题，找出共同物质搭桥</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:12px;"><div class="quiz"><div class="q">① 由 ①2Fe³⁺+2I⁻=2Fe²⁺+I₂ ②2Fe²⁺+H₂O₂+2H⁺=2Fe³⁺+2H₂O，氧化性顺序正确的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'s1')">A．Fe³⁺&gt;H₂O₂&gt;I₂</span><span class="opt" data-key="1" onclick="pick(this,true,'s1')">B．H₂O₂&gt;Fe³⁺&gt;I₂</span><span class="opt" onclick="pick(this,false,'s1')">C．I₂&gt;Fe³⁺&gt;H₂O₂</span><span class="opt" onclick="pick(this,false,'s1')">D．Fe³⁺&gt;I₂&gt;H₂O₂</span></div><div class="expl" id="e_s1">由①得 Fe³⁺&gt;I₂，由②得 H₂O₂&gt;Fe³⁺，串联得 H₂O₂&gt;Fe³⁺&gt;I₂。（河南商丘期中联考）</div></div><div class="quiz"><div class="q">② Co₂O₃、Cl₂、FeCl₃、I₂ 氧化性依次减弱，下列反应能发生的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'s2')">A．I₂+2KCl=2KI+Cl₂</span><span class="opt" onclick="pick(this,false,'s2')">B．I₂+2FeCl₂=2FeCl₃+2KI</span><span class="opt" data-key="1" onclick="pick(this,true,'s2')">C．Co₂O₃+6HCl=2CoCl₂+Cl₂↑+3H₂O</span><span class="opt" onclick="pick(this,false,'s2')">D．3FeCl₂+I₂=2FeCl₃+FeI₂</span></div><div class="expl" id="e_s2">只有强氧化剂制弱氧化剂：Co₂O₃ 最强，可把 Cl⁻ 氧化为 Cl₂；其余都是弱氧化剂制强氧化剂，不能发生。（江苏梅村高级中学期中）</div></div><div class="quiz"><div class="q">③ 由 2Fe³⁺+2I⁻=2Fe²⁺+I₂、Cl₂+2Fe²⁺=2Cl⁻+2Fe³⁺，氧化性由强到弱是（　）</div><div class="opts"><span class="opt" data-key="1" onclick="pick(this,true,'s3')">A．Cl₂&gt;Fe³⁺&gt;I₂</span><span class="opt" onclick="pick(this,false,'s3')">B．Fe³⁺&gt;Cl₂&gt;I₂</span><span class="opt" onclick="pick(this,false,'s3')">C．I₂&gt;Fe³⁺&gt;Cl₂</span><span class="opt" onclick="pick(this,false,'s3')">D．Fe³⁺&gt;I₂&gt;Cl₂</span></div><div class="expl" id="e_s3">由第二式得 Cl₂&gt;Fe³⁺，由第一式得 Fe³⁺&gt;I₂，串联得 Cl₂&gt;Fe³⁺&gt;I₂。</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点四 · 方法归纳</div><h2 class="title">配平四步走：标价—守恒—配平—检查</h2><div class="pagebody"><button class="btn" onclick="reveal(['p1','p2','p3','p4'])">展开配平示范 →</button><div class="card blue" style="margin-top:14px;font-size:19px;">示例：Cu + HNO₃(稀) → Cu(NO₃)₂ + NO↑ + H₂O</div><div id="p1" class="reveal card" style="margin-top:12px;font-size:18px;"><b>第 1 步 标价</b>　Cu：0→+2（升 2）；N：+5→+2（降 3）</div><div id="p2" class="reveal card" style="margin-top:10px;font-size:18px;"><b>第 2 步 守恒</b>　最小公倍数 6 → Cu 系数 3，NO 系数 2</div><div id="p3" class="reveal card" style="margin-top:10px;font-size:18px;"><b>第 3 步 配平</b>　3Cu + 8HNO₃ = 3Cu(NO₃)₂ + 2NO↑ + 4H₂O</div><div id="p4" class="reveal card good" style="margin-top:10px;font-size:18px;"><b>第 4 步 检查</b>　原子守恒 ✓；离子方程式还要查<b>电荷守恒</b> ✓</div><div class="card warm" style="margin-top:14px;font-size:16px;">技巧：先定氧化剂、还原剂及其产物的系数，再用观察法配平未变价的元素。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点四 · 真题选择</div><h2 class="title">三道期中真题，练配平与守恒</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:12px;"><div class="quiz"><div class="q">① xFe²⁺+2S₂O₃²⁻+O₂+4OH⁻=M+S₄O₆²⁻+2H₂O，下列说法正确的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'b1')">A．x=5</span><span class="opt" onclick="pick(this,false,'b1')">B．O₂ 是还原剂</span><span class="opt" onclick="pick(this,false,'b1')">C．M 的化学式为 FeO</span><span class="opt" data-key="1" onclick="pick(this,true,'b1')">D．一个 S₂O₃²⁻ 转移电子数为 1</span></div><div class="expl" id="e_b1">电荷守恒 2x−4−4=−2 得 x=3；质量守恒得 M=Fe₃O₄；O₂ 降价是氧化剂；每个 S₂O₃²⁻ 转移 1 e⁻。（宁波北仑中学期中）</div></div><div class="quiz"><div class="q">② 3SnCl₂+12Cl⁻+2H₃AsO₃+6H⁺=2As+3M+6H₂O，M 是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'b2')">A．SnCl₄</span><span class="opt" data-key="1" onclick="pick(this,true,'b2')">B．SnCl₆²⁻</span><span class="opt" onclick="pick(this,false,'b2')">C．SnCl₃⁻</span><span class="opt" onclick="pick(this,false,'b2')">D．SnCl₅⁻</span></div><div class="expl" id="e_b2">As 由 +3→0 得电子，Sn 由 +2→+4 失电子；由电荷守恒（左 −6）得 3M 为 −6，M=SnCl₆²⁻。（辽宁朝阳期中）</div></div><div class="quiz"><div class="q">③ KClO₃+6HCl(浓)=KCl+3Cl₂↑+3H₂O，下列说法正确的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'b3')">A．HCl 只表现还原性</span><span class="opt" onclick="pick(this,false,'b3')">B．每生成 3 个 Cl₂ 转移 6 个电子</span><span class="opt" data-key="1" onclick="pick(this,true,'b3')">C．KClO₃ 中 Cl 由 +5 降到 0，被还原</span><span class="opt" onclick="pick(this,false,'b3')">D．Cl₂ 只是还原产物</span></div><div class="expl" id="e_b3">归中反应：Cl(+5) 与 Cl(−1) 都变为 0；转移 5 e⁻；HCl 既显还原性又显酸性；Cl₂ 既是氧化产物又是还原产物。（深圳福田期中改编）</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点五 · 规律归纳</div><h2 class="title">四大规律，决定反应能否发生</h2><div class="pagebody"><div class="hint" style="margin-bottom:12px;">点击规律卡片查看要点</div><div class="grid2" style="gap:14px;"><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">① 强制弱</div></div><div class="flip-b"><div class="nm">强弱规律</div><div class="bigv">剂 &gt; 产物</div><div class="d">强氧化剂 + 强还原剂 → 弱还原产物 + 弱氧化产物</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">② 归中规律</div></div><div class="flip-b"><div class="nm">归中</div><div class="bigv">高价 + 低价 → 中间价</div><div class="d">同种元素不同价态反应，只靠拢、不交叉</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">③ 歧化规律</div></div><div class="flip-b"><div class="nm">歧化</div><div class="bigv">中间价 → 高 + 低</div><div class="d">中间价态元素自身一边升、一边降，一身兼两剂</div></div></div></div><div class="flip" onclick="flip(this)"><div class="flip-in"><div class="flip-f"><div class="q">④ 先后规律</div></div><div class="flip-b"><div class="nm">先后</div><div class="bigv">强的先反应</div><div class="d">多种还原剂遇同一氧化剂，还原性强的先被氧化</div></div></div></div></div><div class="card warm" style="margin-top:16px;font-size:17px;">典型歧化：<b>Cl₂+H₂O</b>、<b>Cl₂+NaOH</b>；典型归中：<b>KClO₃+HCl</b>、<b>NO₂+NO</b>。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点五 · 综合应用</div><h2 class="title">流程题：按三步拆解情境</h2><div class="pagebody"><div class="card blue" style="font-size:19px;line-height:1.7;">题（广东揭阳期中改编）：“细菌冶金”中氧化亚铁硫杆菌用 O₂ 将黄铁矿 FeS₂ 氧化：<br>4FeS₂ + 15O₂ + 2H₂O = 2Fe₂(SO₄)₃ + 2H₂SO₄</div><div class="hint" style="margin:14px 0;">点按钮，分步展开解题过程</div><button class="btn" onclick="reveal(['q1','q2','q3'])">展开三步 →</button><div id="q1" class="reveal card" style="margin-top:14px;font-size:18px;">第 1 步　标价：FeS₂ 中 Fe 为 <b>+2</b> 价、S 为 <b>−1</b> 价（二硫键）</div><div id="q2" class="reveal card" style="margin-top:10px;font-size:18px;">第 2 步　判剂：Fe、S 化合价都升高被氧化 → FeS₂ 是<b>还原剂</b>；O₂ 由 0→−2 被还原 → <b>氧化剂</b></div><div id="q3" class="reveal card good" style="margin-top:10px;font-size:18px;">第 3 步　算电子：4 个 FeS₂ 失 4×(1+2×7)=<b>60 e⁻</b>，对应 2 个 H₂O，故每消耗 1 个 H₂O 转移 <b>30 e⁻</b></div><div class="card warm" style="margin-top:14px;font-size:16px;">流程题通法：先标价态定剂与产物，再用电子守恒算数目，最后看流程中物质的循环与转化。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">考点五 · 综合选择</div><h2 class="title">三道综合题，当堂检验</h2><div class="pagebody"><div style="display:flex;flex-direction:column;gap:12px;"><div class="quiz"><div class="q">① 稀酸中 Ce⁴⁺/Mn²⁺/Fe²⁺/I⁻ 转化，还原性 I⁻&gt;Fe²⁺&gt;Mn²⁺&gt;Ce³⁺。下列说法错误的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'x1')">A．还原性顺序如上</span><span class="opt" onclick="pick(this,false,'x1')">B．0.2 mol Ce⁴⁺ 与足量 I⁻ 反应生成 0.1 mol I₂</span><span class="opt" onclick="pick(this,false,'x1')">C．可能发生 2Mn³⁺+2I⁻=I₂+2Mn²⁺</span><span class="opt" data-key="1" onclick="pick(this,true,'x1')">D．催化剂是 Mn²⁺、Fe²⁺，中间产物是 Mn³⁺、Fe³⁺</span></div><div class="expl" id="e_x1">Mn²⁺、Fe²⁺ 是反应中循环出现的中间产物（先消耗后生成），而 Mn³⁺、Fe³⁺ 才是催化剂式的循环物——D 把两者说反了，错误。（四川绵阳期中改编）</div></div><div class="quiz"><div class="q">② Cr₂O₇²⁻+6Fe²⁺+14H⁺=2Cr³⁺+6Fe³⁺+7H₂O，每处理 1 个 Cr₂O₇²⁻ 转移电子（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'x2')">A．3 个</span><span class="opt" data-key="1" onclick="pick(this,true,'x2')">B．6 个</span><span class="opt" onclick="pick(this,false,'x2')">C．12 个</span><span class="opt" onclick="pick(this,false,'x2')">D．2 个</span></div><div class="expl" id="e_x2">Cr 由 +6→+3，每个 Cr 得 3 e⁻，1 个 Cr₂O₇²⁻ 含 2 个 Cr，共得 6 e⁻。（广东汕头金山中学期中改编）</div></div><div class="quiz"><div class="q">③ 高铁酸盐 FeO₄²⁻ 用于消毒净水，转化为 Fe(OH)₃ 胶体。下列说法不正确的是（　）</div><div class="opts"><span class="opt" onclick="pick(this,false,'x3')">A．FeO₄²⁻ 中 Fe 为 +6 价</span><span class="opt" onclick="pick(this,false,'x3')">B．其强氧化性可杀菌消毒</span><span class="opt" onclick="pick(this,false,'x3')">C．Fe(OH)₃ 胶体净水利用吸附性</span><span class="opt" data-key="1" onclick="pick(this,true,'x3')">D．FeO₄²⁻→Fe(OH)₃ 时 Fe 化合价不变</span></div><div class="expl" id="e_x3">Fe 由 +6 降到 +3，化合价降低、被还原，正是其氧化性的体现；D 错误。（四川自贡一中期中改编）</div></div></div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section>
+<section class="slide"><div class="topbar"></div><div class="body-pad"><div class="kicker">课堂小结</div><h2 class="title">一个核心，两条守恒，三大能力</h2><div class="pagebody"><div class="card" style="margin-bottom:12px;font-size:20px;padding:14px 20px;"><b style="color:var(--blue);">1 个核心：</b>　化合价升降 ⇄ 电子转移——升失氧、降得还。</div><div class="card" style="margin-bottom:12px;font-size:20px;padding:14px 20px;"><b style="color:var(--blue);">2 条守恒：</b>　得失电子守恒（算数目、配平）、电荷守恒（离子方程式）。</div><div class="card" style="margin-bottom:12px;font-size:20px;padding:14px 20px;"><b style="color:var(--blue);">3 大能力：</b>　判剂与产物、比强弱排序、配平与情境应用。</div><div class="card warm" style="margin-top:14px;font-size:18px;line-height:1.7;">考试提醒：题目再新，第一步都是<b>标价态</b>；涉及离子方程式，最后务必检查<b>原子守恒与电荷守恒</b>。易错点：单质参加≠氧化还原、歧化一身二任、强弱与数目无关。</div></div></div><div class="footer"><span>人教版（2019）必修第一册 · 第一章 第三节 · 高一期中复习</span><span>氧化还原反应</span></div></section></div>
+<div id="nav">
+  <button onclick="go(-1)" title="上一页">◀</button>
+  <span id="pageinfo">1 / 16</span>
+  <button onclick="go(1)" title="下一页">▶</button>
+  <div id="navtip">← → / 空格 翻页 · 点击卡片交互</div>
+</div>
+<script>
+
+const stage = document.getElementById('stage');
+function fit(){
+  const s = Math.min(window.innerWidth/1280, (window.innerHeight-52)/720);
+  stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+}
+window.addEventListener('resize', fit); fit();
+const slides = [...document.querySelectorAll('.slide')];
+let cur = 0;
+function go(d){
+  if(d>0 && cur===slides.length-1) return;
+  if(d<0 && cur===0) return;
+  slides[cur].classList.remove('active');
+  cur += d;
+  slides[cur].classList.add('active');
+  document.getElementById('pageinfo').textContent = (cur+1)+' / '+slides.length;
+}
+document.addEventListener('keydown', e=>{
+  const t = e.target.tagName;
+  if(t==='INPUT' || t==='TEXTAREA' || t==='SELECT') return;
+  if(e.key===' ' && t==='BUTTON') return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { e.preventDefault(); go(1); }
+  if(e.key==='ArrowLeft'||e.key==='PageUp') { e.preventDefault(); go(-1); }
+});
+function show(id){ const e=document.getElementById(id); if(e) e.classList.add('shown'); }
+function reveal(ids){ ids.forEach(show); }
+function flip(el){ el.classList.toggle('open'); }
+function chip(el, ok, reason){
+  if(el.dataset.done) return;
+  el.classList.add(ok?'ok':'no');
+  const s=document.createElement('span'); s.className='rs'; s.textContent=reason;
+  el.appendChild(s); el.dataset.done='1';
+}
+function pick(el, ok, qid){
+  const box = el.closest('.quiz');
+  if(box.dataset.done) return;
+  box.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  el.classList.add(ok?'right':'wrong');
+  if(!ok) box.querySelectorAll('.opt').forEach(o=>{ if(o.dataset.key==='1') o.classList.add('right'); });
+  document.getElementById('e_'+qid).classList.add('show');
+  box.dataset.done='1';
+}
+function checkVal(inputId, fbId, expected, okMsg, badMsg){
+  const v = parseFloat(document.getElementById(inputId).value);
+  const fb = document.getElementById(fbId);
+  if(Math.abs(v-expected) < 1e-6){ fb.className='fb good'; fb.textContent='✓ '+okMsg; }
+  else { fb.className='fb bad'; fb.textContent='✗ '+badMsg; }
+}
+function light(el, cls){
+  el.classList.add('on');
+  if(cls) el.classList.add(cls);
+}
+function lightNext(groupIdx){
+  const g=document.getElementById(groupIdx);
+  const items=g.querySelectorAll('.step-item');
+  for(let i=0;i<items.length;i++){ if(!items[i].classList.contains('on')){ items[i].classList.add('on'); break; } }
+}
+
+
+const NET = [
+ ['化合价升高 → 失电子','<div class="eq">升 · 失 · 氧</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'化合价<b>升高</b> → <b>失去</b>电子 → 被<b>氧化</b>。<br>'
+   +'对应物质是<b style="color:#D9534F;">还原剂</b>，它生成的产物叫<b>氧化产物</b>。<br><br>'
+   +'口诀：升、失、氧——还原剂，产物却是氧化产物。</div>'],
+ ['化合价降低 → 得电子','<div class="eq">降 · 得 · 还</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'化合价<b>降低</b> → <b>得到</b>电子 → 被<b>还原</b>。<br>'
+   +'对应物质是<b style="color:#1E4FA8;">氧化剂</b>，它生成的产物叫<b>还原产物</b>。<br><br>'
+   +'口诀：降、得、还——氧化剂，产物却是还原产物。</div>'],
+ ['两剂 → 两产物','<div class="eq">剂强于产物</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'<b>氧化剂 + 还原剂 → 还原产物 + 氧化产物</b><br>'
+   +'氧化性：氧化剂 &gt; 氧化产物<br>还原性：还原剂 &gt; 还原产物<br><br>'
+   +'“剂”更强，“产物”更弱——这是比较强弱的总依据。</div>'],
+ ['记忆口诀','<div class="eq">升失氧，降得还</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'升失氧、降得还；若说剂，正相反；说产物，与“剂”反。<br><br>'
+   +'做题顺序：<b>标价态 → 定升降 → 判剂与产物 → 算电子</b>。</div>']
+];
+function net(i){
+  document.querySelectorAll('.fbox').forEach((e,j)=>e.classList.toggle('on', j===i));
+  document.getElementById('netDetail').innerHTML = NET[i][0] ? NET[i][1] : NET[i][1];
+}
+const STR = [
+ ['强制弱规律','<div class="eq">剂 &gt; 产物</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'氧化性：<b>氧化剂 &gt; 氧化产物</b>；还原性：<b>还原剂 &gt; 还原产物</b>。<br>'
+   +'一个自发进行的氧化还原反应，一定是“强”生成“弱”。</div>'],
+ ['两剂两产物','<div class="eq">谁强谁当事</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'氧化剂被还原得还原产物，还原剂被氧化得氧化产物。<br>'
+   +'判断时先找出“两剂”“两产物”，再分别比较氧化性或还原性。</div>'],
+ ['多反应排序法','<div class="eq">找共同物质串联</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'每个反应先写“氧化性：剂 &gt; 产物”，得到若干不等式；<br>'
+   +'利用在多个反应中出现的<b>共同物质</b>作桥梁，串联成完整顺序。<br>'
+   +'例：由 Fe³⁺&gt;I₂ 与 H₂O₂&gt;Fe³⁺，得 H₂O₂&gt;Fe³⁺&gt;I₂。</div>'],
+ ['判断口诀','<div class="eq">比什么，找什么</div><div class="small" style="margin-top:12px;line-height:1.95;">'
+   +'比氧化性，就找氧化剂；比还原性，就找还原剂。<br>'
+   +'“剂”的性强于对应“产物”。<br><br>'
+   +'警惕：强弱取决于<b>得失电子难易</b>，与数目、价态高低无必然关系。</div>']
+];
+function str(i){
+  document.querySelectorAll('.fbox').forEach((e,j)=>e.classList.toggle('on', j===i));
+  document.getElementById('strDetail').innerHTML = STR[i][1];
+}
+
+</script>
+</body>
+</html>
