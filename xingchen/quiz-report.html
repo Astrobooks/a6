@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>答题汇总 · 化学练习3 · 星辰班级</title>
+<link rel="stylesheet" href="assets/css/style.css?v=20261101" />
+<style>
+  .rp-wrap { max-width: 1100px; margin: 0 auto; }
+  .rp-panel {
+    padding: 24px 26px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .rp-panel h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .rp-panel h2 em {
+    font-style: normal; font-size: 11.5px; font-weight: 400;
+    padding: 2px 9px; border-radius: 999px;
+    color: var(--ink-faint);
+    border: 1px solid var(--border);
+  }
+  .rp-hint { margin: 0 0 14px; font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
+  #codesInput {
+    width: 100%; min-height: 140px;
+    padding: 13px 15px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 12.5px; line-height: 1.7;
+    color: var(--ink);
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    resize: vertical;
+  }
+  .rp-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .rp-btn {
+    padding: 9px 18px;
+    font-size: 13.5px; font-family: inherit; letter-spacing: 1px;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    cursor: pointer;
+  }
+  .rp-btn:hover { background: rgba(255, 255, 255, 0.16); }
+  .rp-btn.primary {
+    color: #fff; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+  }
+  .rp-msg { margin-top: 12px; font-size: 13px; min-height: 18px; color: var(--ink-faint); }
+  .rp-msg.err { color: #f87171; }
+
+  .rp-cards { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 6px; }
+  .rp-kpi {
+    flex: 1 1 150px;
+    padding: 16px 18px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid var(--border);
+  }
+  .rp-kpi b { display: block; font-size: 24px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .rp-kpi span { font-size: 12.5px; color: var(--ink-faint); }
+
+  table.rp-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  table.rp-tbl th, table.rp-tbl td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+  }
+  table.rp-tbl th {
+    font-size: 12.5px; font-weight: 600;
+    color: var(--ink-faint);
+    background: rgba(255, 255, 255, 0.05);
+    position: sticky; top: 0;
+  }
+  table.rp-tbl td.num { text-align: center; font-variant-numeric: tabular-nums; }
+  .rp-scroll { max-height: 520px; overflow: auto; border-radius: 12px; }
+
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 13px; }
+  .bar-lbl { flex: 0 0 108px; color: var(--ink-soft); line-height: 1.5; }
+  .bar-track {
+    flex: 1; height: 9px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .bar-fill {
+    display: block;
+    height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, #34d399, #10b981);
+  }
+  .bar-fill.low { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+  .bar-fill.bad { background: linear-gradient(90deg, #f87171, #ef4444); }
+  .bar-val { flex: 0 0 96px; text-align: right; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .tag-ok { color: #34d399; }
+  .tag-no { color: #f87171; }
+  .tag-none { color: var(--ink-faint); }
+  .rp-empty { padding: 28px 0; text-align: center; color: var(--ink-faint); font-size: 13.5px; }
+</style>
+</head>
+<body data-theme="chem">
+  <header class="top-bar">
+    <a class="back-link" href="chemistry.html">← 返回化学小屋</a>
+    <span class="top-title">答题汇总</span>
+    <span class="top-title" style="opacity:.35; font-weight:400;">高一化学练习3</span>
+  </header>
+
+  <main class="page-shell">
+    <div class="rp-wrap">
+
+      <div class="rp-panel">
+        <h2>粘贴成绩码 <em>STUDENT CODES</em></h2>
+        <p class="rp-hint">
+          把学生发来的成绩码整段粘贴到下面（可以一次粘贴很多条，中间有文字、换行、空格都没关系），
+          点「解析统计」即可看到全班每题情况。<br />
+          本页不联网、不上传任何数据，统计只在你自己的浏览器里完成。
+        </p>
+        <textarea id="codesInput" placeholder="粘贴形如 XC3-eyJ2IjoxLCJxIjoiY2hlbTMi... 的成绩码，可多行混排"></textarea>
+        <div class="rp-acts">
+          <button class="rp-btn primary" id="btnParse" type="button">解析统计</button>
+          <button class="rp-btn" id="btnSample" type="button">看格式示例</button>
+          <button class="rp-btn" id="btnClear" type="button">清空</button>
+          <button class="rp-btn" id="btnCsv" type="button">导出 CSV（Excel）</button>
+        </div>
+        <div class="rp-msg" id="msg"></div>
+      </div>
+
+      <div class="rp-panel" id="overviewPanel" style="display:none;">
+        <h2>班级概览 <em>OVERVIEW</em></h2>
+        <div class="rp-cards" id="kpis"></div>
+      </div>
+
+      <div class="rp-panel" id="qPanel" style="display:none;">
+        <h2>每题正确率 <em>PER QUESTION</em></h2>
+        <div id="qStats"></div>
+      </div>
+
+      <div class="rp-panel" id="sPanel" style="display:none;">
+        <h2>学生明细 <em>STUDENTS</em></h2>
+        <div class="rp-scroll"><table class="rp-tbl" id="sTable"></table></div>
+      </div>
+
+      <div class="rp-panel" id="emptyPanel">
+        <div class="rp-empty">还没有数据 —— 先粘贴学生发来的成绩码，再点「解析统计」。</div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var PREFIX = "XC3-";
+    var quiz = null;       // chem3.json
+    var units = [];        // 与答题端完全一致的判分单元顺序
+    var students = [];     // 解析结果
+    var loaded = false;
+
+    function $(id) { return document.getElementById(id); }
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    /* ---------- 载入试卷，构造判分单元 ---------- */
+    function loadQuiz() {
+      if (loaded) return Promise.resolve();
+      return fetch("assets/papers/chem3.json?v=20261120d")
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          quiz = d;
+          units = [];
+          d.sections.forEach(function (s) {
+            (s.questions || []).forEach(function (q) {
+              if (q.type === "choice") {
+                units.push({ kind: "choice", num: q.num, answer: q.answer, q: q });
+              } else {
+                (q.parts || []).forEach(function (p) {
+                  (p.blanks || []).forEach(function (b) {
+                    if (!b.manual && b.accept && b.accept.length) {
+                      units.push({ kind: "blank", num: q.num, id: b.id, accept: b.accept, ph: b.ph });
+                    }
+                  });
+                });
+              }
+            });
+          });
+          loaded = true;
+        });
+    }
+
+    /* ---------- 解码 ---------- */
+    function decode(code) {
+      var body = code.slice(PREFIX.length).replace(/-/g, "+").replace(/_/g, "/");
+      while (body.length % 4) body += "=";
+      var bin = atob(body);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+    }
+
+    function parseAll(text) {
+      var re = new RegExp(PREFIX + "[A-Za-z0-9_\\-]+", "g");
+      var found = text.match(re) || [];
+      var out = [], bad = 0;
+      found.forEach(function (code) {
+        try {
+          var o = decode(code);
+          if (o && o.v === 1 && typeof o.c === "string") out.push(o);
+          else bad++;
+        } catch (e) { bad++; }
+      });
+      // 同一学生重复提交，保留最后一次
+      var map = {};
+      out.forEach(function (o) {
+        var key = (o.s || "") + "|" + (o.n || "");
+        if (!map[key] || (o.t || 0) >= (map[key].t || 0)) map[key] = o;
+      });
+      return { list: Object.keys(map).map(function (k) { return map[k]; }), bad: bad, dup: out.length - Object.keys(map).length };
+    }
+
+    /* ---------- 逐单元判定 ---------- */
+    function scoreOf(stu) {
+      var marks = units.map(function (u, i) {
+        if (u.kind === "choice") {
+          var c = stu.c.charAt(i) || ".";
+          if (c === ".") return null;
+          return c.toUpperCase() === String(u.answer).toUpperCase();
+        }
+        var b = stu.b.charAt(i - choiceCount()) || ".";
+        if (b === ".") return null;
+        return b === "1";
+      });
+      var right = marks.filter(function (m) { return m === true; }).length;
+      var answered = marks.filter(function (m) { return m !== null; }).length;
+      return { marks: marks, right: right, answered: answered, total: units.length };
+    }
+
+    function choiceCount() {
+      return units.filter(function (u) { return u.kind === "choice"; }).length;
+    }
+
+    /* ---------- 渲染 ---------- */
+    function render(list, bad, dup) {
+      students = list;
+      if (!list.length) {
+        $("overviewPanel").style.display = "none";
+        $("qPanel").style.display = "none";
+        $("sPanel").style.display = "none";
+        $("emptyPanel").style.display = "";
+        $("emptyPanel").querySelector(".rp-empty").textContent =
+          bad ? "识别到 " + bad + " 段无法解析的内容，请确认粘贴的是完整成绩码。" : "没有识别到成绩码。";
+        return;
+      }
+      $("emptyPanel").style.display = "none";
+
+      var rows = list.map(function (s) {
+        var sc = scoreOf(s);
+        return { s: s, sc: sc, pct: sc.total ? sc.right / sc.total : 0 };
+      });
+      rows.sort(function (a, b) { return b.sc.right - a.sc.right || (a.s.n > b.s.n ? 1 : -1); });
+
+      // KPI
+      var n = rows.length;
+      var avg = rows.reduce(function (a, r) { return a + r.sc.right; }, 0) / n;
+      var pass = rows.filter(function (r) { return r.pct >= 0.6; }).length;
+      var full = units.length;
+      $("kpis").innerHTML =
+        kpi(n, "参与人数") +
+        kpi(avg.toFixed(1) + "<span style='font-size:14px;color:var(--ink-faint)'> / " + full + "</span>", "平均得分") +
+        kpi(Math.round(pass / n * 100) + "%", "及格率（60%）") +
+        kpi(rows.filter(function (r) { return r.pct >= 0.9; }).length, "优秀人数（90%）") +
+        kpi(rows.filter(function (r) { return r.sc.answered < full; }).length, "有未答判分点");
+      $("overviewPanel").style.display = "";
+
+      renderQStats(rows);
+      renderStudents(rows, dup);
+      $("qPanel").style.display = "";
+      $("sPanel").style.display = "";
+    }
+
+    function kpi(v, t) {
+      return '<div class="rp-kpi"><b>' + v + "</b><span>" + t + "</span></div>";
+    }
+
+    function renderQStats(rows) {
+      var html = "";
+      // 选择题
+      html += '<div style="font-size:13px;letter-spacing:1px;color:var(--ink-faint);margin:4px 0 10px;">一、单选题</div>';
+      units.forEach(function (u, i) {
+        if (u.kind !== "choice") return;
+        var ok = 0, ans = 0, dist = { A: 0, B: 0, C: 0, D: 0 }, blankN = 0;
+        rows.forEach(function (r) {
+          var c = r.s.c.charAt(i) || ".";
+          if (c === ".") { blankN++; return; }
+          ans++;
+          dist[c.toUpperCase()] = (dist[c.toUpperCase()] || 0) + 1;
+          if (c.toUpperCase() === String(u.answer).toUpperCase()) ok++;
+        });
+        var pct = ans ? Math.round(ok / ans * 100) : 0;
+        html += bar("第 " + u.num + " 题",
+          pct, ok + "/" + ans + " 人" + (blankN ? "，未答 " + blankN : "") +
+          "　答案 " + u.answer + "　选项分布 A" + dist.A + " B" + dist.B + " C" + dist.C + " D" + dist.D);
+      });
+
+      // 填空题
+      html += '<div style="font-size:13px;letter-spacing:1px;color:var(--ink-faint);margin:20px 0 10px;">二、填空题（自动判分的空）</div>';
+      var ci = 0;
+      units.forEach(function (u) {
+        if (u.kind === "choice") { ci++; return; }
+        var idx = units.indexOf(u) - choiceCount();
+        var ok = 0, ans = 0, blankN = 0;
+        rows.forEach(function (r) {
+          var b = r.s.b.charAt(idx) || ".";
+          if (b === ".") { blankN++; return; }
+          ans++;
+          if (b === "1") ok++;
+        });
+        var pct = ans ? Math.round(ok / ans * 100) : 0;
+        html += bar(u.num + " 题 · " + (u.ph || u.id), pct,
+          ok + "/" + ans + " 人" + (blankN ? "，未填 " + blankN : ""),
+          "　参考答案 " + esc(u.accept[0]));
+      });
+
+      // 错题排行
+      var wrongs = [];
+      units.forEach(function (u, i) {
+        var ok = 0, ans = 0;
+        rows.forEach(function (r) {
+          var m = r.sc.marks[i];
+          if (m === null) return;
+          ans++;
+          if (m) ok++;
+        });
+        if (ans) wrongs.push({ label: u.kind === "choice" ? "第 " + u.num + " 题" : u.num + " 题·" + (u.ph || u.id), rate: ok / ans, ans: ans });
+      });
+      wrongs.sort(function (a, b) { return a.rate - b.rate; });
+      html += '<div style="font-size:13px;letter-spacing:1px;color:var(--ink-faint);margin:22px 0 10px;">正确率最低的 6 个判分点（建议重点讲评）</div>';
+      wrongs.slice(0, 6).forEach(function (w) {
+        html += '<div class="bar-row"><span class="bar-lbl">' + esc(w.label.replace("题·", "题 ")) +
+          '</span><span class="bar-track"><span class="bar-fill bad" style="width:' +
+          Math.round(w.rate * 100) + '%"></span></span><span class="bar-val">' +
+          Math.round(w.rate * 100) + "%（" + w.ans + "人）</span></div>";
+      });
+      $("qStats").innerHTML = html;
+    }
+
+    function bar(label, pct, right, extra) {
+      var cls = pct >= 80 ? "" : pct >= 50 ? "low" : "bad";
+      return '<div class="bar-row"><span class="bar-lbl">' + esc(label) + "</span>" +
+        '<span class="bar-track"><span class="bar-fill ' + cls + '" style="width:' + pct + '%"></span></span>' +
+        '<span class="bar-val">' + pct + "%</span></div>" +
+        '<div style="font-size:12px;color:var(--ink-faint);margin:-2px 0 10px 118px;">' +
+        esc(right) + (extra || "") + "</div>";
+    }
+
+    function renderStudents(rows, dup) {
+      var cols = units.map(function (u, i) {
+        return '<th class="num">' + (u.kind === "choice" ? u.num : u.id) + "</th>";
+      }).join("");
+      var head = '<thead><tr><th>姓名</th><th>学号</th><th class="num">得分</th>' +
+        '<th class="num">正确率</th><th>交卷时间</th>' + cols + "</tr></thead>";
+      var body = rows.map(function (r) {
+        var tds = r.sc.marks.map(function (m) {
+          return '<td class="num ' + (m === null ? "tag-none" : m ? "tag-ok" : "tag-no") + '">' +
+            (m === null ? "–" : m ? "1" : "0") + "</td>";
+        }).join("");
+        return "<tr><td>" + esc(r.s.n || "—") + "</td><td>" + esc(r.s.s || "—") +
+          '</td><td class="num"><b>' + r.sc.right + "</b>/" + r.sc.total + "</td>" +
+          '<td class="num">' + Math.round(r.pct * 100) + "%</td>" +
+          "<td>" + (r.s.t ? new Date(r.s.t * 1000).toLocaleString("zh-CN", { hour12: false }) : "—") + "</td>" +
+          tds + "</tr>";
+      }).join("");
+      $("sTable").innerHTML = head + "<tbody>" + body + "</tbody>";
+      if (dup) {
+        $("msg").textContent = "已合并 " + dup + " 条重复提交（同一学生取最后一次）。";
+      }
+    }
+
+    /* ---------- 导出 ---------- */
+    function exportCsv() {
+      if (!students.length) { setMsg("还没有数据可导出。", true); return; }
+      var rows = students.map(function (s) { return { s: s, sc: scoreOf(s) }; });
+      rows.sort(function (a, b) { return (a.s.s || "").localeCompare(b.s.s || ""); });
+      var head = ["姓名", "学号", "得分", "总判分点", "正确率", "交卷时间"];
+      units.forEach(function (u, i) {
+        head.push(u.kind === "choice" ? "第" + u.num + "题" : u.id);
+      });
+      var lines = [head.join(",")];
+      rows.forEach(function (r) {
+        var line = [r.s.n || "", r.s.s || "", r.sc.right, r.sc.total,
+          Math.round(r.sc.right / r.sc.total * 100) + "%",
+          r.s.t ? new Date(r.s.t * 1000).toLocaleString("zh-CN", { hour12: false }) : ""];
+        r.sc.marks.forEach(function (m) { line.push(m === null ? "" : m ? 1 : 0); });
+        lines.push(line.map(function (v) {
+          var s = String(v);
+          return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+        }).join(","));
+      });
+      var blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "化学练习3-答题明细-" + new Date().toISOString().slice(0, 10) + ".csv";
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000);
+    }
+
+    function setMsg(t, err) {
+      var m = $("msg");
+      m.textContent = t || "";
+      m.className = "rp-msg" + (err ? " err" : "");
+    }
+
+    /* ---------- 事件 ---------- */
+    $("btnParse").addEventListener("click", function () {
+      var text = $("codesInput").value;
+      if (!text.trim()) { setMsg("请先把成绩码粘贴到上面的框里。", true); return; }
+      setMsg("正在解析…");
+      loadQuiz().then(function () {
+        var r = parseAll(text);
+        render(r.list, r.bad, r.dup);
+        setMsg("识别到 " + r.list.length + " 名学生" +
+          (r.bad ? "，" + r.bad + " 段内容无法识别（可能没复制完整）" : "") + "。", r.bad > 0);
+      }).catch(function (e) {
+        setMsg("试卷数据加载失败：" + e.message, true);
+      });
+    });
+
+    $("btnClear").addEventListener("click", function () {
+      $("codesInput").value = "";
+      $("overviewPanel").style.display = "none";
+      $("qPanel").style.display = "none";
+      $("sPanel").style.display = "none";
+      $("emptyPanel").style.display = "";
+      setMsg("");
+    });
+
+    $("btnCsv").addEventListener("click", exportCsv);
+
+    $("btnSample").addEventListener("click", function () {
+      setMsg("成绩码长这样：XC3-eyJ2IjoxLCJxIjoiY2hlbTMiLCJuIjoi5byg5LiJIiwi... 一条一行，直接整段粘贴即可。");
+    });
+  })();
+  </script>
+</body>
+</html>

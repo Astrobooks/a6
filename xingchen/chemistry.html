@@ -7,6 +7,7 @@
 <title>化学小屋 · 星辰班级</title>
 <link rel="stylesheet" href="assets/css/style.css?v=20261101" />
 <link rel="stylesheet" href="assets/css/quiz.css?v=20261118" />
+<link rel="stylesheet" href="assets/css/quiz-exam.css?v=20261120e" />
 </head>
 <body data-theme="chem">
   <div class="bg-layer"></div>
@@ -86,8 +87,29 @@
         <p style="margin:0 0 6px;">
           点开作业即可作答 —— 选择答案后提交，立刻看到对错；填空题为参考答案对照模式，做完自查。
         </p>
+        <p style="margin:8px 0 0;font-size:13px;line-height:1.9;color:var(--ink-soft);">
+          老师汇总：把学生发来的成绩码整段粘贴到
+          <a href="quiz-report.html" style="color:var(--accent-2);">答题汇总报表</a>
+          ，即可看全班每题正确率与个人明细，可导出 Excel。
+        </p>
 
         <div class="quiz-entry" id="quiz-entry">
+          <div class="quiz-card" data-exam="chem3">
+            <div class="qc-ico">🧪</div>
+            <h3>高一化学练习3 · 在线答题</h3>
+            <p style="margin:0;font-size:13.5px;line-height:1.95;color:var(--ink-soft);">
+              14 道单选 ＋ 4 道填空（拆成 21 个判分小空）。交卷后只显示每题对错，不给答案；
+              交卷会生成成绩码，复制发给老师即可汇总。
+            </p>
+            <div class="qc-meta">
+              <span>18 题</span>
+              <span>35 个判分点</span>
+              <span>不显示答案</span>
+              <span>需登录姓名学号</span>
+            </div>
+            <div class="qc-go">开始答题 →</div>
+          </div>
+
           <div class="quiz-card" data-quiz="chem1020">
             <div class="qc-ico">📝</div>
             <h3>2026年10月31日 化学作业</h3>
@@ -103,6 +125,7 @@
           </div>
         </div>
 
+        <div class="quiz" id="exam-chem3" style="margin-top:22px;"></div>
         <div class="quiz" id="quiz-chem1020" style="margin-top:22px;"></div>
       </div>
     </section>
@@ -248,6 +271,7 @@
 
   <script src="assets/js/main.js?v=20261101"></script>
   <script src="assets/js/quiz.js?v=20261118"></script>
+  <script src="assets/js/quiz-exam.js?v=20261120e"></script>
   <script>
     (function () {
       var specs = {
@@ -290,6 +314,103 @@
                 '<div class="d">请稍后重试，或确认网络连接正常。</div></div>';
             });
         });
+      });
+    })();
+  </script>
+
+  <!-- 考试模式：化学练习3（登录姓名学号 → 答题 → 交卷只出对错 → 生成成绩码） -->
+  <script>
+    (function () {
+      var KEY = "xc_exam_student";
+      var card = document.querySelector('[data-exam="chem3"]');
+      var mount = document.getElementById("exam-chem3");
+      if (!card || !mount) return;
+      var inst = null;
+
+      function getId() {
+        try { return JSON.parse(localStorage.getItem(KEY) || "null") || {}; }
+        catch (e) { return {}; }
+      }
+      function saveId(o) {
+        try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+      }
+
+      function gateHtml(who) {
+        return '' +
+          '<div class="xq-gate">' +
+          '<h3>先确认身份</h3>' +
+          '<p>本次答题按姓名与学号记录，交卷后的成绩码里会带上它们。填一次即可，本机会记住。</p>' +
+          '<label class="xq-gline"><span>姓名</span>' +
+          '<input id="xq-n" type="text" autocomplete="off" placeholder="请输入本人姓名" value="' +
+          (who.name ? who.name.replace(/"/g, "&quot;") : "") + '"/></label>' +
+          '<label class="xq-gline"><span>学号</span>' +
+          '<input id="xq-s" type="text" autocomplete="off" inputmode="numeric" placeholder="完整学号" value="' +
+          (who.sid ? who.sid.replace(/"/g, "&quot;") : "") + '"/></label>' +
+          '<div class="xq-gacts">' +
+          '<button class="xq-btn primary" id="xq-go" type="button">开始答题</button>' +
+          '<button class="xq-btn" id="xq-back" type="button">返回</button>' +
+          '</div>' +
+          '<p class="xq-gmsg" id="xq-gmsg"></p>' +
+          '</div>';
+      }
+
+      function gate() {
+        card.style.display = "none";
+        mount.classList.add("on");
+        mount.innerHTML = gateHtml(getId());
+        mount.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        var gn = document.getElementById("xq-n");
+        var gs = document.getElementById("xq-s");
+        var gm = document.getElementById("xq-gmsg");
+
+        document.getElementById("xq-back").addEventListener("click", function () {
+          mount.classList.remove("on");
+          mount.innerHTML = "";
+          card.style.display = "";
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        document.getElementById("xq-go").addEventListener("click", function () {
+          var name = (gn.value || "").trim();
+          var sid = (gs.value || "").trim();
+          if (!name) { gm.textContent = "请填写姓名"; gn.focus(); return; }
+          if (sid.length < 4) { gm.textContent = "请填写完整学号"; gs.focus(); return; }
+          saveId({ name: name, sid: sid });
+          start({ name: name, sid: sid });
+        });
+        gn.focus();
+      }
+
+      function start(who) {
+        mount.innerHTML = '<div class="xq-loading">正在加载试卷…</div>';
+        fetch("assets/papers/chem3.json?v=20261120d")
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            mount.innerHTML = "";
+            inst = new window.ExamEngine.ExamQuiz(mount, data, {
+              id: "chem3",
+              title: "高一化学练习3",
+              dir: "assets/papers/chem3/",
+              student: who
+            });
+            mount.scrollIntoView({ behavior: "smooth", block: "start" });
+          })
+          .catch(function () {
+            mount.innerHTML =
+              '<div class="placeholder"><div class="ico">😢</div>' +
+              '<div class="t">试卷加载失败</div>' +
+              '<div class="d">请检查网络后刷新页面重试。</div></div>';
+          });
+      }
+
+      card.addEventListener("click", function () {
+        if (inst) {
+          mount.classList.toggle("on");
+          card.style.display = mount.classList.contains("on") ? "none" : "";
+          return;
+        }
+        gate();
       });
     })();
   </script>
