@@ -219,6 +219,29 @@ body[data-theme="phy"] .bg-veil {
   background: radial-gradient(65% 50% at 50% 4%, rgba(56, 189, 248, 0.16), transparent 72%);
 }
 
+/* 教师入口 —— 中性石墨 / 工具感 */
+body[data-theme="teacher"] {
+  --bg-base: #0f1420;
+  --ink: #eef2f8;
+  --ink-soft: rgba(238, 242, 248, 0.78);
+  --ink-faint: rgba(238, 242, 248, 0.52);
+  --surface: rgba(30, 41, 59, 0.62);
+  --surface-strong: rgba(24, 33, 48, 0.88);
+  --border: rgba(165, 180, 252, 0.22);
+  --accent: #a5b4fc;
+  --accent-2: #7dd3fc;
+}
+body[data-theme="teacher"] .bg-layer {
+  background:
+    radial-gradient(78% 60% at 12% 8%, #1e293b 0%, transparent 58%),
+    radial-gradient(78% 60% at 88% 20%, #312e5f 0%, transparent 56%),
+    radial-gradient(120% 95% at 50% 112%, #0b1020 0%, transparent 62%),
+    linear-gradient(165deg, #16203a 0%, #0f1420 55%, #070a12 100%);
+}
+body[data-theme="teacher"] .bg-veil {
+  background: radial-gradient(65% 50% at 50% 4%, rgba(165, 180, 252, 0.16), transparent 72%);
+}
+
 /* 化学：分子轨道纹理 */
 body[data-theme="chem"] .bg-pattern {
   background-image:

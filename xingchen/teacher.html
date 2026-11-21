@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js?v=20261120"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>教师入口 · 星辰班级</title>
+<link rel="stylesheet" href="assets/css/style.css?v=20261120g" />
+</head>
+<body data-theme="teacher">
+  <div class="bg-layer"></div>
+  <div class="bg-veil"></div>
+
+  <header class="top-bar">
+    <a class="back-link" href="index.html">← 返回首页导航</a>
+    <span class="top-title">教师入口</span>
+    <span class="top-title" style="opacity:.35; font-weight:400;">星辰班级</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-hero">
+      <div class="hero-emoji">🛠️</div>
+      <h1>教师<em>入口</em></h1>
+      <p>
+        这里只放老师用的工具：成绩汇总、网站维护说明。学生日常不需要看这一页。
+      </p>
+      <div class="hero-rule"></div>
+    </section>
+
+    <section class="panel reveal" id="tools">
+      <div class="panel-head">
+        <span class="panel-dot"></span>
+        <h2>成绩与报表</h2>
+        <span class="sub">REPORTS</span>
+      </div>
+      <div class="panel-body">
+        <div class="act-grid">
+          <a class="act-card" href="quiz-report.html">
+            <div class="ai">📊</div>
+            <h3>答题汇总报表 · 化学练习3</h3>
+            <p>把学生发来的成绩码整段粘贴进去，即可统计全班每题正确率、错题排行与逐人明细，可导出 Excel。</p>
+          </a>
+          <a class="act-card" href="chem3-card.html">
+            <div class="ai">🗂️</div>
+            <h3>答题卡补录 · 化学练习3</h3>
+            <p>学生交完卷却忘了发成绩码时，让本人凭印象重填答题卡，重新生成一份成绩码。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel reveal" id="docs">
+      <div class="panel-head">
+        <span class="panel-dot"></span>
+        <h2>网站维护</h2>
+        <span class="sub">MAINTENANCE</span>
+      </div>
+      <div class="panel-body">
+        <div class="act-grid">
+          <a class="act-card" href="使用说明.html">
+            <div class="ai">📖</div>
+            <h3>使用说明 · 怎么加照片 / 视频 / 活动</h3>
+            <p>修改页面的具体步骤：素材放哪个文件夹、文件名怎么起、HTML 片段粘在哪里、常见问题排查。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel reveal" id="note">
+      <div class="panel-head">
+        <span class="panel-dot"></span>
+        <h2>说明</h2>
+        <span class="sub">NOTE</span>
+      </div>
+      <div class="panel-body">
+        <p style="margin:0;font-size:13.5px;line-height:2;color:var(--ink-soft);">
+          本站是纯静态网站，登录校验只能挡住随手点开，<b>不能当作真正的权限控制</b>。
+          请不要在这里放身份证号、成绩单原件之类的敏感资料。
+          成绩汇总依赖学生把成绩码发给老师，没有自动回传。
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
