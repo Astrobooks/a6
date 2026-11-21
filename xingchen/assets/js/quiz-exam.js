@@ -467,7 +467,8 @@
       "</div>" +
       '<div class="xq-code">' +
       "<h4>成绩码（发给老师）</h4>" +
-      '<p class="xq-code-tip">复制下面这段码，通过微信／QQ 发给老师。老师汇总后即可看到全班每题情况。</p>' +
+      '<p class="xq-code-tip">复制下面这段码，通过微信／QQ 发给老师。老师汇总后即可看到全班每题情况。' +
+      "忘记发也没关系——下次用同一台设备打开本页，还能找回这段码。</p>" +
       '<textarea class="xq-code-box" id="' + this.id + '-code" readonly>' + esc(code) + "</textarea>" +
       '<div class="xq-code-acts">' +
       '<button class="xq-btn primary" data-act="copy" type="button">复制成绩码</button>' +
