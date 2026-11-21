@@ -14,7 +14,7 @@ a6/
 │
 ├── xingchen/                 ← 星辰班级主站（学生 + 老师，需登录，2300+ 文件）
 │   ├── index.html              首页：班级风采 / 化学小屋 / 数学加油站 / 英语角 / 物理之家
-│   ├── teacher.html            教师工具：答题汇总、答题卡补录、维护说明
+│   ├── teacher.html            教师工具：答题汇总报表、维护说明
 │   ├── class.html              班级风采（照片、接力视频、远足 MV）
 │   ├── chemistry.html          化学小屋
 │   ├── math.html               数学加油站
@@ -22,7 +22,7 @@ a6/
 │   ├── physics.html            物理之家
 │   ├── chemistry-mol.html       物质的量课时索引（7 个课件）
 │   ├── chemistry-*.html        化学交互课件（氯 / 钠 / 氧化还原 / 物质的量 / 期末复习）
-│   ├── chem3-card.html         化学练习3 答题卡补录（凭印象重填 → 找回成绩码）
+│   ├── chem3-card.html         学生用：练习3 答题卡补录（凭印象重填 → 找回成绩码）
 │   ├── quiz-report.html        成绩汇总报表（从 teacher.html 进入）
 │   ├── login.html              登录页
 │   ├── 使用说明.html            网站维护教程（从 teacher.html 进入）
