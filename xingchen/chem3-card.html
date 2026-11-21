@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script src="assets/js/auth.js?v=20261120"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>化学练习3 · 答题卡补录 · 星辰班级</title>
+<link rel="stylesheet" href="assets/css/style.css?v=20261101" />
+<link rel="stylesheet" href="assets/css/quiz-exam.css?v=20261120f" />
+<style>
+  .cd-wrap { max-width: 940px; margin: 0 auto; }
+  .cd-intro {
+    margin: 0 0 18px; padding: 16px 18px; border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+    font-size: 13.5px; line-height: 1.95; color: var(--ink-soft);
+  }
+  .cd-intro b { color: var(--ink); }
+  .cd-bar {
+    position: sticky; top: 62px; z-index: 28;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; margin-bottom: 16px; border-radius: 16px;
+    background: var(--surface-strong); border: 1px solid var(--border);
+    backdrop-filter: blur(14px); box-shadow: var(--shadow);
+  }
+  .cd-bar-t { font-weight: 700; letter-spacing: 1px; color: var(--ink); }
+  .cd-bar-p {
+    font-size: 12.5px; padding: 3px 10px; border-radius: 999px;
+    color: var(--accent-2); background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border); font-variant-numeric: tabular-nums;
+  }
+  .cd-bar-s { flex: 1; }
+  .cd-who { font-size: 12.5px; color: var(--ink-faint); }
+  .cd-who a { color: var(--accent-2); text-decoration: none; margin-left: 6px; }
+
+  .cd-sec {
+    margin: 24px 0 12px; padding-left: 12px; font-size: 15px; font-weight: 700;
+    letter-spacing: 1.5px; color: var(--ink); border-left: 3px solid var(--accent);
+  }
+  .cd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cd-grid.one { grid-template-columns: 1fr; }
+  @media (max-width: 660px) { .cd-grid { grid-template-columns: 1fr; } }
+
+  .cd-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+  }
+  .cd-item.done { border-color: rgba(52, 211, 153, 0.5); }
+  .cd-no {
+    flex: 0 0 52px; font-size: 13.5px; font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-opts { display: flex; gap: 6px; }
+  .cd-o {
+    width: 34px; height: 34px; display: grid; place-items: center;
+    font-size: 14px; color: var(--ink); cursor: pointer; user-select: none;
+    background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
+    border-radius: 9px; transition: all 0.15s ease;
+  }
+  .cd-o:hover { background: rgba(255, 255, 255, 0.14); }
+  .cd-o.sel {
+    color: #fff; font-weight: 700; border-color: transparent;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  .cd-in {
+    flex: 1; min-width: 0; padding: 9px 12px;
+    font-size: 14px; font-family: inherit; color: var(--ink);
+    background: rgba(0, 0, 0, 0.22); border: 1px solid var(--border);
+    border-radius: 10px; outline: none;
+  }
+  .cd-in:focus { border-color: var(--accent-2); }
+  .cd-in::placeholder { color: var(--ink-faint); font-size: 13px; }
+
+  .cd-res { margin-top: 22px; }
+  .cd-tip { margin: 10px 0 0; font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
+  .cd-acts { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .cd-acts .xq-btn, .cd-acts a.xq-btn { text-decoration: none; display: inline-block; }
+  .cd-loading { padding: 40px 0; text-align: center; color: var(--ink-soft); font-size: 14px; }
+
+  @media (max-width: 560px) {
+    .cd-bar { top: 56px; padding: 10px 12px; gap: 8px; flex-wrap: wrap; }
+    .cd-bar-t { font-size: 13px; letter-spacing: 0; }
+    .cd-who { display: none; }
+    .cd-bar .xq-btn { padding: 8px 14px; font-size: 13px; }
+    .cd-intro { padding: 13px 14px; font-size: 13px; }
+    .cd-no { flex: 0 0 46px; font-size: 13px; }
+    .cd-o { width: 32px; height: 32px; }
+  }
+</style>
+</head>
+<body data-theme="chem">
+  <div class="bg-layer"></div>
+  <div class="bg-veil"></div>
+  <div class="bg-pattern"></div>
+
+  <header class="top-bar">
+    <a class="back-link" href="chemistry.html">← 返回化学小屋</a>
+    <span class="top-title">化学练习3</span>
+    <span class="top-title" style="opacity:.35; font-weight:400;">答题卡补录</span>
+  </header>
+
+  <main class="page-shell">
+    <div class="cd-wrap">
+      <h1 style="font-size:26px;margin:0 0 12px;">答题卡<span style="color:var(--accent-2)">补录</span></h1>
+      <div class="cd-intro">
+        这张页面只用来<b>补交答案</b>，不放题目原文、也不显示正确答案。<br />
+        凭你做题时的印象把答案填上即可，<b>14 道单选 + 21 个判分空</b>，一般 3 分钟能填完；
+        长化学方程式、说理类等不计分的小空<b>不用补</b>。<br />
+        填完点「生成成绩码」，把码发给老师就完成了统计。
+      </div>
+
+      <div id="cd-root">
+        <div class="cd-loading">正在加载答题卡…</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/quiz-exam.js?v=20261120f"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var KEY_ID = "xc_exam_student";
+      var CARD_KEY = "xc_examcard_chem3";
+      var SRC = "assets/papers/chem3.json?v=20261120d";
+      var COLLECT_URL = "";   /* 收集表链接建好后填这里，会自动出现「去提交」按钮 */
+
+      var root = document.getElementById("cd-root");
+      var data = null, units = [], picks = {}, vals = {}, submitted = false;
+
+      function esc(s) {
+        return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+      function b64e(str) {
+        var bytes = new TextEncoder().encode(str), bin = "";
+        for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+        return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+      }
+      function norm(s) {
+        return window.ExamEngine ? window.ExamEngine.norm(s) : String(s || "").trim();
+      }
+      function readId() {
+        try { return JSON.parse(localStorage.getItem(KEY_ID) || "null") || {}; }
+        catch (e) { return {}; }
+      }
+      function saveId(o) {
+        try { localStorage.setItem(KEY_ID, JSON.stringify(o)); } catch (e) {}
+      }
+      function saveCard(o) {
+        try { localStorage.setItem(CARD_KEY, JSON.stringify(o)); } catch (e) {}
+      }
+      function readCard() {
+        try { return JSON.parse(localStorage.getItem(CARD_KEY) || "null"); }
+        catch (e) { return null; }
+      }
+
+      /* ---------- 身份 ---------- */
+      function gate(who) {
+        root.innerHTML =
+          '<div class="xq-gate">' +
+          "<h3>先确认身份</h3>" +
+          "<p>成绩码里会带上姓名和学号，老师才能对应到人。</p>" +
+          '<label class="xq-gline"><span>姓名</span>' +
+          '<input id="cd-n" type="text" autocomplete="off" placeholder="请输入本人姓名" value="' +
+          (who.name ? esc(who.name).replace(/"/g, "&quot;") : "") + '"/></label>' +
+          '<label class="xq-gline"><span>学号</span>' +
+          '<input id="cd-s" type="text" autocomplete="off" inputmode="numeric" placeholder="完整学号" value="' +
+          (who.sid ? esc(who.sid).replace(/"/g, "&quot;") : "") + '"/></label>' +
+          '<div class="cd-acts"><button class="xq-btn primary" id="cd-go" type="button">开始补录</button></div>' +
+          '<p class="xq-gmsg" id="cd-gmsg" style="margin:10px 0 0;font-size:13px;color:#f87171;"></p>' +
+          "</div>";
+
+        document.getElementById("cd-go").addEventListener("click", function () {
+          var n = document.getElementById("cd-n").value.trim();
+          var s = document.getElementById("cd-s").value.trim();
+          var msg = document.getElementById("cd-gmsg");
+          if (!n) { msg.textContent = "请填写姓名"; return; }
+          if (s.length < 4) { msg.textContent = "请填写完整学号"; return; }
+          saveId({ name: n, sid: s });
+          start({ name: n, sid: s });
+        });
+        var i = document.getElementById("cd-n");
+        if (i) i.focus();
+      }
+
+      /* ---------- 加载 ---------- */
+      function start(who) {
+        root.innerHTML = '<div class="cd-loading">正在加载答题卡…</div>';
+        fetch(SRC)
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            data = d;
+            units = collect(d);
+            render(who);
+          })
+          .catch(function () {
+            root.innerHTML = '<div class="cd-loading">答题卡加载失败，请刷新页面重试。</div>';
+          });
+      }
+
+      function collect(d) {
+        var out = [];
+        (d.sections || []).forEach(function (sec) {
+          (sec.questions || []).forEach(function (q) {
+            if (q.type === "choice") {
+              out.push({ kind: "choice", num: q.num, q: q });
+            } else {
+              (q.parts || []).forEach(function (p) {
+                (p.blanks || []).forEach(function (b) {
+                  if (!b.manual && b.accept && b.accept.length) {
+                    out.push({ kind: "blank", num: q.num, id: b.id, blank: b, part: p });
+                  }
+                });
+              });
+            }
+          });
+        });
+        return out;
+      }
+
+      var MARK = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧"];
+
+      function render(who) {
+        var h = "";
+        h += '<div class="cd-bar"><span class="cd-bar-t">化学练习3 · 答题卡</span>' +
+          '<span class="cd-bar-p" id="cd-prog">0 / ' + units.length + "</span>" +
+          '<span class="cd-bar-s"></span>' +
+          '<span class="cd-who">' + esc(who.name) + " · " + esc(who.sid) +
+          '<a href="#" id="cd-switch">换人</a></span>' +
+          '<button class="xq-btn primary" id="cd-submit" type="button">生成成绩码</button></div>';
+
+        /* 单选题 */
+        h += '<div class="cd-sec">一、单选题（第 1—14 题）</div><div class="cd-grid">';
+        units.filter(function (u) { return u.kind === "choice"; }).forEach(function (u) {
+          h += '<div class="cd-item" data-num="' + u.num + '">' +
+            '<span class="cd-no">' + u.num + "</span>" +
+            '<div class="cd-opts">' +
+            (u.q.options || []).map(function (o) {
+              return '<b class="cd-o" data-num="' + u.num + '" data-label="' + o.label + '">' +
+                o.label + "</b>";
+            }).join("") +
+            "</div></div>";
+        });
+        h += "</div>";
+
+        /* 填空题：按题分组 */
+        var byQ = {};
+        units.filter(function (u) { return u.kind === "blank"; }).forEach(function (u) {
+          (byQ[u.num] = byQ[u.num] || []).push(u);
+        });
+        Object.keys(byQ).forEach(function (num) {
+          h += '<div class="cd-sec">第 ' + num + " 题（填空题）</div><div class=\"cd-grid one\">";
+          var lastPart = null, bi = 0;
+          byQ[num].forEach(function (u) {
+            if (u.part.label !== lastPart) { lastPart = u.part.label; bi = 0; }
+            h += '<div class="cd-item" data-id="' + u.id + '">' +
+              '<span class="cd-no">' + num + u.part.label + (MARK[bi] || "") + "</span>" +
+              '<input class="cd-in" data-id="' + u.id + '" type="text" autocomplete="off" ' +
+              'placeholder="' + esc(u.blank.ph || "填写答案") + '"/>' +
+              "</div>";
+            bi++;
+          });
+          h += "</div>";
+        });
+
+        h += '<div class="cd-res" id="cd-res"></div>';
+        root.innerHTML = h;
+
+        bind(who);
+        refresh();
+
+        var old = readCard();
+        if (old && old.code && old.n === who.name) showCode(old);
+      }
+
+      function bind(who) {
+        root.addEventListener("click", function (e) {
+          if (e.target.id === "cd-switch") {
+            e.preventDefault();
+            try { localStorage.removeItem(KEY_ID); } catch (err) {}
+            gate({});
+            return;
+          }
+          var o = e.target.closest(".cd-o");
+          if (o && !submitted) {
+            var num = o.getAttribute("data-num");
+            picks[num] = o.getAttribute("data-label");
+            var box = o.closest(".cd-item");
+            box.querySelectorAll(".cd-o").forEach(function (x) {
+              x.classList.toggle("sel", x === o);
+            });
+            box.classList.add("done");
+            refresh();
+            return;
+          }
+          if (e.target.id === "cd-submit") { doSubmit(who); return; }
+          if (e.target.id === "cd-copy") { copyCode(); return; }
+          if (e.target.id === "cd-again") {
+            if (!window.confirm("重新填写会清空这张答题卡，确定吗？")) return;
+            picks = {}; vals = {}; submitted = false;
+            try { localStorage.removeItem(CARD_KEY); } catch (err) {}
+            render(who);
+            return;
+          }
+        });
+
+        root.addEventListener("input", function (e) {
+          var inp = e.target;
+          if (inp.classList && inp.classList.contains("cd-in") && !submitted) {
+            vals[inp.getAttribute("data-id")] = inp.value;
+            var box = inp.closest(".cd-item");
+            if (box) box.classList.toggle("done", !!inp.value.trim());
+            refresh();
+          }
+        });
+      }
+
+      function refresh() {
+        var done = 0;
+        units.forEach(function (u) {
+          if (u.kind === "choice") { if (picks[u.num]) done++; }
+          else if (String(vals[u.id] || "").trim()) done++;
+        });
+        var el = document.getElementById("cd-prog");
+        if (el) el.textContent = done + " / " + units.length;
+      }
+
+      function judge() {
+        var right = 0, answered = 0, c = "", b = "";
+        units.forEach(function (u) {
+          if (u.kind === "choice") {
+            var mine = picks[u.num] || "";
+            c += mine || ".";
+            if (mine) {
+              answered++;
+              if (String(mine).toUpperCase() === String(u.q.answer).toUpperCase()) right++;
+            }
+          } else {
+            var v = String(vals[u.id] || "").trim();
+            if (v) {
+              answered++;
+              var nv = norm(v);
+              var ok = (u.blank.accept || []).some(function (a) { return norm(a) === nv; });
+              b += ok ? "1" : "0";
+              if (ok) right++;
+            } else {
+              b += ".";
+            }
+          }
+        });
+        return { right: right, answered: answered, total: units.length, c: c, b: b };
+      }
+
+      function doSubmit(who) {
+        if (submitted) return;
+        var res = judge();
+        var left = res.total - res.answered;
+        var msg = left > 0
+          ? "还有 " + left + " 个判分点没填，确定生成成绩码吗？生成后不能再改。"
+          : "确定生成成绩码吗？生成后不能再修改。";
+        if (!window.confirm(msg)) return;
+
+        submitted = true;
+        var payload = {
+          v: 1, q: "chem3", n: who.name || "", s: who.sid || "",
+          t: Math.floor(Date.now() / 1000), c: res.c, b: res.b,
+          r: [res.right, res.total]
+        };
+        var code = "XC3-" + b64e(JSON.stringify(payload));
+        showCode({ code: code, right: res.right, total: res.total, n: who.name, ts: Date.now() });
+        saveCard({ code: code, right: res.right, total: res.total, n: who.name, ts: Date.now() });
+        var inputs = root.querySelectorAll(".cd-in");
+        for (var i = 0; i < inputs.length; i++) inputs[i].readOnly = true;
+      }
+
+      function showCode(o) {
+        var pct = o.total ? Math.round((o.right / o.total) * 100) : 0;
+        var box = document.getElementById("cd-res");
+        if (!box) return;
+        box.innerHTML =
+          '<div class="xq-code">' +
+          "<h4>成绩码（发给老师）</h4>" +
+          '<p class="xq-code-tip">按你填的答案估算：' + o.right + " / " + o.total +
+          "（" + pct + "%）。成绩码里记录的是每道题选了什么，老师汇总时以此为准。</p>" +
+          '<textarea class="xq-code-box" id="cd-code" readonly>' + esc(o.code) + "</textarea>" +
+          '<div class="cd-acts">' +
+          '<button class="xq-btn primary" id="cd-copy" type="button">复制成绩码</button>' +
+          (COLLECT_URL
+            ? '<a class="xq-btn" href="' + COLLECT_URL + '" target="_blank" rel="noopener">打开收集表粘贴提交</a>'
+            : "") +
+          '<button class="xq-btn" id="cd-again" type="button">重新填写</button>' +
+          "</div>" +
+          '<p class="cd-tip">复制后发到班级群，或直接发给老师即可。' +
+          (COLLECT_URL ? "" : "（老师会统一粘贴到汇总页统计）") + "</p>" +
+          "</div>";
+        box.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function copyCode() {
+        var ta = document.getElementById("cd-code");
+        if (!ta) return;
+        var ok = false;
+        try {
+          ta.removeAttribute("readonly"); ta.select();
+          ok = document.execCommand("copy");
+          ta.setAttribute("readonly", "readonly");
+        } catch (e) { ok = false; }
+        if (!ok && navigator.clipboard) {
+          navigator.clipboard.writeText(ta.value).then(function () { alert("成绩码已复制"); },
+            function () { alert("复制失败，请长按上面的文字手动复制"); });
+          return;
+        }
+        alert(ok ? "成绩码已复制" : "复制失败，请长按上面的文字手动复制");
+      }
+
+      /* ---------- 启动 ---------- */
+      var who = readId();
+      if (who && who.name && who.sid) start(who);
+      else gate({});
+    })();
+  </script>
+</body>
+</html>

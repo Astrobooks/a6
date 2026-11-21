@@ -72,8 +72,11 @@
     this.picks = {};      // 选择题 num -> letter
     this.vals = {};       // 空 id -> 输入值
     this.submitted = false;
+    this.code = "";       // 交卷后的成绩码
+    this.storeKey = "xc_exam_" + this.id;
     this.units = this.collectUnits();
     this.build();
+    this.hydrate();       // 本机暂存：恢复未交卷作答 / 找回上次成绩码
   }
 
   /* 判分单元：选择题 1 个，自动判的空各 1 个 */
@@ -120,6 +123,94 @@
 
     this.bind();
     this.update();
+  };
+
+  /* ---------------- 本机暂存：防误关、可找回成绩码 ---------------- */
+  ExamQuiz.prototype.readStore = function () {
+    try { return JSON.parse(localStorage.getItem(this.storeKey) || "null"); } catch (e) { return null; }
+  };
+
+  ExamQuiz.prototype.writeStore = function (extra) {
+    var who = this.opts.student || {};
+    var o = {
+      v: 1,
+      n: who.name || "",
+      s: who.sid || "",
+      picks: this.picks,
+      vals: this.vals,
+      code: this.code || "",
+      submitted: !!this.submitted,
+      ts: Date.now()
+    };
+    if (extra) for (var k in extra) o[k] = extra[k];
+    try { localStorage.setItem(this.storeKey, JSON.stringify(o)); } catch (e) {}
+  };
+
+  ExamQuiz.prototype.clearStore = function () {
+    try { localStorage.removeItem(this.storeKey); } catch (e) {}
+  };
+
+  function ago(ts) {
+    var m = Math.floor((Date.now() - ts) / 60000);
+    if (m < 1) return "刚刚";
+    if (m < 60) return m + " 分钟前";
+    var h = Math.floor(m / 60);
+    if (h < 24) return h + " 小时前";
+    return Math.floor(h / 24) + " 天前";
+  }
+
+  ExamQuiz.prototype.hydrate = function () {
+    var st = this.readStore();
+    if (!st) return;
+    var who = this.opts.student || {};
+    /* 别人在这台设备上留下的记录，不自动恢复，避免串号 */
+    if (st.n && who.name && String(st.n) !== String(who.name)) return;
+
+    if (st.submitted && st.code) { this.showLastCode(st); return; }
+
+    this.picks = st.picks || {};
+    this.vals = st.vals || {};
+    if (!Object.keys(this.picks).length && !Object.keys(this.vals).length) return;
+
+    var self = this;
+    Object.keys(this.picks).forEach(function (n) {
+      var card = self.root.querySelector('.xq-card[data-num="' + n + '"]');
+      if (!card) return;
+      card.querySelectorAll(".xq-opt").forEach(function (o) {
+        o.classList.toggle("sel", o.getAttribute("data-label") === self.picks[n]);
+      });
+    });
+    Object.keys(this.vals).forEach(function (id) {
+      var inp = self.root.querySelector('.xq-input[data-id="' + id + '"]');
+      if (inp) inp.value = self.vals[id];
+    });
+    this.update();
+    this.note("已恢复你上次未交卷的作答（" + ago(st.ts) + "），可以接着做。", "clear");
+  };
+
+  /* 顶部提示条 */
+  ExamQuiz.prototype.note = function (text, act) {
+    var bar = document.createElement("div");
+    bar.className = "xq-last";
+    bar.innerHTML = '<div class="xq-last-t">' + esc(text) + "</div>" +
+      (act ? '<button class="xq-btn" data-act="' + act + '" type="button">清空重答</button>' : "");
+    var list = this.root.querySelector(".xq-list");
+    this.root.insertBefore(bar, list || this.root.firstChild);
+  };
+
+  ExamQuiz.prototype.showLastCode = function (st) {
+    var bar = document.createElement("div");
+    bar.className = "xq-last code";
+    bar.innerHTML =
+      '<div class="xq-last-t"><b>你上次已经交过卷了</b>（' + esc(ago(st.ts)) + "）" +
+      (st.total ? "　得分 " + esc(st.right) + "/" + esc(st.total) : "") + "</div>" +
+      '<p class="xq-last-p">如果当时没把成绩码发给老师，现在可以再复制一次。</p>' +
+      '<textarea class="xq-code-box" id="' + this.id + '-lastcode" readonly>' + esc(st.code) + "</textarea>" +
+      '<div class="xq-last-acts">' +
+      '<button class="xq-btn primary" data-act="copy-last" type="button">复制上次成绩码</button>' +
+      '<button class="xq-btn" data-act="hide-last" type="button">收起</button>' +
+      "</div>";
+    this.root.insertBefore(bar, this.root.firstChild);
   };
 
   ExamQuiz.prototype.qHtml = function (q) {
@@ -184,6 +275,25 @@
         self.copyCode();
         return;
       }
+      var actName = act && act.getAttribute("data-act");
+      if (actName === "copy-last") {
+        self.copyLast();
+        return;
+      }
+      if (actName === "hide-last") {
+        var nb = act.closest(".xq-last");
+        if (nb) nb.remove();
+        return;
+      }
+      if (actName === "clear") {
+        self.clearStore();
+        self.picks = {};
+        self.vals = {};
+        self.code = "";
+        self.submitted = false;
+        self.build();
+        return;
+      }
       var opt = e.target.closest(".xq-opt");
       if (opt && !self.submitted) {
         self.pick(opt.getAttribute("data-num"), opt.getAttribute("data-label"), opt);
@@ -197,6 +307,7 @@
       if (inp.classList && inp.classList.contains("xq-input") && !self.submitted) {
         self.vals[inp.getAttribute("data-id")] = inp.value;
         self.update();
+        self.writeStore();
       }
     });
     this.root.addEventListener("keydown", function (e) {
@@ -215,6 +326,7 @@
       o.classList.toggle("sel", o.getAttribute("data-label") === label);
     });
     this.update();
+    this.writeStore();
   };
 
   ExamQuiz.prototype.update = function () {
@@ -329,6 +441,7 @@
     this.root.querySelectorAll(".xq-input").forEach(function (i) { i.readOnly = true; });
 
     this.showResult(res, byQ);
+    this.writeStore({ code: this.code, right: res.right, total: res.total });
   };
 
   ExamQuiz.prototype.showResult = function (res, byQ) {
@@ -401,7 +514,15 @@
 
   ExamQuiz.prototype.copyCode = function () {
     var ta = document.getElementById(this.id + "-code");
-    if (!ta) return;
+    if (ta) this.copyText(ta);
+  };
+
+  ExamQuiz.prototype.copyLast = function () {
+    var ta = document.getElementById(this.id + "-lastcode");
+    if (ta) this.copyText(ta);
+  };
+
+  ExamQuiz.prototype.copyText = function (ta) {
     var ok = false;
     try {
       ta.removeAttribute("readonly");
@@ -448,6 +569,7 @@
 
   ExamQuiz.prototype.reset = function () {
     if (!window.confirm("重新作答将清空本次答案，确定吗？")) return;
+    this.clearStore();
     this.picks = {};
     this.vals = {};
     this.submitted = false;
