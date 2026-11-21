@@ -10,34 +10,36 @@
 
 ```
 a6/
-├── index.html                ← 总入口（学生入口 + 课件库两块）
+├── index.html                ← 总入口：三个互不重叠的入口
 │
-├── xingchen/                 ← 星辰班级主站（学生用，2313 个文件）
+├── xingchen/                 ← 星辰班级主站（学生 + 老师，需登录，2300+ 文件）
 │   ├── index.html              首页：班级风采 / 化学小屋 / 数学加油站 / 英语角 / 物理之家
+│   ├── teacher.html            教师工具：答题汇总、答题卡补录、维护说明
 │   ├── class.html              班级风采（照片、接力视频、远足 MV）
-│   ├── chemistry.html          化学小屋：课件入口 + 在线练习 + 成绩汇总
+│   ├── chemistry.html          化学小屋
 │   ├── math.html               数学加油站
 │   ├── english.html            英语角
 │   ├── physics.html            物理之家
-│   ├── chemistry-*.html        化学互动课件（氯 / 钠 / 物质的量 / 氧化还原 / 期末复习）
+│   ├── chemistry-mol.html       物质的量课时索引（7 个课件）
+│   ├── chemistry-*.html        化学交互课件（氯 / 钠 / 氧化还原 / 物质的量 / 期末复习）
 │   ├── chem3-card.html         化学练习3 答题卡补录（凭印象重填 → 找回成绩码）
-│   ├── quiz-report.html        教师端：粘贴成绩码 → 正确率 / 错题排行 / 明细导出
+│   ├── quiz-report.html        成绩汇总报表（从 teacher.html 进入）
 │   ├── login.html              登录页
+│   ├── 使用说明.html            网站维护教程（从 teacher.html 进入）
 │   └── assets/
 │       ├── css/                4 个样式表（style / quiz / quiz-en / quiz-exam）
 │       ├── js/                 答题引擎与鉴权（见下表）
-│       ├── papers/             题库：16 套试卷的 JSON + 2118 张题目切片
+│       ├── papers/             题库：16 套试卷 JSON + 2118 张题目切片
 │       ├── audio/              英语听力音频
 │       ├── media/              班级视频（接力、远足 MV）
 │       ├── games/  poster/     小游戏与海报素材
 │       └── vendor/katex/       本地 KaTeX，公式离线渲染
 │
-├── courseware/               ← 化学课件库（老师备课用，纯网页可直接投屏）
+├── courseware/               ← 免登录的独立成品课件（可直接投屏）
 │   ├── index.html              课件库导航
-│   ├── cl2/                    氯气 · 三册合一互动课件
-│   ├── na/                     钠及其化合物 · 互动课件（含 img/）
+│   ├── na-compounds/           钠的化合物 · 复习课件
 │   ├── chem-exam1/             第一次月考讲评（网页 index.html + PPT）
-│   └── _legacy/na-v1/          早期版本，保留存档，站点不入口
+│   └── _legacy/na-v1/          早期版本，存档不入口
 │
 ├── tools/                    ← 生成脚本与源数据（不参与部署）
 │   ├── cl2/                    氯气课件逐页文稿 JSON 与改稿脚本
@@ -47,6 +49,20 @@ a6/
 ├── .nojekyll                 关闭 GitHub Pages 的 Jekyll 处理
 └── .gitignore
 ```
+
+### 五个学科页的统一分类
+
+`chemistry / math / physics / english` 一律按同一顺序排板块，缺哪层就跳过：
+
+| 顺序 | 板块 | 英文副标题 | 放什么 |
+|---|---|---|---|
+| 1 | 课堂课件 | CLASSWARE | 上课用的交互课件（目前仅化学有） |
+| 2 | 在线练习 | PRACTICE | 在线答题、周考、周末作业、挑战题 |
+| 3 | 试题讲评 | EXAM REVIEW | 月考、期中的试卷讲评，按时间倒序 |
+| 4 | 专题与资料 | REFERENCE | 知识专题、公式速查、学习方法、词汇墙 |
+| 5 | 实验与安全 | LAB &amp; SAFETY | 实验记录、器材与安全（仅化学有） |
+
+「活动秀」是英语角独有的班级活动板块，固定在最后。
 
 ### 页面脚本分工（`xingchen/assets/js/`）
 
@@ -68,7 +84,7 @@ a6/
 2. 写 `xingchen/assets/papers/<新卷名>.json`（字段见 `quiz-exam.js` 顶部注释）
 3. 在 `chemistry.html`（或对应学科页）里加一张卡片，`fetch` 该 JSON
 
-**加一个课件**：放进 `courseware/<名字>/index.html`，在 `courseware/index.html` 和根 `index.html` 各加一条链接。
+**加一个课件**：站内课件放 `xingchen/` 并在对应学科页加卡片；免登录成品放 `courseware/<名字>/index.html`，只需在 `courseware/index.html` 加一条链接。
 
 **新增学生账号**：按 `auth.js` 里现有方式算加盐 SHA-256 追加到 `TOKENS`，并升级引用处的 `?v=` 版本号。
 
@@ -93,6 +109,8 @@ a6/
 |---|---|---|
 | `氯气课件/shots/` | 143 张逐页校验截图（约 15MB） | `git log --diff-filter=D -- 氯气课件/shots` |
 | `氯气课件/text/` | 已迁至 `tools/cl2/`，无遗漏 | — |
+| `xingchen/huaxue-xiaowu.html` | chemistry.html 的旧副本 | 任意历史提交 |
+| `courseware/cl2/` | 与 `xingchen/chemistry-cl2-lesson1.html` 仅差一行 auth.js，已去重 | 任意历史提交 |
 | `化学互动课堂/` | 早期钠课件 + 外链导航页 | 现存档于 `courseware/_legacy/na-v1/` |
 | `氯气互动课件/氯气-三册合一互动课件.html` | 与 `index.html` 完全相同，已去重 | 任意历史提交 |
 

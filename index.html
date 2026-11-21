@@ -30,19 +30,13 @@
   .head p { color:#64748b; font-size:17px; margin-top:10px; }
 
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
-  .sec { margin-top:46px; }
-  .sec-head {
-    display:flex; align-items:center; gap:12px; margin-bottom:20px;
-    font-size:15px; font-weight:700; letter-spacing:3px; color:#0f172a;
+  .card.s1 .ic { background:linear-gradient(135deg,#ede9fe,#e0f2fe); }
+  .card.s2 .ic { background:linear-gradient(135deg,#e0f2fe,#d1fae5); }
+  .card.s3 .ic { background:linear-gradient(135deg,#e2e8f0,#e0f2fe); }
+  .card .who {
+    margin-top:14px; padding-top:12px; border-top:1px dashed #e2e8f0;
+    font-size:12.5px; color:#94a3b8; line-height:1.7;
   }
-  .sec-head::before { content:""; width:4px; height:20px; border-radius:3px; background:linear-gradient(180deg,#0ea5e9,#10b981); }
-  .sec-head em {
-    font-style:normal; font-size:11.5px; font-weight:400; letter-spacing:1px;
-    color:#94a3b8; padding:3px 10px; border-radius:20px; background:#fff; border:1px solid #e2e8f0;
-  }
-  .card.hero { grid-column:1/-1; }
-  .card.hero .ic { background:linear-gradient(135deg,#ede9fe,#e0f2fe); }
-  .card.hero .desc { min-height:0; }
   .card {
     position:relative; background:#fff; border-radius:18px; padding:26px 24px 22px; overflow:hidden;
     box-shadow:0 6px 22px rgba(15,23,42,.08); border:1px solid #e2e8f0;
@@ -76,58 +70,37 @@
     <div class="head">
       <div class="badge">XING CHEN · CHEM</div>
       <h1>学习资源总站</h1>
-      <p>星辰班级主页与化学课件库 · 点击卡片即可进入</p>
+      <p>三个入口，互不重叠 · 选你要去的那一个</p>
     </div>
 
-    <section class="sec">
-      <div class="sec-head">学生入口 <em>STUDENTS</em></div>
-      <div class="grid">
-        <a class="card hero" href="./xingchen/">
-          <span class="tag">班级主页</span>
-          <div class="ic">✦</div>
-          <h3>星辰班级</h3>
-          <div class="desc">班级风采、化学小屋、数学加油站、英语角、物理之家，五大板块一站直达；含在线练习与答题成绩汇总。</div>
-          <span class="go">进入班级主页 →</span>
-        </a>
-      </div>
-    </section>
+    <div class="grid">
+      <a class="card s1" href="./xingchen/">
+        <span class="tag">学生 · 需登录</span>
+        <div class="ic">✦</div>
+        <h3>星辰班级</h3>
+        <div class="desc">班级风采、化学小屋、数学加油站、英语角、物理之家五大板块；含课堂课件、在线练习、试题讲评与成绩汇总。</div>
+        <div class="who">学生用姓名 + 完整学号登录 · 老师用科目名登录</div>
+        <span class="go">进入班级主页 →</span>
+      </a>
 
-    <section class="sec">
-      <div class="sec-head">化学课件 <em>COURSEWARE</em></div>
-      <div class="grid">
-        <a class="card" href="./courseware/cl2/">
-          <span class="tag">互动网页</span>
-          <div class="ic">🟢</div>
-          <h3>氯气互动课件</h3>
-          <div class="desc">氯气三册合一互动课件：性质、实验室制法、用途，边学边练。</div>
-          <span class="go">进入课件 →</span>
-        </a>
+      <a class="card s2" href="./courseware/">
+        <span class="tag">课件 · 免登录</span>
+        <div class="ic">🧪</div>
+        <h3>化学课件库</h3>
+        <div class="desc">拿起来就能讲的独立成品课件：钠的化合物复习、第一次月考讲评（网页版 + PPT）。可直接投屏，不依赖账号。</div>
+        <div class="who">配套课堂交互课件在「化学小屋 → 课堂课件」内</div>
+        <span class="go">进入课件库 →</span>
+      </a>
 
-        <a class="card" href="./courseware/na/">
-          <span class="tag">互动网页</span>
-          <div class="ic">🔥</div>
-          <h3>钠及其化合物互动课件</h3>
-          <div class="desc">钠、氧化钠、过氧化钠、碳酸钠与碳酸氢钠的互动讲解。</div>
-          <span class="go">进入课件 →</span>
-        </a>
-
-        <a class="card" href="./courseware/chem-exam1/">
-          <span class="tag">互动网页</span>
-          <div class="ic">📝</div>
-          <h3>高一化学月考讲评（网页版）</h3>
-          <div class="desc">第一次月考试卷讲评：选择题逐题点按出答案，非选择题逐大题展开。</div>
-          <span class="go">进入课件 →</span>
-        </a>
-
-        <a class="card ppt" href="./courseware/chem-exam1/高一化学第一次月考讲评.pptx">
-          <span class="tag">PPT 文件</span>
-          <div class="ic">📊</div>
-          <h3>高一化学月考讲评（PPT 版）</h3>
-          <div class="desc">可在 PowerPoint / WPS 中放映，含原卷图示与点击出现答案动画。</div>
-          <span class="go">下载 / 打开 PPT →</span>
-        </a>
-      </div>
-    </section>
+      <a class="card s3" href="./xingchen/teacher.html">
+        <span class="tag">老师 · 需登录</span>
+        <div class="ic">🛠️</div>
+        <h3>教师工具</h3>
+        <div class="desc">答题汇总报表（粘贴成绩码出全班正确率与错题排行）、答题卡补录、网站维护使用说明。</div>
+        <div class="who">学生日常不需要此页</div>
+        <span class="go">进入教师入口 →</span>
+      </a>
+    </div>
 
     <div class="foot">
       <b>星辰班级 · 化学小屋</b> · 瑞昌一中 高一化学备课资源<br>
