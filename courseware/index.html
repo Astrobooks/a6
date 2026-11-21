@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化学课件库 · 星辰班级</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    color:#1f2d3d; min-height:100vh;
+    background:radial-gradient(1000px 500px at 10% -10%, #e0f2fe 0%, transparent 60%),
+               radial-gradient(900px 460px at 90% 0%, #d1fae5 0%, transparent 55%),
+               #f1f5f9;
+  }
+  .wrap { max-width:900px; margin:0 auto; padding:56px 22px 70px; }
+  .head { text-align:center; margin-bottom:36px; }
+  .head .badge {
+    display:inline-block; padding:5px 16px; border-radius:30px; font-size:13px; letter-spacing:2px;
+    background:rgba(56,189,248,.15); color:#0369a1; border:1px solid rgba(56,189,248,.4); margin-bottom:14px;
+  }
+  .head h1 { font-size:36px; letter-spacing:5px; color:#0f172a; }
+  .head p { color:#64748b; font-size:15px; margin-top:10px; }
+
+  .list { display:flex; flex-direction:column; gap:14px; }
+  .item {
+    display:flex; align-items:center; gap:18px; padding:20px 24px;
+    background:#fff; border:1px solid #e2e8f0; border-radius:16px;
+    box-shadow:0 4px 16px rgba(15,23,42,.06); text-decoration:none; color:inherit;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .item:hover { transform:translateX(4px); border-color:#7dd3fc; box-shadow:0 10px 26px rgba(14,165,233,.16); }
+  .item .ic {
+    width:48px; height:48px; flex:0 0 48px; border-radius:13px; font-size:24px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,#e0f2fe,#d1fae5);
+  }
+  .item .txt { flex:1; }
+  .item h2 { font-size:17px; color:#0f172a; font-weight:600; }
+  .item p { font-size:13.5px; color:#64748b; margin-top:4px; line-height:1.7; }
+  .item .go { font-size:13px; font-weight:600; color:#0284c7; white-space:nowrap; }
+
+  .foot { text-align:center; margin-top:40px; font-size:13px; color:#94a3b8; line-height:1.9; }
+  .foot a { color:#0284c7; text-decoration:none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="badge">COURSEWARE</div>
+      <h1>化学课件库</h1>
+      <p>高一化学互动课件与讲评 · 全部为离线可用的纯网页</p>
+    </div>
+
+    <div class="list">
+      <a class="item" href="./cl2/">
+        <div class="ic">🟢</div>
+        <div class="txt">
+          <h2>富集在海水中的元素——氯</h2>
+          <p>三册合一互动课件：氯气的性质、实验室制法与用途，边学边练。</p>
+        </div>
+        <span class="go">进入 →</span>
+      </a>
+
+      <a class="item" href="./na/">
+        <div class="ic">🔥</div>
+        <div class="txt">
+          <h2>钠及其化合物</h2>
+          <p>钠、氧化钠、过氧化钠、碳酸钠与碳酸氢钠的互动复习课件。</p>
+        </div>
+        <span class="go">进入 →</span>
+      </a>
+
+      <a class="item" href="./chem-exam1/">
+        <div class="ic">📝</div>
+        <div class="txt">
+          <h2>高一化学第一次月考 · 试卷讲评</h2>
+          <p>网页版：选择题逐题点按出答案，非选择题逐大题展开；同目录附 PPT 版。</p>
+        </div>
+        <span class="go">进入 →</span>
+      </a>
+    </div>
+
+    <div class="foot">
+      有疑问？返回 <a href="../index.html">资源总站</a> 或 <a href="../xingchen/">星辰班级主页</a>
+    </div>
+  </div>
+</body>
+</html>

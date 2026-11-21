@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>化学小屋 · 课件导航</title>
+<title>星辰班级 · 学习资源总站</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -29,7 +29,20 @@
   .head h1 { font-size:46px; letter-spacing:6px; background:linear-gradient(90deg,#0ea5e9,#10b981); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .head p { color:#64748b; font-size:17px; margin-top:10px; }
 
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; margin-top:38px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+  .sec { margin-top:46px; }
+  .sec-head {
+    display:flex; align-items:center; gap:12px; margin-bottom:20px;
+    font-size:15px; font-weight:700; letter-spacing:3px; color:#0f172a;
+  }
+  .sec-head::before { content:""; width:4px; height:20px; border-radius:3px; background:linear-gradient(180deg,#0ea5e9,#10b981); }
+  .sec-head em {
+    font-style:normal; font-size:11.5px; font-weight:400; letter-spacing:1px;
+    color:#94a3b8; padding:3px 10px; border-radius:20px; background:#fff; border:1px solid #e2e8f0;
+  }
+  .card.hero { grid-column:1/-1; }
+  .card.hero .ic { background:linear-gradient(135deg,#ede9fe,#e0f2fe); }
+  .card.hero .desc { min-height:0; }
   .card {
     position:relative; background:#fff; border-radius:18px; padding:26px 24px 22px; overflow:hidden;
     box-shadow:0 6px 22px rgba(15,23,42,.08); border:1px solid #e2e8f0;
@@ -61,72 +74,64 @@
 
   <div class="wrap">
     <div class="head">
-      <div class="badge">CHEM HOUSE</div>
-      <h1>化 学 小 屋</h1>
-      <p>高一化学课件导航 · 点击卡片即可进入对应课件</p>
+      <div class="badge">XING CHEN · CHEM</div>
+      <h1>学习资源总站</h1>
+      <p>星辰班级主页与化学课件库 · 点击卡片即可进入</p>
     </div>
 
-    <div class="grid">
-      <a class="card" href="./xingchen/">
-        <span class="tag">班级主页</span>
-        <div class="ic">✦</div>
-        <h3>星辰班级</h3>
-        <div class="desc">班级风采、化学小屋、数学加油站、英语角、物理之家，五大板块一站直达。</div>
-        <span class="go">进入班级主页 →</span>
-      </a>
+    <section class="sec">
+      <div class="sec-head">学生入口 <em>STUDENTS</em></div>
+      <div class="grid">
+        <a class="card hero" href="./xingchen/">
+          <span class="tag">班级主页</span>
+          <div class="ic">✦</div>
+          <h3>星辰班级</h3>
+          <div class="desc">班级风采、化学小屋、数学加油站、英语角、物理之家，五大板块一站直达；含在线练习与答题成绩汇总。</div>
+          <span class="go">进入班级主页 →</span>
+        </a>
+      </div>
+    </section>
 
-      <a class="card" href="./氯气互动课件/index.html">
-        <span class="tag">互动网页</span>
-        <div class="ic">🟢</div>
-        <h3>氯气互动课件</h3>
-        <div class="desc">氯气三册合一互动课件：性质、实验室制法、用途，边学边练。</div>
-        <span class="go">进入课件 →</span>
-      </a>
+    <section class="sec">
+      <div class="sec-head">化学课件 <em>COURSEWARE</em></div>
+      <div class="grid">
+        <a class="card" href="./courseware/cl2/">
+          <span class="tag">互动网页</span>
+          <div class="ic">🟢</div>
+          <h3>氯气互动课件</h3>
+          <div class="desc">氯气三册合一互动课件：性质、实验室制法、用途，边学边练。</div>
+          <span class="go">进入课件 →</span>
+        </a>
 
-      <a class="card" href="./化学互动课堂/index.html">
-        <span class="tag">互动网页</span>
-        <div class="ic">🧪</div>
-        <h3>化学互动课堂</h3>
-        <div class="desc">通用化学互动课堂练习，含多章节随堂训练。</div>
-        <span class="go">进入课件 →</span>
-      </a>
+        <a class="card" href="./courseware/na/">
+          <span class="tag">互动网页</span>
+          <div class="ic">🔥</div>
+          <h3>钠及其化合物互动课件</h3>
+          <div class="desc">钠、氧化钠、过氧化钠、碳酸钠与碳酸氢钠的互动讲解。</div>
+          <span class="go">进入课件 →</span>
+        </a>
 
-      <a class="card" href="./化学月考课件/index.html">
-        <span class="tag">互动网页</span>
-        <div class="ic">📝</div>
-        <h3>高一化学月考讲评（网页版）</h3>
-        <div class="desc">第一次月考试卷讲评：选择题逐题点按出答案，非选择题逐大题展开。</div>
-        <span class="go">进入课件 →</span>
-      </a>
+        <a class="card" href="./courseware/chem-exam1/">
+          <span class="tag">互动网页</span>
+          <div class="ic">📝</div>
+          <h3>高一化学月考讲评（网页版）</h3>
+          <div class="desc">第一次月考试卷讲评：选择题逐题点按出答案，非选择题逐大题展开。</div>
+          <span class="go">进入课件 →</span>
+        </a>
 
-      <a class="card ppt" href="./化学月考课件PPT/高一化学第一次月考讲评.pptx">
-        <span class="tag">PPT 文件</span>
-        <div class="ic">📊</div>
-        <h3>高一化学月考讲评（PPT 版）</h3>
-        <div class="desc">可在 PowerPoint / WPS 中放映，含原卷图示与点击出现答案动画。</div>
-        <span class="go">下载 / 打开 PPT →</span>
-      </a>
-
-      <a class="card" href="./钠及其化合物互动课件/钠及其化合物-互动课件.html">
-        <span class="tag">互动网页</span>
-        <div class="ic">🔥</div>
-        <h3>钠及其化合物互动课件</h3>
-        <div class="desc">钠、氧化钠、过氧化钠、碳酸钠与碳酸氢钠的互动讲解。</div>
-        <span class="go">进入课件 →</span>
-      </a>
-
-      <a class="card res" href="./氯气课件/">
-        <span class="tag">素材库</span>
-        <div class="ic">📁</div>
-        <h3>氯气课件（素材库）</h3>
-        <div class="desc">氯气相关图片、文本等备课素材集合，便于二次加工。</div>
-        <span class="go">浏览素材 →</span>
-      </a>
-    </div>
+        <a class="card ppt" href="./courseware/chem-exam1/高一化学第一次月考讲评.pptx">
+          <span class="tag">PPT 文件</span>
+          <div class="ic">📊</div>
+          <h3>高一化学月考讲评（PPT 版）</h3>
+          <div class="desc">可在 PowerPoint / WPS 中放映，含原卷图示与点击出现答案动画。</div>
+          <span class="go">下载 / 打开 PPT →</span>
+        </a>
+      </div>
+    </section>
 
     <div class="foot">
-      <b>化学小屋</b> · 瑞昌一中 高一化学备课资源<br>
-      本页为课件总入口，建议收藏；课件内容版权归命题与整理者所有。
+      <b>星辰班级 · 化学小屋</b> · 瑞昌一中 高一化学备课资源<br>
+      本页为总入口，建议收藏；课件内容版权归命题与整理者所有。
     </div>
   </div>
 </body>
