@@ -5,60 +5,148 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>化学课件库 · 星辰班级</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --bg: #edf6f2;
+    --paper: #ffffff;
+    --paper-alt: #f7f8fa;
+    --ink: #14171c;
+    --ink-soft: #4a5361;
+    --ink-faint: #6b7480;
+    --line: #e3e6eb;
+    --accent: #0b6b57;
+    --accent-weak: #e6f2ee;
+    --accent-line: #b7d8ce;
+    --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB",
+      "Source Han Sans SC", system-ui, -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
-    color:#1f2d3d; min-height:100vh;
-    background:radial-gradient(1000px 500px at 10% -10%, #e0f2fe 0%, transparent 60%),
-               radial-gradient(900px 460px at 90% 0%, #d1fae5 0%, transparent 55%),
-               #f1f5f9;
+    font-family: var(--font);
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image: radial-gradient(rgba(11, 107, 87, 0.14) 1.2px, transparent 1.4px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+    line-height: 1.75;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width:900px; margin:0 auto; padding:56px 22px 70px; }
-  .head { text-align:center; margin-bottom:30px; }
-  .head .badge {
-    display:inline-block; padding:5px 16px; border-radius:30px; font-size:13px; letter-spacing:2px;
-    background:rgba(56,189,248,.15); color:#0369a1; border:1px solid rgba(56,189,248,.4); margin-bottom:14px;
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 76px 24px 56px; }
+
+  .eyebrow {
+    display: inline-block;
+    padding: 5px 12px 4px;
+    border-radius: 4px;
+    background: var(--accent);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #fff;
+    transform: rotate(-1.2deg);
   }
-  .head h1 { font-size:36px; letter-spacing:5px; color:#0f172a; }
-  .head p { color:#64748b; font-size:15px; margin-top:10px; line-height:1.8; }
+  h1 {
+    margin: 24px 0 0;
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 800;
+    letter-spacing: .01em;
+    line-height: 1.08;
+  }
+  .lead {
+    margin-top: 18px;
+    max-width: 56ch;
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .rule { width: 76px; height: 5px; margin-top: 26px; background: var(--accent); }
 
   .note {
-    margin:0 0 22px; padding:14px 18px; border-radius:14px; font-size:13.5px; line-height:1.95;
-    background:#fff; border:1px solid #e2e8f0; color:#475569;
+    margin-top: 32px;
+    padding: 18px 20px;
+    background: var(--accent-weak);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--ink-soft);
   }
-  .note b { color:#0f172a; }
-  .note a { color:#0284c7; }
+  .note b { color: var(--ink); }
+  .note a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
 
-  .list { display:flex; flex-direction:column; gap:14px; }
+  .list { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
   .item {
-    display:flex; align-items:center; gap:18px; padding:20px 24px;
-    background:#fff; border:1px solid #e2e8f0; border-radius:16px;
-    box-shadow:0 4px 16px rgba(15,23,42,.06); text-decoration:none; color:inherit;
-    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    transition: border-color .18s ease, background .18s ease,
+      transform .18s ease, box-shadow .18s ease;
   }
-  .item:hover { transform:translateX(4px); border-color:#7dd3fc; box-shadow:0 10px 26px rgba(14,165,233,.16); }
-  .item .ic {
-    width:48px; height:48px; flex:0 0 48px; border-radius:13px; font-size:24px;
-    display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(135deg,#e0f2fe,#d1fae5);
+  .item:hover {
+    border-color: var(--accent);
+    background: var(--paper-alt);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--accent-line);
   }
-  .item.warm .ic { background:linear-gradient(135deg,#fef3c7,#fee2e2); }
-  .item .txt { flex:1; }
-  .item h2 { font-size:17px; color:#0f172a; font-weight:600; }
-  .item p { font-size:13.5px; color:#64748b; margin-top:4px; line-height:1.7; }
-  .item .go { font-size:13px; font-weight:600; color:#0284c7; white-space:nowrap; }
+  .item .no {
+    flex: none;
+    padding: 1px 8px;
+    border-radius: 4px;
+    background: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: #fff;
+  }
+  .item .txt { flex: 1; }
+  .item h2 { font-size: 18px; font-weight: 800; letter-spacing: .01em; }
+  .item p { margin-top: 6px; font-size: 13.5px; line-height: 1.85; color: var(--ink-soft); }
+  .item .go {
+    flex: none;
+    align-self: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
 
-  .foot { text-align:center; margin-top:40px; font-size:13px; color:#94a3b8; line-height:1.9; }
-  .foot a { color:#0284c7; text-decoration:none; }
+  .foot {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: var(--ink-faint);
+  }
+  .foot a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; }
+  .foot a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 56px 16px 48px; }
+    .item { padding: 18px; gap: 14px; flex-wrap: wrap; }
+    .item .go { align-self: flex-start; }
+  }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="head">
-      <div class="badge">COURSEWARE</div>
-      <h1>化学课件库</h1>
-      <p>免登录、可直接投屏的独立成品课件<br>点开就能用，不依赖班级站的账号</p>
-    </div>
+    <span class="eyebrow">Courseware</span>
+    <h1>化学课件库</h1>
+    <p class="lead">免登录、可直接投屏的独立成品课件<br>点开就能用，不依赖班级站的账号</p>
+    <div class="rule"></div>
 
     <div class="note">
       <b>交互课件去哪了？</b>
@@ -69,7 +157,7 @@
 
     <div class="list">
       <a class="item" href="./na-compounds/">
-        <div class="ic">🔥</div>
+        <span class="no">01</span>
         <div class="txt">
           <h2>钠的化合物 · 复习课件</h2>
           <p>过氧化钠的两个核心反应与双线桥、饱和 Na₂CO₃ 溶液通 CO₂、侯氏制碱法、Na₂CO₃ 与 NaHCO₃ 对比、钠露置空气中的变化、钠的转化网络。</p>
@@ -78,7 +166,7 @@
       </a>
 
       <a class="item" href="./chem-exam1/">
-        <div class="ic">📝</div>
+        <span class="no">02</span>
         <div class="txt">
           <h2>高一化学第一次月考 · 试卷讲评</h2>
           <p>网页版讲评课件：选择题逐题点按出答案，非选择题逐大题展开，可全部展开 / 收起。同目录附 PPT 版。</p>
@@ -86,8 +174,8 @@
         <span class="go">进入 →</span>
       </a>
 
-      <a class="item warm" href="./chem-exam1/高一化学第一次月考讲评.pptx">
-        <div class="ic">📊</div>
+      <a class="item" href="./chem-exam1/高一化学第一次月考讲评.pptx">
+        <span class="no">03</span>
         <div class="txt">
           <h2>高一化学第一次月考 · 讲评 PPT</h2>
           <p>可在 PowerPoint / WPS 中放映，含原卷图示与点击出现答案动画。</p>
